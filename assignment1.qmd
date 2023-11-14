@@ -50,3 +50,7 @@ loaded_data <- readRDS("world_bank_data.rds")
 loaded_data
 
 ```
+
+## Preprocessed Data Link
+
+## [Data Link](https://github.com/pjournal/mef07g-astralprojection/blob/main/world_bank_data.rds)
