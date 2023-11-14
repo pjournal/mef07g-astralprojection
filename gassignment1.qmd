@@ -27,7 +27,7 @@ install_github('vincentarelbundock/WDI')
 ## Data Preparation
 
 ```{r}
-indicator_codes <- c("SP.POP.TOTL","NY.GDP.PCAP.CD","SP.POP.DPND","FP.CPI.TOTL.ZG","SL.UEM.TOTL.ZS","SL.TLF.CACT.FE.ZS","SL.TLF.CACT.MA.ZS")
+indicator_codes <- c("SP.POP.DPND","FP.CPI.TOTL.ZG","SL.UEM.TOTL.ZS","SL.TLF.CACT.FE.ZS","SL.TLF.CACT.MA.ZS")
 countries <- c("TUR", "USA")
 start_date <- 2018
 end_date <- 2023
@@ -36,16 +36,13 @@ world_bank_data_2 <- WDI( indicator = indicator_codes,
                         start = start_date, 
                         end = end_date, 
                         extra = TRUE)
-
-world_bank_data_summary <- world_bank_data_2[,c("country","year","SP.POP.TOTL","NY.GDP.PCAP.CD","SP.POP.DPND","FP.CPI.TOTL.ZG","SL.UEM.TOTL.ZS","SL.TLF.CACT.FE.ZS","SL.TLF.CACT.MA.ZS")]
-colnames(world_bank_data_summary) <- c("Country","Year","Population","GdpPerCapita","AgeDependancyRatio","Inflation","UnemploymentRate","FemaleLaborRate","MaleLaborRate")
-world_bank_data_summary
+world_bank_data_2
 ```
 
 ## Save as .rds File
 
 ```{r}
-saveRDS(world_bank_data_summary, file = "world_bank_data.rds")
+saveRDS(world_bank_data_2, file = "world_bank_data.rds")
 loaded_data <- readRDS("world_bank_data.rds")
 loaded_data
 

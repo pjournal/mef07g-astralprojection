@@ -9,7 +9,7 @@ install_github('vincentarelbundock/WDI')
 
 #DENEME2
 
-indicator_codes <- c("SP.POP.DPND","FP.CPI.TOTL.ZG","SL.UEM.TOTL.ZS","SL.TLF.CACT.FE.ZS","SL.TLF.CACT.MA.ZS")
+indicator_codes <- c("SP.POP.TOTL", "NY.GDP.PCAP.CD","SP.POP.DPND","FP.CPI.TOTL.ZG","SL.UEM.TOTL.ZS","SL.TLF.CACT.FE.ZS","SL.TLF.CACT.MA.ZS")
 countries <- c("TUR", "USA")
 start_date <- 2018
 end_date <- 2023
@@ -22,7 +22,7 @@ world_bank_data_2 <- WDI( indicator = indicator_codes,
 saveRDS(world_bank_data_2, file = "world_bank_data.rds")
 loaded_data <- readRDS("world_bank_data.rds")
 loaded_data
-
+colnames(loaded_data)
 
 #"NY.GDP.MKTP.CD"
 
