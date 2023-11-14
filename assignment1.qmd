@@ -6,7 +6,28 @@ date: "2022-10-01"
 This is a template example qmd output page. You may see an example R code below.
 
 ```{r}
-set.seed(1)
-vec1 <- sample(LETTERS,5)
-paste0(vec1,collapse="")
+install.packages("WDI")
+library(WDI)
+
+install.packages("remotes")
+library(remotes)
+
+install_github('vincentarelbundock/WDI')
+
+
+
+indicator_codes <- c("SP.POP.DPND","FP.CPI.TOTL.ZG","SL.UEM.TOTL.ZS","SL.TLF.CACT.FE.ZS","SL.TLF.CACT.MA.ZS")
+countries <- c("TUR", "USA")
+start_date <- 2018
+end_date <- 2023
+world_bank_data_2 <- WDI( indicator = indicator_codes,
+                        country = countries,
+                        start = start_date, 
+                        end = end_date, 
+                        extra = TRUE)
+
+saveRDS(world_bank_data_2, file = "world_bank_data.rds")
+loaded_data <- readRDS("world_bank_data.rds")
+loaded_data
+
 ```
