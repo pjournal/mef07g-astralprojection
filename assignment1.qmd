@@ -14,10 +14,13 @@ editor: visual
 ## Initial Setup
 
 ```{r}
-install.packages("WDI")
+
+#remove.packages("WDI")
+install.packages("WDI",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)
 library(WDI)
 
-install.packages("remotes")
+#remove.packages("remotes")
+install.packages("remotes",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)
 library(remotes)
 
 install_github('vincentarelbundock/WDI')
