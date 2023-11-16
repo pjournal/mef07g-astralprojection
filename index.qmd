@@ -24,6 +24,11 @@ Each section is an assignment or an individual work.
 
 Group Members
 
+-   [Gözde Uğur](https://pjournal.github.io/mef07-GozdeUgurK/)
+-   [Melihcan Akgül](https://pjournal.github.io/mef07-meakgul/)
+-   [Derya Şaşmaz](https://pjournal.github.io/mef07-sasmazd/)
+-   [Burcu Altıparmak](https://pjournal.github.io/mef07-BurcuAltiparmak/)
+
 
 # Group Project Details
 
