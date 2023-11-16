@@ -8,6 +8,10 @@ pre {
 
 </style>
 # Introduction {.unnumbered}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8244c776c0ae60d9d6ce74d5dbc95e1bd5e10486
 <!-- DO NOT TOUCH THIS PART EXCEPT FILLING YOUR OR YOUR GROUP's NAME -->
 
 This progress journal covers Astral Projection's work during their term at [BDA 503 Fall 2023](https://mef-bda503.github.io/fall23/).
@@ -27,4 +31,8 @@ Each section is an assignment or an individual work.
 
 # Group Project Details
 
+<<<<<<< HEAD
 Our group project is [PROJECT NAME]. [SHORT DESCRIPTION] -->
+=======
+Our group project is Astral Projection. AST
+>>>>>>> 8244c776c0ae60d9d6ce74d5dbc95e1bd5e10486

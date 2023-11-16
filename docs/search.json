@@ -4,7 +4,11 @@
     "href": "index.html",
     "title": "Astral Projection’s Progress Journal",
     "section": "",
+<<<<<<< HEAD
     "text": "Introduction\n\nThis progress journal covers Astral Projection’s work during their term at BDA 503 Fall 2023.\nEach section is an assignment or an individual work.\n\n\nGroup Members\n\nGözde Uğur\nMelihcan Akgül\nDerya Şaşmaz\nBurcu Altıparmak"
+=======
+    "text": "Introduction\n\nThis progress journal covers Astral Projection’s work during their term at BDA 503 Fall 2023.\nEach section is an assignment or an individual work.\n\nGroup Members\n\nGözde Uğur\nMelihcan Akgül\nDerya Şaşmaz\nBurcu Altıparmak\n\n\n\nGroup Project Details\nOur group project is Astral Projection. AST"
+>>>>>>> 8244c776c0ae60d9d6ce74d5dbc95e1bd5e10486
   },
   {
     "objectID": "assignment1.html",
