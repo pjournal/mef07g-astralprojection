@@ -10,24 +10,10 @@ Each section is an assignment or an individual work.
 
 <!-- IF THIS IS A GROUP UNCOMMENT BELOW -->
 
-<<<<<<< HEAD
 ### Group Members {-}
 
 +   [Gözde Uğur](https://pjournal.github.io/mef07-GozdeUgurK/)
 +   [Melihcan Akgül](https://pjournal.github.io/mef07-meakgul/)
 +   [Derya Şaşmaz](https://pjournal.github.io/mef07-sasmazd/)
 +   [Burcu Altıparmak](https://pjournal.github.io/mef07-BurcuAltiparmak/)
-=======
-<!-- # Group Members
->>>>>>> 3d755a15bf7d241da3def48ea463908da0fe09bd
 
-+ [Member 1](Member 1's Progress Journal URL with https://)  
-+ [Member 2](Member 2's Progress Journal URL with https://)
-+ [Member 3](Member 3's Progress Journal URL with https://)
-
-<<<<<<< HEAD
-=======
-# Group Project Details
-
-Our group project is [PROJECT NAME]. [SHORT DESCRIPTION] -->
->>>>>>> 3d755a15bf7d241da3def48ea463908da0fe09bd
