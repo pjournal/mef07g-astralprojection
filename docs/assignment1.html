@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2023-11-16">
 
-<title>Astral Projection’s Progress Journal - 1&nbsp; Preprocessing</title>
+<title>Astral Projection’s Progress Journal - 2&nbsp; Preprocessing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignment1.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Preprocessing</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignment1.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocessing</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -156,13 +156,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./assignment1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Preprocessing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocessing</span></span></a>
   </div>
 </li>
     </ul>
@@ -175,13 +175,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preprocessing" id="toc-preprocessing" class="nav-link active" data-scroll-target="#preprocessing"><span class="header-section-number">2</span> Preprocessing</a>
+  <li><a href="#preprocessing" id="toc-preprocessing" class="nav-link active" data-scroll-target="#preprocessing"><span class="header-section-number">3</span> Preprocessing</a>
   <ul class="collapse">
-  <li><a href="#initial-setup" id="toc-initial-setup" class="nav-link" data-scroll-target="#initial-setup"><span class="header-section-number">2.1</span> Initial Setup</a></li>
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="header-section-number">2.2</span> Data Preparation</a></li>
-  <li><a href="#save-as-.rds-file" id="toc-save-as-.rds-file" class="nav-link" data-scroll-target="#save-as-.rds-file"><span class="header-section-number">2.3</span> Save as .rds File</a></li>
-  <li><a href="#preprocessed-data-link" id="toc-preprocessed-data-link" class="nav-link" data-scroll-target="#preprocessed-data-link"><span class="header-section-number">2.4</span> Preprocessed Data Link</a></li>
-  <li><a href="#data-link" id="toc-data-link" class="nav-link" data-scroll-target="#data-link"><span class="header-section-number">2.5</span> Data Link</a></li>
+  <li><a href="#initial-setup" id="toc-initial-setup" class="nav-link" data-scroll-target="#initial-setup"><span class="header-section-number">3.1</span> Initial Setup</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="header-section-number">3.2</span> Data Preparation</a></li>
+  <li><a href="#save-as-.rds-file" id="toc-save-as-.rds-file" class="nav-link" data-scroll-target="#save-as-.rds-file"><span class="header-section-number">3.3</span> Save as .rds File</a></li>
+  <li><a href="#preprocessed-data-link" id="toc-preprocessed-data-link" class="nav-link" data-scroll-target="#preprocessed-data-link"><span class="header-section-number">3.4</span> Preprocessed Data Link</a></li>
+  <li><a href="#data-link" id="toc-data-link" class="nav-link" data-scroll-target="#data-link"><span class="header-section-number">3.5</span> Data Link</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -191,7 +191,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Preprocessing</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocessing</span></h1>
 </div>
 
 
@@ -212,10 +212,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="preprocessing" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Preprocessing</h1>
-<section id="initial-setup" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="initial-setup"><span class="header-section-number">2.1</span> Initial Setup</h2>
+<section id="preprocessing" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Preprocessing</h1>
+<section id="initial-setup" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="initial-setup"><span class="header-section-number">3.1</span> Initial Setup</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("WDI",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WDI)</span>
@@ -227,8 +227,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#install_github('vincentarelbundock/WDI')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="data-preparation" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">2.2</span> Data Preparation</h2>
+<section id="data-preparation" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">3.2</span> Data Preparation</h2>
 <p>The specified block aims to extract WDI data containing certain indicators and create a summary data set for Turkey and the United States over a certain time period.</p>
 <p>Indicator codes to be used to pull data were defined.</p>
 <p>Relevant countries have been determined</p>
@@ -276,8 +276,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="save-as-.rds-file" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="save-as-.rds-file"><span class="header-section-number">2.3</span> Save as .rds File</h2>
+<section id="save-as-.rds-file" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="save-as-.rds-file"><span class="header-section-number">3.3</span> Save as .rds File</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(world_bank_data_summary, <span class="at">file =</span> <span class="st">"world_bank_data.rds"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>loaded_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"world_bank_data.rds"</span>)</span>
@@ -308,11 +308,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="preprocessed-data-link" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="preprocessed-data-link"><span class="header-section-number">2.4</span> Preprocessed Data Link</h2>
+<section id="preprocessed-data-link" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="preprocessed-data-link"><span class="header-section-number">3.4</span> Preprocessed Data Link</h2>
 </section>
-<section id="data-link" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="data-link"><span class="header-section-number">2.5</span> <a href="https://github.com/pjournal/mef07g-astralprojection/blob/main/world_bank_data.rds">Data Link</a></h2>
+<section id="data-link" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="data-link"><span class="header-section-number">3.5</span> <a href="https://github.com/pjournal/mef07g-astralprojection/blob/main/world_bank_data.rds">Data Link</a></h2>
 
 
 </section>
@@ -555,7 +555,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

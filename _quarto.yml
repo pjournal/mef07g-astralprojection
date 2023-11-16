@@ -9,14 +9,13 @@ book:
     - index.qmd
     - assignment1.qmd
   page-footer: 
-    center: "[MEF BDA 503](https://mef-bda503.github.io)" 
+    center: "[MEF BDA 503](https://mef-bda503.github.io)"
   sharing: [twitter, facebook]
 
 format:
   html:
     theme: cosmo
-  pdf:
-    documentclass: scrreprt
+
     
     
 
