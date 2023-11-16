@@ -4,7 +4,7 @@ project:
 
 book:
   title: "Astral Projection Progress Journal"
-  repo-url: https://pjournal.github.io/mef07g-astralprojection
+  repo-url: https://github.com/pjournal/mef07g-astralprojection
   chapters:
     - index.qmd
     - assignment1.qmd
