@@ -229,6 +229,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data-preparation" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">2.2</span> Data Preparation</h2>
+<p>The specified block aims to extract WDI data containing certain indicators and create a summary data set for Turkey and the United States over a certain time period.</p>
+<p>Indicator codes to be used to pull data were defined.</p>
+<p>Relevant countries have been determined</p>
+<p>Time range defined</p>
+<p>Specified indicators were received using the WDI function.</p>
+<p>A summary data set was created by selecting specific columns pulled from the data.</p>
+<p>Column names have been made more understandable.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>indicator_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SP.POP.TOTL"</span>,<span class="st">"NY.GDP.PCAP.CD"</span>,<span class="st">"SP.POP.DPND"</span>,<span class="st">"FP.CPI.TOTL.ZG"</span>,<span class="st">"SL.UEM.TOTL.ZS"</span>,<span class="st">"SL.TLF.CACT.FE.ZS"</span>,<span class="st">"SL.TLF.CACT.MA.ZS"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TUR"</span>, <span class="st">"USA"</span>)</span>
