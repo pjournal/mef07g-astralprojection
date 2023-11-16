@@ -28,6 +28,20 @@ library(remotes)
 
 ## Data Preparation
 
+The specified block aims to extract WDI data containing certain indicators and create a summary data set for Turkey and the United States over a certain time period.
+
+Indicator codes to be used to pull data were defined.
+
+Relevant countries have been determined
+
+Time range defined
+
+Specified indicators were received using the WDI function.
+
+A summary data set was created by selecting specific columns pulled from the data.
+
+Column names have been made more understandable.
+
 ```{r}
 indicator_codes <- c("SP.POP.TOTL","NY.GDP.PCAP.CD","SP.POP.DPND","FP.CPI.TOTL.ZG","SL.UEM.TOTL.ZS","SL.TLF.CACT.FE.ZS","SL.TLF.CACT.MA.ZS")
 countries <- c("TUR", "USA")
