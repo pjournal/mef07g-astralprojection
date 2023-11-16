@@ -5,8 +5,8 @@
 
 Here is the list of items to properly set this Progress Journal up.
 
-1. Replace the name placeholder "[STUDENT NAME SURNAME / PROJECT GROUP NAME]" on `index.qmd` with your name or group name.
-2. Replace the name placeholder "[STUDENT/GROUP NAME]" on `_quarto.yml` with your name or group name.
+1. Replace the name placeholder "Astral Projection" on `index.qmd` with your name or group name.
+2. Replace the name placeholder "Astral Projection" on `_quarto.yml` with your name or group name.
 3. Replace the repository link `https://github.com/pjournal/mef07g-astralprojection` with your or your group's repository link.
 4. If this is a group PJ, follow the instructions in comments on `index.qmd` and add members, group name, project name and project short description.
 5. If this repository does not use RStudio/Posit, then you can also remove `.Rproj` file. Otherwise rename it with your repository name (e.g, mefXX-reponame).
@@ -17,18 +17,18 @@ Then test with `quarto preview` on Terminal. If everything is ok, execute `quart
 :::
 <!-- DO NOT TOUCH THIS PART EXCEPT FILLING YOUR OR YOUR GROUP's NAME -->
 
-This progress journal covers [STUDENT NAME SURNAME / PROJECT GROUP NAME]'s work during their term at [BDA 503 Fall 2023](https://mef-bda503.github.io/fall23/).
+This progress journal covers Astral Projection's work during their term at [BDA 503 Fall 2023](https://mef-bda503.github.io/fall23/).
 
 Each section is an assignment or an individual work.
 
 <!-- IF THIS IS A GROUP UNCOMMENT BELOW -->
+ Group Members
 
-<!-- # Group Members
-
-+ [Member 1](Member 1's Progress Journal URL with https://)  
-+ [Member 2](Member 2's Progress Journal URL with https://)
-+ [Member 3](Member 3's Progress Journal URL with https://)
++ [Gözde Uğur](https://pjournal.github.io/mef07-GozdeUgurK/)  
++ [Melihcan Akgül](https://pjournal.github.io/mef07-meakgul/)
++ [Derya Şaşmaz](https://pjournal.github.io/mef07-sasmazd/)
++ [Burcu Altıparmak](https://pjournal.github.io/mef07-BurcuAltiparmak/)
 
 # Group Project Details
 
-Our group project is [PROJECT NAME]. [SHORT DESCRIPTION] -->
+Our group project is Astral Projection.
