@@ -29,6 +29,7 @@ Group Members
 -   [Derya Şaşmaz](https://pjournal.github.io/mef07-sasmazd/)
 -   [Burcu Altıparmak](https://pjournal.github.io/mef07-BurcuAltiparmak/)
 
+
 # Group Project Details
 
 Our group project is Astral Projection.
