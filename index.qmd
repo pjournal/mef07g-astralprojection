@@ -5,7 +5,7 @@ Here is the list of items to properly set this Progress Journal up.
 
 1.  Replace the name placeholder "Astral Projection" on `index.qmd` with your name or group name.
 2.  Replace the name placeholder "Astral Projection" on `_quarto.yml` with your name or group name.
-3.  Replace the repository link (https://pjournal.github/mef07g-astralprojection) with your or your group's repository link.
+3.  Replace the repository link https://pjournal.github/mef07g-astralprojection with your or your group's repository link.
 4.  If this is a group PJ, follow the instructions in comments on `index.qmd` and add members, group name, project name and project short description.
 5.  If this repository does not use RStudio/Posit, then you can also remove `.Rproj` file. Otherwise rename it with your repository name (e.g, mefXX-reponame).
 
