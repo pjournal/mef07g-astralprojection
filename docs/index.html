@@ -140,8 +140,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#group-project-details" id="toc-group-project-details" class="nav-link" data-scroll-target="#group-project-details">Group Project Details</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#group-members" id="toc-group-members" class="nav-link" data-scroll-target="#group-members">Group Members</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -165,47 +167,37 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<style>
+body {
+  font-family: Calibri;
+}
+pre {
+  color: #708090
+}
+
+</style>
 <section id="introduction" class="level1 unnumbered">
 <h1 class="unnumbered">Introduction</h1>
-<div class="callout callout-style-default callout-caution callout-titled" title="Setup To-Do">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Setup To-Do
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Here is the list of items to properly set this Progress Journal up.</p>
-<ol type="1">
-<li>Replace the name placeholder “Astral Projection” on <code>index.qmd</code> with your name or group name.</li>
-<li>Replace the name placeholder “Astral Projection” on <code>_quarto.yml</code> with your name or group name.</li>
-<li>Replace the repository link with your or your group’s repository link.</li>
-<li>If this is a group PJ, follow the instructions in comments on <code>index.qmd</code> and add members, group name, project name and project short description.</li>
-<li>If this repository does not use RStudio/Posit, then you can also remove <code>.Rproj</code> file. Otherwise rename it with your repository name (e.g, mefXX-reponame).</li>
-</ol>
-<p>Then test with <code>quarto preview</code> on Terminal. If everything is ok, execute <code>quarto render</code> command in Terminal.</p>
-<p><strong>Finally, delete the above section (including this sentence) and (GitHub) push the changes to your repository.</strong></p>
-</div>
-</div>
 <!-- DO NOT TOUCH THIS PART EXCEPT FILLING YOUR OR YOUR GROUP's NAME -->
 <p>This progress journal covers Astral Projection’s work during their term at <a href="https://mef-bda503.github.io/fall23/">BDA 503 Fall 2023</a>.</p>
 <p>Each section is an assignment or an individual work.</p>
 <!-- IF THIS IS A GROUP UNCOMMENT BELOW -->
-<p>Group Members</p>
+<section id="group-members" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="group-members">Group Members</h3>
 <ul>
 <li><a href="https://pjournal.github.io/mef07-GozdeUgurK/">Gözde Uğur</a></li>
 <li><a href="https://pjournal.github.io/mef07-meakgul/">Melihcan Akgül</a></li>
 <li><a href="https://pjournal.github.io/mef07-sasmazd/">Derya Şaşmaz</a></li>
 <li><a href="https://pjournal.github.io/mef07-BurcuAltiparmak/">Burcu Altıparmak</a></li>
 </ul>
+<!-- 
+
+# Group Project Details
+
+Our group project is [PROJECT NAME]. [SHORT DESCRIPTION] -->
+
+
 </section>
-<section id="group-project-details" class="level1">
-<h1>Group Project Details</h1>
-<p>Our group project is Astral Projection.</p>
-
-
 </section>
 
 </main> <!-- /main -->
