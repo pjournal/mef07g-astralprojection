@@ -15,15 +15,14 @@ editor: visual
 
 ```{r}
 
-#remove.packages("WDI")
-install.packages("WDI",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)
+#install.packages("WDI",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)
 library(WDI)
 
-#remove.packages("remotes")
-install.packages("remotes",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)
+
+#install.packages("remotes",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)
 library(remotes)
 
-install_github('vincentarelbundock/WDI')
+#install_github('vincentarelbundock/WDI')
 
 ```
 
