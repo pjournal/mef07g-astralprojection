@@ -9,6 +9,7 @@ output:
 editor: visual
 ---
 
+
 # World Development Indicators - USA vs Turkey: Exploratory Data Analysis
 
 ## Introduction:
@@ -49,12 +50,15 @@ In this Exploratory Data Analysis (EDA), we compared key indicators for the USA 
 
 The libraries used in our analysis are given below:
 
+
 ```{r, echo=FALSE}
 library(WDI)
 library(remotes)
 ```
 
+
 The data set used in our analysis is given below:
+
 
 ```{r}
 indicator_codes <- c("SP.POP.TOTL","NY.GDP.PCAP.CD","SP.POP.DPND","FP.CPI.TOTL.ZG","SL.UEM.TOTL.ZS","SL.TLF.CACT.FE.ZS","SL.TLF.CACT.MA.ZS")
@@ -72,11 +76,13 @@ colnames(world_bank_data_summary) <- c("Country","Year","Population","GdpPerCapi
 world_bank_data_summary
 ```
 
+
 ## Key Findings:
 
 ### 1. Total Population Comparison:
 
 Both the USA and Turkey experienced steady population growth between 2018 and 2023. The USA had a larger total population compared to Turkey throughout the period.
+
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 library(ggplot2)
@@ -99,9 +105,11 @@ ggplot(world_bank_data_summary, aes(x = factor(Year), y = Population / 1e6, fill
 
 ```
 
+
 ### 2. GDP per Capita Comparison:
 
 The USA consistently exhibited a higher GDP per capita compared to Turkey. Both countries showed variations in GDP per capita over the years.
+
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 ggplot(world_bank_data_summary, aes(x = Year, y = GdpPerCapita, fill = Country)) +
@@ -119,9 +127,11 @@ ggplot(world_bank_data_summary, aes(x = Year, y = GdpPerCapita, fill = Country))
   theme_minimal()
 ```
 
+
 ### 3. Age Dependency Ratio Comparison:
 
 The age dependency ratio in Turkey was higher than in the USA, indicating a relatively larger proportion of dependents.
+
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 ggplot(world_bank_data_summary, aes(x = Year, y = AgeDependancyRatio, color = Country, group = Country)) +
@@ -141,9 +151,11 @@ ggplot(world_bank_data_summary, aes(x = Year, y = AgeDependancyRatio, color = Co
 
 ```
 
+
 ### 4. Inflation Rate Comparison:
 
 Inflation rates fluctuated in both countries, with specific years potentially warranting further investigation.
+
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 ggplot(world_bank_data_summary, aes(x = Year, y = Inflation, color = Country, group = Country)) +
@@ -161,6 +173,7 @@ ggplot(world_bank_data_summary, aes(x = Year, y = Inflation, color = Country, gr
   theme_minimal()
 ```
 
+
 ### 4.1. Inflation and GdpPerCapita Change Over Years:
 
 The provided code conducts an analysis of the change in Inflation and GDP per Capita over the years for two countries, Turkey (TUR) and the United States (USA). The data is first processed to calculate the percentage change in both Inflation and GDP per Capita compared to the previous year. Two line charts are then generated and displayed vertically.
@@ -172,6 +185,7 @@ The line chart illustrates the percentage change in inflation rates for both Tur
 Similarly, the second line chart visualizes the percentage change in GDP per Capita for Turkey and the USA across the given time frame. The lines depict the annual fluctuations in GDP per Capita, enabling a comparative analysis of economic performance between the two countries.
 
 The two charts displayed vertically allow for a convenient side-by-side comparison of the economic indicators. Analyzing the trends in these indicators can provide insights into the economic dynamics and relative performance of Turkey and the USA over the specified period.
+
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 
@@ -207,6 +221,7 @@ gdp_plot <- ggplot(gdp_inflation_data, aes(x = Year, y = GdpPerCapita_Change, co
 #grid.arrange(inflation_plot, gdp_plot, nrow = 2)
 ```
 
+
 ### **5. Unemployment Rate Comparison:**
 
 The USA generally maintained lower unemployment rates compared to Turkey.
@@ -230,3 +245,4 @@ The labor force participation rate for males exhibited fluctuations, with both c
 -   Regional Comparisons: Compare USA and Turkey indicators with other regions globally.
 
 This analysis provides an initial overview, and further investigations and statistical tests will be conducted for a more in-depth understanding.
+
