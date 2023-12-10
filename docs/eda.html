@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2023-12-10">
 
-<title>Astral Projection’s Progress Journal - 2&nbsp; Preprocessing</title>
+<title>Astral Projection’s Progress Journal - 3&nbsp; Exploratory Data Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./eda.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./assignment1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -109,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./assignment1.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocessing</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./eda.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -162,13 +161,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./assignment1.html" class="sidebar-item-text sidebar-link active">
+  <a href="./assignment1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocessing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./eda.html" class="sidebar-item-text sidebar-link">
+  <a href="./eda.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
   </div>
 </li>
@@ -182,13 +181,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preprocessing" id="toc-preprocessing" class="nav-link active" data-scroll-target="#preprocessing"><span class="header-section-number">3</span> Preprocessing</a>
+  <li><a href="#world-development-indicators---usa-vs-turkey-exploratory-data-analysis" id="toc-world-development-indicators---usa-vs-turkey-exploratory-data-analysis" class="nav-link active" data-scroll-target="#world-development-indicators---usa-vs-turkey-exploratory-data-analysis"><span class="header-section-number">4</span> World Development Indicators - USA vs Turkey: Exploratory Data Analysis</a>
   <ul class="collapse">
-  <li><a href="#initial-setup" id="toc-initial-setup" class="nav-link" data-scroll-target="#initial-setup"><span class="header-section-number">3.1</span> Initial Setup</a></li>
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="header-section-number">3.2</span> Data Preparation</a></li>
-  <li><a href="#save-as-.rds-file" id="toc-save-as-.rds-file" class="nav-link" data-scroll-target="#save-as-.rds-file"><span class="header-section-number">3.3</span> Save as .rds File</a></li>
-  <li><a href="#preprocessed-data-link" id="toc-preprocessed-data-link" class="nav-link" data-scroll-target="#preprocessed-data-link"><span class="header-section-number">3.4</span> Preprocessed Data Link</a></li>
-  <li><a href="#data-link" id="toc-data-link" class="nav-link" data-scroll-target="#data-link"><span class="header-section-number">3.5</span> Data Link</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">4.1</span> Introduction:</a></li>
+  <li><a href="#description-of-selected-indicators" id="toc-description-of-selected-indicators" class="nav-link" data-scroll-target="#description-of-selected-indicators"><span class="header-section-number">4.2</span> Description of Selected Indicators:</a>
+  <ul class="collapse">
+  <li><a href="#total-population" id="toc-total-population" class="nav-link" data-scroll-target="#total-population"><span class="header-section-number">4.2.1</span> 1. Total Population:</a></li>
+  <li><a href="#gdp-per-capita" id="toc-gdp-per-capita" class="nav-link" data-scroll-target="#gdp-per-capita"><span class="header-section-number">4.2.2</span> 2. GDP per Capita:</a></li>
+  <li><a href="#age-dependency-ratio" id="toc-age-dependency-ratio" class="nav-link" data-scroll-target="#age-dependency-ratio"><span class="header-section-number">4.2.3</span> 3. Age Dependency Ratio:</a></li>
+  <li><a href="#inflation-consumer-prices-cpi-annual-growth-rate" id="toc-inflation-consumer-prices-cpi-annual-growth-rate" class="nav-link" data-scroll-target="#inflation-consumer-prices-cpi-annual-growth-rate"><span class="header-section-number">4.2.4</span> 4. Inflation, Consumer Prices (CPI) Annual Growth Rate:</a></li>
+  <li><a href="#unemployment-total-of-labor-force" id="toc-unemployment-total-of-labor-force" class="nav-link" data-scroll-target="#unemployment-total-of-labor-force"><span class="header-section-number">4.2.5</span> 5. Unemployment, Total (% of Labor Force):</a></li>
+  <li><a href="#labor-force-participation-rate-female-of-female-population-ages-15" id="toc-labor-force-participation-rate-female-of-female-population-ages-15" class="nav-link" data-scroll-target="#labor-force-participation-rate-female-of-female-population-ages-15"><span class="header-section-number">4.2.6</span> 6. Labor Force Participation Rate, Female (% of Female Population Ages 15+):</a></li>
+  <li><a href="#labor-force-participation-rate-male-of-male-population-ages-15" id="toc-labor-force-participation-rate-male-of-male-population-ages-15" class="nav-link" data-scroll-target="#labor-force-participation-rate-male-of-male-population-ages-15"><span class="header-section-number">4.2.7</span> 7. Labor Force Participation Rate, Male (% of Male Population Ages 15+):</a></li>
+  </ul></li>
+  <li><a href="#load-libraries-and-packages" id="toc-load-libraries-and-packages" class="nav-link" data-scroll-target="#load-libraries-and-packages"><span class="header-section-number">4.3</span> Load Libraries and Packages</a></li>
+  <li><a href="#key-findings" id="toc-key-findings" class="nav-link" data-scroll-target="#key-findings"><span class="header-section-number">4.4</span> Key Findings:</a>
+  <ul class="collapse">
+  <li><a href="#total-population-comparison" id="toc-total-population-comparison" class="nav-link" data-scroll-target="#total-population-comparison"><span class="header-section-number">4.4.1</span> 1. Total Population Comparison:</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -198,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocessing</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></h1>
 </div>
 
 
@@ -219,30 +229,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="preprocessing" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Preprocessing</h1>
-<section id="initial-setup" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="initial-setup"><span class="header-section-number">3.1</span> Initial Setup</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("WDI",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WDI)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("remotes",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(remotes)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#install_github('vincentarelbundock/WDI')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="world-development-indicators---usa-vs-turkey-exploratory-data-analysis" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> World Development Indicators - USA vs Turkey: Exploratory Data Analysis</h1>
+<section id="introduction" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">4.1</span> Introduction:</h2>
+<p>In this Exploratory Data Analysis (EDA), we compared key indicators for the USA and Turkey using the World Development Indicators (WDI) dataset. The analysis focused on the years between 2018 and 2023.</p>
 </section>
-<section id="data-preparation" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">3.2</span> Data Preparation</h2>
-<p>The specified block aims to extract WDI data containing certain indicators and create a summary data set for Turkey and the United States over a certain time period.</p>
-<p>Indicator codes to be used to pull data were defined.</p>
-<p>Relevant countries have been determined</p>
-<p>Time range defined</p>
-<p>Specified indicators were received using the WDI function.</p>
-<p>A summary data set was created by selecting specific columns pulled from the data.</p>
-<p>Column names have been made more understandable.</p>
+<section id="description-of-selected-indicators" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="description-of-selected-indicators"><span class="header-section-number">4.2</span> Description of Selected Indicators:</h2>
+<section id="total-population" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="total-population"><span class="header-section-number">4.2.1</span> 1. Total Population:</h3>
+<ul>
+<li>Total population is the sum of all residents regardless of age.</li>
+</ul>
+</section>
+<section id="gdp-per-capita" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="gdp-per-capita"><span class="header-section-number">4.2.2</span> 2. GDP per Capita:</h3>
+<ul>
+<li>Gross Domestic Product (GDP) per capita represents the average economic output per person.</li>
+</ul>
+</section>
+<section id="age-dependency-ratio" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="age-dependency-ratio"><span class="header-section-number">4.2.3</span> 3. Age Dependency Ratio:</h3>
+<ul>
+<li>The age dependency ratio is the ratio of dependents (those aged 0-14 and 65+) to the working-age population (15-64).</li>
+</ul>
+</section>
+<section id="inflation-consumer-prices-cpi-annual-growth-rate" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="inflation-consumer-prices-cpi-annual-growth-rate"><span class="header-section-number">4.2.4</span> 4. Inflation, Consumer Prices (CPI) Annual Growth Rate:</h3>
+<ul>
+<li>The Consumer Price Index (CPI) measures the average change over time in the prices paid by urban consumers for a market basket of consumer goods and services. This indicator represents the annual growth rate of CPI.</li>
+</ul>
+</section>
+<section id="unemployment-total-of-labor-force" class="level3" data-number="4.2.5">
+<h3 data-number="4.2.5" class="anchored" data-anchor-id="unemployment-total-of-labor-force"><span class="header-section-number">4.2.5</span> 5. Unemployment, Total (% of Labor Force):</h3>
+<ul>
+<li>Total unemployment is the percentage of the labor force that is unemployed but actively seeking employment.</li>
+</ul>
+</section>
+<section id="labor-force-participation-rate-female-of-female-population-ages-15" class="level3" data-number="4.2.6">
+<h3 data-number="4.2.6" class="anchored" data-anchor-id="labor-force-participation-rate-female-of-female-population-ages-15"><span class="header-section-number">4.2.6</span> 6. Labor Force Participation Rate, Female (% of Female Population Ages 15+):</h3>
+<ul>
+<li>The labor force participation rate for females represents the percentage of the female population ages 15 and older that is economically active.</li>
+</ul>
+</section>
+<section id="labor-force-participation-rate-male-of-male-population-ages-15" class="level3" data-number="4.2.7">
+<h3 data-number="4.2.7" class="anchored" data-anchor-id="labor-force-participation-rate-male-of-male-population-ages-15"><span class="header-section-number">4.2.7</span> 7. Labor Force Participation Rate, Male (% of Male Population Ages 15+):</h3>
+<ul>
+<li>The labor force participation rate for males represents the percentage of the male population ages 15 and older that is economically active.</li>
+</ul>
+</section>
+</section>
+<section id="load-libraries-and-packages" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="load-libraries-and-packages"><span class="header-section-number">4.3</span> Load Libraries and Packages</h2>
+<p>The libraries used in our analysis are given below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WDI)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(remotes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The data set used in our analysis is given below:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>indicator_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SP.POP.TOTL"</span>,<span class="st">"NY.GDP.PCAP.CD"</span>,<span class="st">"SP.POP.DPND"</span>,<span class="st">"FP.CPI.TOTL.ZG"</span>,<span class="st">"SL.UEM.TOTL.ZS"</span>,<span class="st">"SL.TLF.CACT.FE.ZS"</span>,<span class="st">"SL.TLF.CACT.MA.ZS"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TUR"</span>, <span class="st">"USA"</span>)</span>
@@ -283,45 +329,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="save-as-.rds-file" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="save-as-.rds-file"><span class="header-section-number">3.3</span> Save as .rds File</h2>
+<section id="key-findings" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="key-findings"><span class="header-section-number">4.4</span> Key Findings:</h2>
+<section id="total-population-comparison" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="total-population-comparison"><span class="header-section-number">4.4.1</span> 1. Total Population Comparison:</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(world_bank_data_summary, <span class="at">file =</span> <span class="st">"world_bank_data.rds"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>loaded_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"world_bank_data.rds"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>loaded_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         Country Year Population GdpPerCapita AgeDependancyRatio Inflation
-1        Turkiye 2018   82809304     9400.836           46.30621 16.332464
-2        Turkiye 2019   83481684     9103.012           46.74186 15.176822
-3        Turkiye 2020   84135428     8561.064           46.82812 12.278957
-4        Turkiye 2021   84775404     9661.228           46.75508 19.596493
-5        Turkiye 2022   85341241    10616.061           46.77459 72.308836
-6  United States 2018  326838199    62823.309           52.22720  2.442583
-7  United States 2019  328329953    65120.395           52.73635  1.812210
-8  United States 2020  331511512    63528.634           53.22089  1.233584
-9  United States 2021  332031554    70219.472           53.66160  4.697859
-10 United States 2022  333287557    76398.592           54.05367  8.002800
-   UnemploymentRate FemaleLaborRate MaleLaborRate
-1            10.890          34.037        72.434
-2            13.670          34.215        71.761
-3            13.110          30.767        67.998
-4            11.980          32.762        70.135
-5            10.030          34.167        71.116
-6             3.900          56.497        68.449
-7             3.670          56.885        68.559
-8             8.050          55.700        67.116
-9             5.350          55.588        67.043
-10            3.611          56.459        67.511</code></pre>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(world_bank_data_summary, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Year), <span class="at">y =</span> Population <span class="sc">/</span> <span class="fl">1e6</span>, <span class="at">fill =</span> Country)) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> scales<span class="sc">::</span><span class="fu">comma</span>(Population, <span class="at">big.mark =</span> <span class="st">","</span>)), </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="co"># Barların üstüne değerleri yazmak için</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Population Comparison by Year and Country"</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Population (Million)"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Country"</span>) <span class="sc">+</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="eda_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-<section id="preprocessed-data-link" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="preprocessed-data-link"><span class="header-section-number">3.4</span> Preprocessed Data Link</h2>
-</section>
-<section id="data-link" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="data-link"><span class="header-section-number">3.5</span> <a href="https://github.com/pjournal/mef07g-astralprojection/blob/main/world_bank_data.rds">Data Link</a></h2>
 
 
+</section>
 </section>
 </section>
 
@@ -561,14 +595,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      <a href="./assignment1.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocessing</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./eda.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

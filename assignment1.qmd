@@ -57,14 +57,15 @@ world_bank_data_summary <- world_bank_data_2[,c("country","year","SP.POP.TOTL","
 colnames(world_bank_data_summary) <- c("Country","Year","Population","GdpPerCapita","AgeDependancyRatio","Inflation","UnemploymentRate","FemaleLaborRate","MaleLaborRate")
 world_bank_data_summary
 ```
+
 ## Save as .rds File
+
 ```{r}
 saveRDS(world_bank_data_summary, file = "world_bank_data.rds")
 loaded_data <- readRDS("world_bank_data.rds")
 loaded_data
 
 ```
-
 
 ## Preprocessed Data Link
 

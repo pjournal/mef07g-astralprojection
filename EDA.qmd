@@ -1,0 +1,232 @@
+---
+title: "Exploratory Data Analysis"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 1
+    number_sections: true
+editor: visual
+---
+
+# World Development Indicators - USA vs Turkey: Exploratory Data Analysis
+
+## Introduction:
+
+In this Exploratory Data Analysis (EDA), we compared key indicators for the USA and Turkey using the World Development Indicators (WDI) dataset. The analysis focused on the years between 2018 and 2023.
+
+## Description of Selected Indicators:
+
+### 1. Total Population:
+
+-   Total population is the sum of all residents regardless of age.
+
+### 2. GDP per Capita:
+
+-   Gross Domestic Product (GDP) per capita represents the average economic output per person.
+
+### 3. Age Dependency Ratio:
+
+-   The age dependency ratio is the ratio of dependents (those aged 0-14 and 65+) to the working-age population (15-64).
+
+### 4. Inflation, Consumer Prices (CPI) Annual Growth Rate:
+
+-   The Consumer Price Index (CPI) measures the average change over time in the prices paid by urban consumers for a market basket of consumer goods and services. This indicator represents the annual growth rate of CPI.
+
+### 5. Unemployment, Total (% of Labor Force):
+
+-   Total unemployment is the percentage of the labor force that is unemployed but actively seeking employment.
+
+### 6. Labor Force Participation Rate, Female (% of Female Population Ages 15+):
+
+-   The labor force participation rate for females represents the percentage of the female population ages 15 and older that is economically active.
+
+### 7. Labor Force Participation Rate, Male (% of Male Population Ages 15+):
+
+-   The labor force participation rate for males represents the percentage of the male population ages 15 and older that is economically active.
+
+## Load Libraries and Packages
+
+The libraries used in our analysis are given below:
+
+```{r, echo=FALSE}
+library(WDI)
+library(remotes)
+```
+
+The data set used in our analysis is given below:
+
+```{r}
+indicator_codes <- c("SP.POP.TOTL","NY.GDP.PCAP.CD","SP.POP.DPND","FP.CPI.TOTL.ZG","SL.UEM.TOTL.ZS","SL.TLF.CACT.FE.ZS","SL.TLF.CACT.MA.ZS")
+countries <- c("TUR", "USA")
+start_date <- 2018
+end_date <- 2023
+world_bank_data_2 <- WDI( indicator = indicator_codes,
+                        country = countries,
+                        start = start_date, 
+                        end = end_date, 
+                        extra = TRUE)
+
+world_bank_data_summary <- world_bank_data_2[,c("country","year","SP.POP.TOTL","NY.GDP.PCAP.CD","SP.POP.DPND","FP.CPI.TOTL.ZG","SL.UEM.TOTL.ZS","SL.TLF.CACT.FE.ZS","SL.TLF.CACT.MA.ZS")]
+colnames(world_bank_data_summary) <- c("Country","Year","Population","GdpPerCapita","AgeDependancyRatio","Inflation","UnemploymentRate","FemaleLaborRate","MaleLaborRate")
+world_bank_data_summary
+```
+
+## Key Findings:
+
+### 1. Total Population Comparison:
+
+Both the USA and Turkey experienced steady population growth between 2018 and 2023. The USA had a larger total population compared to Turkey throughout the period.
+
+```{r, echo=FALSE, fig.cap="", out.width="100%"}
+library(ggplot2)
+library(scales)
+library(dplyr)
+
+ggplot(world_bank_data_summary, aes(x = factor(Year), y = Population / 1e6, fill = Country)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = scales::comma(Population, big.mark = ",")), 
+            position = position_dodge(width = 0.9), 
+            vjust = -0.5, 
+            size = 3) +  # Barların üstüne değerleri yazmak için
+  labs(title = "Total Population Comparison by Year and Country",
+       x = "Year",
+       y = "Population (Million)",
+       fill = "Country") +
+  scale_y_continuous(labels = scales::comma) +
+  theme_minimal()
+
+
+```
+
+### 2. **GDP per Capita Comparison:**
+
+The USA consistently exhibited a higher GDP per capita compared to Turkey. Both countries showed variations in GDP per capita over the years.
+
+```{r, echo=FALSE, fig.cap="", out.width="100%"}
+ggplot(world_bank_data_summary, aes(x = Year, y = GdpPerCapita, fill = Country)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = scales::comma(GdpPerCapita, big.mark = ",")), 
+            position = position_dodge(width = 0.9), 
+            vjust = -0.5, 
+            size = 3) +  # Barların üstüne değerleri yazmak için
+  labs(
+    title = "GDP per Capita Comparison (USD)",
+    x = "Year",
+    y = "GDP per Capita (USD)",
+    fill = "Country"
+  ) +
+  theme_minimal()
+```
+
+### **3. Age Dependency Ratio Comparison:**
+
+The age dependency ratio in Turkey was higher than in the USA, indicating a relatively larger proportion of dependents.
+
+```{r, echo=FALSE, fig.cap="", out.width="100%"}
+ggplot(world_bank_data_summary, aes(x = Year, y = AgeDependancyRatio, color = Country, group = Country)) +
+  geom_line() +
+  geom_text(aes(label = scales::comma(AgeDependancyRatio, big.mark = ",")), 
+            position = position_dodge(width = 0.9), 
+            vjust = -0.5, 
+            size = 3) +  # Barların üstüne değerleri yazmak için
+  labs(
+    title = "Age Dependency Ratio Comparison",
+    x = "Year",
+    y = "Age Dependency Ratio",
+    color = "Country"
+  ) + 
+  theme_minimal() +
+    scale_y_continuous(limits = c(40, 60), breaks = seq(40, 60, by = 10))
+
+```
+
+### **4. Inflation Rate Comparison:**
+
+Inflation rates fluctuated in both countries, with specific years potentially warranting further investigation.
+
+```{r, echo=FALSE, fig.cap="", out.width="100%"}
+ggplot(world_bank_data_summary, aes(x = Year, y = Inflation, color = Country, group = Country)) +
+  geom_line() +
+   geom_text(aes(label = scales::comma(Inflation, big.mark = ",")), 
+            position = position_dodge(width = 0.9), 
+            vjust = -0.5, 
+            size = 3) +  # Barların üstüne değerleri yazmak için
+  labs(
+    title = "Inflation Rate Comparison",
+    x = "Year",
+    y = "Inflation Rate",
+    color = "Country"
+  ) +
+  theme_minimal()
+```
+
+### **4.1. Inflation and** GdpPerCapita **Change Over Years:**
+
+The provided code conducts an analysis of the change in Inflation and GDP per Capita over the years for two countries, Turkey (TUR) and the United States (USA). The data is first processed to calculate the percentage change in both Inflation and GDP per Capita compared to the previous year. Two line charts are then generated and displayed vertically.
+
+**Inflation Change Over Years:**
+The line chart illustrates the percentage change in inflation rates for both Turkey and the USA over the specified years. Each line represents the annual variation in inflation, providing a visual comparison of the inflation dynamics between the two countries.
+
+**GDP per Capita Change Over Years:**
+Similarly, the second line chart visualizes the percentage change in GDP per Capita for Turkey and the USA across the given time frame. The lines depict the annual fluctuations in GDP per Capita, enabling a comparative analysis of economic performance between the two countries.
+
+The two charts displayed vertically allow for a convenient side-by-side comparison of the economic indicators. Analyzing the trends in these indicators can provide insights into the economic dynamics and relative performance of Turkey and the USA over the specified period.
+
+```{r, echo=FALSE, fig.cap="", out.width="100%"}
+
+gdp_inflation_data <- world_bank_data_summary %>%
+  arrange(Country, Year) %>%
+  group_by(Country) %>%
+  mutate(GdpPerCapita_Change = (GdpPerCapita - lag(GdpPerCapita)) / lag(GdpPerCapita) * 100,
+         Inflation_Change = (Inflation - lag(Inflation)) / lag(Inflation) * 100) %>%
+  ungroup()
+
+# Inflation grafiği oluştur
+inflation_plot <- ggplot(gdp_inflation_data, aes(x = Year, y = Inflation_Change, color = Country)) +
+  geom_line() +
+  labs(
+    title = "Inflation Change Over Years",
+    x = "Year",
+    y = "Inflation Change (%)",
+    color = "Country"
+  ) +
+  theme_minimal()
+
+# GDP per Capita grafiği oluştur
+gdp_plot <- ggplot(gdp_inflation_data, aes(x = Year, y = GdpPerCapita_Change, color = Country)) +
+  geom_line() +
+  labs(
+    title = "GDP per Capita Change Over Years",
+    x = "Year",
+    y = "GDP per Capita Change (%)",
+    color = "Country"
+  ) +
+  theme_minimal()
+
+#grid.arrange(inflation_plot, gdp_plot, nrow = 2)
+```
+
+### **5. Unemployment Rate Comparison:**
+
+The USA generally maintained lower unemployment rates compared to Turkey.
+
+### **6. Female Labor Force Participation Rate Comparison:**
+
+The labor force participation rate for females showed variations but tended to be higher in the USA compared to Turkey.
+
+### **7. Male Labor Force Participation Rate Comparison:**
+
+The labor force participation rate for males exhibited fluctuations, with both countries experiencing changes over the years.
+
+### **8. Unemployment Rate and Female&Male Force Participation Rate Change Over Years**
+
+## **Further Analysis:**
+
+-   Trend Analysis: Explore trends in each indicator over the specified period.
+
+-   Correlation Analysis: Investigate potential correlations between different indicators.
+
+-   Regional Comparisons: Compare USA and Turkey indicators with other regions globally.
+
+This analysis provides an initial overview, and further investigations and statistical tests will be conducted for a more in-depth understanding.
