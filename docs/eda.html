@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-12-10">
+<meta name="dcterms.date" content="2023-12-11">
 
 <title>Astral Projection’s Progress Journal - 3&nbsp; Exploratory Data Analysis</title>
 <style>
@@ -198,7 +198,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#key-findings" id="toc-key-findings" class="nav-link" data-scroll-target="#key-findings"><span class="header-section-number">4.4</span> Key Findings:</a>
   <ul class="collapse">
   <li><a href="#total-population-comparison" id="toc-total-population-comparison" class="nav-link" data-scroll-target="#total-population-comparison"><span class="header-section-number">4.4.1</span> 1. Total Population Comparison:</a></li>
+  <li><a href="#gdp-per-capita-comparison" id="toc-gdp-per-capita-comparison" class="nav-link" data-scroll-target="#gdp-per-capita-comparison"><span class="header-section-number">4.4.2</span> 2. GDP per Capita Comparison:</a></li>
+  <li><a href="#age-dependency-ratio-comparison" id="toc-age-dependency-ratio-comparison" class="nav-link" data-scroll-target="#age-dependency-ratio-comparison"><span class="header-section-number">4.4.3</span> 3. Age Dependency Ratio Comparison:</a></li>
+  <li><a href="#inflation-rate-comparison" id="toc-inflation-rate-comparison" class="nav-link" data-scroll-target="#inflation-rate-comparison"><span class="header-section-number">4.4.4</span> 4. Inflation Rate Comparison:</a></li>
+  <li><a href="#inflation-and-gdppercapita-change-over-years" id="toc-inflation-and-gdppercapita-change-over-years" class="nav-link" data-scroll-target="#inflation-and-gdppercapita-change-over-years"><span class="header-section-number">4.4.5</span> 4.1. Inflation and GdpPerCapita Change Over Years:</a></li>
+  <li><a href="#unemployment-rate-comparison" id="toc-unemployment-rate-comparison" class="nav-link" data-scroll-target="#unemployment-rate-comparison"><span class="header-section-number">4.4.6</span> <strong>5. Unemployment Rate Comparison:</strong></a></li>
+  <li><a href="#female-labor-force-participation-rate-comparison" id="toc-female-labor-force-participation-rate-comparison" class="nav-link" data-scroll-target="#female-labor-force-participation-rate-comparison"><span class="header-section-number">4.4.7</span> <strong>6. Female Labor Force Participation Rate Comparison:</strong></a></li>
+  <li><a href="#male-labor-force-participation-rate-comparison" id="toc-male-labor-force-participation-rate-comparison" class="nav-link" data-scroll-target="#male-labor-force-participation-rate-comparison"><span class="header-section-number">4.4.8</span> <strong>7. Male Labor Force Participation Rate Comparison:</strong></a></li>
+  <li><a href="#unemployment-rate-and-femalemale-force-participation-rate-change-over-years" id="toc-unemployment-rate-and-femalemale-force-participation-rate-change-over-years" class="nav-link" data-scroll-target="#unemployment-rate-and-femalemale-force-participation-rate-change-over-years"><span class="header-section-number">4.4.9</span> <strong>8. Unemployment Rate and Female&amp;Male Force Participation Rate Change Over Years</strong></a></li>
   </ul></li>
+  <li><a href="#further-analysis" id="toc-further-analysis" class="nav-link" data-scroll-target="#further-analysis"><span class="header-section-number">4.5</span> <strong>Further Analysis:</strong></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -219,7 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 10, 2023</p>
+      <p class="date">December 11, 2023</p>
     </div>
   </div>
   
@@ -283,26 +292,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-libraries-and-packages" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="load-libraries-and-packages"><span class="header-section-number">4.3</span> Load Libraries and Packages</h2>
 <p>The libraries used in our analysis are given below:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WDI)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(remotes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>The data set used in our analysis is given below:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>indicator_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SP.POP.TOTL"</span>,<span class="st">"NY.GDP.PCAP.CD"</span>,<span class="st">"SP.POP.DPND"</span>,<span class="st">"FP.CPI.TOTL.ZG"</span>,<span class="st">"SL.UEM.TOTL.ZS"</span>,<span class="st">"SL.TLF.CACT.FE.ZS"</span>,<span class="st">"SL.TLF.CACT.MA.ZS"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TUR"</span>, <span class="st">"USA"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>start_date <span class="ot">&lt;-</span> <span class="dv">2018</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>end_date <span class="ot">&lt;-</span> <span class="dv">2023</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>world_bank_data_2 <span class="ot">&lt;-</span> <span class="fu">WDI</span>( <span class="at">indicator =</span> indicator_codes,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">country =</span> countries,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">start =</span> start_date, </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">end =</span> end_date, </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">extra =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>world_bank_data_summary <span class="ot">&lt;-</span> world_bank_data_2[,<span class="fu">c</span>(<span class="st">"country"</span>,<span class="st">"year"</span>,<span class="st">"SP.POP.TOTL"</span>,<span class="st">"NY.GDP.PCAP.CD"</span>,<span class="st">"SP.POP.DPND"</span>,<span class="st">"FP.CPI.TOTL.ZG"</span>,<span class="st">"SL.UEM.TOTL.ZS"</span>,<span class="st">"SL.TLF.CACT.FE.ZS"</span>,<span class="st">"SL.TLF.CACT.MA.ZS"</span>)]</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(world_bank_data_summary) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Country"</span>,<span class="st">"Year"</span>,<span class="st">"Population"</span>,<span class="st">"GdpPerCapita"</span>,<span class="st">"AgeDependancyRatio"</span>,<span class="st">"Inflation"</span>,<span class="st">"UnemploymentRate"</span>,<span class="st">"FemaleLaborRate"</span>,<span class="st">"MaleLaborRate"</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>world_bank_data_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>indicator_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SP.POP.TOTL"</span>,<span class="st">"NY.GDP.PCAP.CD"</span>,<span class="st">"SP.POP.DPND"</span>,<span class="st">"FP.CPI.TOTL.ZG"</span>,<span class="st">"SL.UEM.TOTL.ZS"</span>,<span class="st">"SL.TLF.CACT.FE.ZS"</span>,<span class="st">"SL.TLF.CACT.MA.ZS"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TUR"</span>, <span class="st">"USA"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>start_date <span class="ot">&lt;-</span> <span class="dv">2018</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>end_date <span class="ot">&lt;-</span> <span class="dv">2023</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>world_bank_data_2 <span class="ot">&lt;-</span> <span class="fu">WDI</span>( <span class="at">indicator =</span> indicator_codes,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">country =</span> countries,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">start =</span> start_date, </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">end =</span> end_date, </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">extra =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>world_bank_data_summary <span class="ot">&lt;-</span> world_bank_data_2[,<span class="fu">c</span>(<span class="st">"country"</span>,<span class="st">"year"</span>,<span class="st">"SP.POP.TOTL"</span>,<span class="st">"NY.GDP.PCAP.CD"</span>,<span class="st">"SP.POP.DPND"</span>,<span class="st">"FP.CPI.TOTL.ZG"</span>,<span class="st">"SL.UEM.TOTL.ZS"</span>,<span class="st">"SL.TLF.CACT.FE.ZS"</span>,<span class="st">"SL.TLF.CACT.MA.ZS"</span>)]</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(world_bank_data_summary) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Country"</span>,<span class="st">"Year"</span>,<span class="st">"Population"</span>,<span class="st">"GdpPerCapita"</span>,<span class="st">"AgeDependancyRatio"</span>,<span class="st">"Inflation"</span>,<span class="st">"UnemploymentRate"</span>,<span class="st">"FemaleLaborRate"</span>,<span class="st">"MaleLaborRate"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>world_bank_data_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Country Year Population GdpPerCapita AgeDependancyRatio Inflation
 1        Turkiye 2018   82809304     9400.836           46.30621 16.332464
@@ -333,29 +337,87 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="4.4" class="anchored" data-anchor-id="key-findings"><span class="header-section-number">4.4</span> Key Findings:</h2>
 <section id="total-population-comparison" class="level3" data-number="4.4.1">
 <h3 data-number="4.4.1" class="anchored" data-anchor-id="total-population-comparison"><span class="header-section-number">4.4.1</span> 1. Total Population Comparison:</h3>
+<p>Both the USA and Turkey experienced steady population growth between 2018 and 2023. The USA had a larger total population compared to Turkey throughout the period.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(world_bank_data_summary, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Year), <span class="at">y =</span> Population <span class="sc">/</span> <span class="fl">1e6</span>, <span class="at">fill =</span> Country)) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> scales<span class="sc">::</span><span class="fu">comma</span>(Population, <span class="at">big.mark =</span> <span class="st">","</span>)), </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.9</span>), </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="co"># Barların üstüne değerleri yazmak için</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Population Comparison by Year and Country"</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Population (Million)"</span>,</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Country"</span>) <span class="sc">+</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
 <div class="cell-output-display">
-<p><img src="eda_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<p><img src="eda_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
-
-
 </section>
+<section id="gdp-per-capita-comparison" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="gdp-per-capita-comparison"><span class="header-section-number">4.4.2</span> 2. GDP per Capita Comparison:</h3>
+<p>The USA consistently exhibited a higher GDP per capita compared to Turkey. Both countries showed variations in GDP per capita over the years.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="eda_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+</section>
+<section id="age-dependency-ratio-comparison" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="age-dependency-ratio-comparison"><span class="header-section-number">4.4.3</span> 3. Age Dependency Ratio Comparison:</h3>
+<p>The age dependency ratio in Turkey was higher than in the USA, indicating a relatively larger proportion of dependents.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="eda_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+</section>
+<section id="inflation-rate-comparison" class="level3" data-number="4.4.4">
+<h3 data-number="4.4.4" class="anchored" data-anchor-id="inflation-rate-comparison"><span class="header-section-number">4.4.4</span> 4. Inflation Rate Comparison:</h3>
+<p>Inflation rates fluctuated in both countries, with specific years potentially warranting further investigation.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="eda_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" style="width:100.0%"></p>
+</div>
+</div>
+</section>
+<section id="inflation-and-gdppercapita-change-over-years" class="level3" data-number="4.4.5">
+<h3 data-number="4.4.5" class="anchored" data-anchor-id="inflation-and-gdppercapita-change-over-years"><span class="header-section-number">4.4.5</span> 4.1. Inflation and GdpPerCapita Change Over Years:</h3>
+<p>The provided code conducts an analysis of the change in Inflation and GDP per Capita over the years for two countries, Turkey (TUR) and the United States (USA). The data is first processed to calculate the percentage change in both Inflation and GDP per Capita compared to the previous year. Two line charts are then generated and displayed vertically.</p>
+<p><strong>Inflation Change Over Years:</strong> The line chart illustrates the percentage change in inflation rates for both Turkey and the USA over the specified years. Each line represents the annual variation in inflation, providing a visual comparison of the inflation dynamics between the two countries.</p>
+<p><strong>GDP per Capita Change Over Years:</strong> Similarly, the second line chart visualizes the percentage change in GDP per Capita for Turkey and the USA across the given time frame. The lines depict the annual fluctuations in GDP per Capita, enabling a comparative analysis of economic performance between the two countries.</p>
+<p>The two charts displayed vertically allow for a convenient side-by-side comparison of the economic indicators. Analyzing the trends in these indicators can provide insights into the economic dynamics and relative performance of Turkey and the USA over the specified period.</p>
+</section>
+<section id="unemployment-rate-comparison" class="level3" data-number="4.4.6">
+<h3 data-number="4.4.6" class="anchored" data-anchor-id="unemployment-rate-comparison"><span class="header-section-number">4.4.6</span> <strong>5. Unemployment Rate Comparison:</strong></h3>
+<p>The USA generally maintained lower unemployment rates compared to Turkey.</p>
+</section>
+<section id="female-labor-force-participation-rate-comparison" class="level3" data-number="4.4.7">
+<h3 data-number="4.4.7" class="anchored" data-anchor-id="female-labor-force-participation-rate-comparison"><span class="header-section-number">4.4.7</span> <strong>6. Female Labor Force Participation Rate Comparison:</strong></h3>
+<p>The labor force participation rate for females showed variations but tended to be higher in the USA compared to Turkey.</p>
+</section>
+<section id="male-labor-force-participation-rate-comparison" class="level3" data-number="4.4.8">
+<h3 data-number="4.4.8" class="anchored" data-anchor-id="male-labor-force-participation-rate-comparison"><span class="header-section-number">4.4.8</span> <strong>7. Male Labor Force Participation Rate Comparison:</strong></h3>
+<p>The labor force participation rate for males exhibited fluctuations, with both countries experiencing changes over the years.</p>
+</section>
+<section id="unemployment-rate-and-femalemale-force-participation-rate-change-over-years" class="level3" data-number="4.4.9">
+<h3 data-number="4.4.9" class="anchored" data-anchor-id="unemployment-rate-and-femalemale-force-participation-rate-change-over-years"><span class="header-section-number">4.4.9</span> <strong>8. Unemployment Rate and Female&amp;Male Force Participation Rate Change Over Years</strong></h3>
+</section>
+</section>
+<section id="further-analysis" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="further-analysis"><span class="header-section-number">4.5</span> <strong>Further Analysis:</strong></h2>
+<ul>
+<li><p>Trend Analysis: Explore trends in each indicator over the specified period.</p></li>
+<li><p>Correlation Analysis: Investigate potential correlations between different indicators.</p></li>
+<li><p>Regional Comparisons: Compare USA and Turkey indicators with other regions globally.</p></li>
+</ul>
+<p>This analysis provides an initial overview, and further investigations and statistical tests will be conducted for a more in-depth understanding.</p>
+
+
 </section>
 </section>
 
