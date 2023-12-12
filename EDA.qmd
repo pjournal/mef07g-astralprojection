@@ -17,31 +17,31 @@ In this Exploratory Data Analysis (EDA), we compared key indicators for the USA 
 
 ## Description of Selected Indicators:
 
-### 1. Total Population:
+### Total Population:
 
 -   Total population is the sum of all residents regardless of age.
 
-### 2. GDP per Capita:
+### GDP per Capita:
 
 -   Gross Domestic Product (GDP) per capita represents the average economic output per person.
 
-### 3. Age Dependency Ratio:
+### Age Dependency Ratio:
 
 -   The age dependency ratio is the ratio of dependents (those aged 0-14 and 65+) to the working-age population (15-64).
 
-### 4. Inflation, Consumer Prices (CPI) Annual Growth Rate:
+### Inflation, Consumer Prices (CPI) Annual Growth Rate:
 
 -   The Consumer Price Index (CPI) measures the average change over time in the prices paid by urban consumers for a market basket of consumer goods and services. This indicator represents the annual growth rate of CPI.
 
-### 5. Unemployment, Total (% of Labor Force):
+### Unemployment, Total (% of Labor Force):
 
 -   Total unemployment is the percentage of the labor force that is unemployed but actively seeking employment.
 
-### 6. Labor Force Participation Rate, Female (% of Female Population Ages 15+):
+### Labor Force Participation Rate, Female (% of Female Population Ages 15+):
 
 -   The labor force participation rate for females represents the percentage of the female population ages 15 and older that is economically active.
 
-### 7. Labor Force Participation Rate, Male (% of Male Population Ages 15+):
+### Labor Force Participation Rate, Male (% of Male Population Ages 15+):
 
 -   The labor force participation rate for males represents the percentage of the male population ages 15 and older that is economically active.
 
@@ -74,7 +74,7 @@ world_bank_data_summary
 
 ## Key Findings:
 
-### 1. Total Population Comparison:
+### Total Population Comparison:
 
 Both the USA and Turkey experienced steady population growth between 2018 and 2023. The USA had a larger total population compared to Turkey throughout the period.
 
@@ -99,7 +99,7 @@ ggplot(world_bank_data_summary, aes(x = factor(Year), y = Population / 1e6, fill
 
 ```
 
-### 2. GDP per Capita Comparison:
+### GDP per Capita Comparison:
 
 The USA consistently exhibited a higher GDP per capita compared to Turkey. Both countries showed variations in GDP per capita over the years.
 
@@ -119,7 +119,7 @@ ggplot(world_bank_data_summary, aes(x = Year, y = GdpPerCapita, fill = Country))
   theme_minimal()
 ```
 
-### 3. Age Dependency Ratio Comparison:
+### Age Dependency Ratio Comparison:
 
 The age dependency ratio in Turkey was higher than in the USA, indicating a relatively larger proportion of dependents.
 
@@ -141,7 +141,7 @@ ggplot(world_bank_data_summary, aes(x = Year, y = AgeDependancyRatio, color = Co
 
 ```
 
-### 4. Inflation Rate Comparison:
+### Inflation Rate Comparison:
 
 Inflation rates fluctuated in both countries, with specific years potentially warranting further investigation.
 
@@ -161,17 +161,9 @@ ggplot(world_bank_data_summary, aes(x = Year, y = Inflation, color = Country, gr
   theme_minimal()
 ```
 
-### 4.1. Inflation and GdpPerCapita Change Over Years:
+### Inflation and GdpPerCapita Change Over Years:
 
 The provided code conducts an analysis of the change in Inflation and GDP per Capita over the years for two countries, Turkey (TUR) and the United States (USA). The data is first processed to calculate the percentage change in both Inflation and GDP per Capita compared to the previous year. Two line charts are then generated and displayed vertically.
-
-**Inflation Change Over Years:**
-The line chart illustrates the percentage change in inflation rates for both Turkey and the USA over the specified years. Each line represents the annual variation in inflation, providing a visual comparison of the inflation dynamics between the two countries.
-
-**GDP per Capita Change Over Years:**
-Similarly, the second line chart visualizes the percentage change in GDP per Capita for Turkey and the USA across the given time frame. The lines depict the annual fluctuations in GDP per Capita, enabling a comparative analysis of economic performance between the two countries.
-
-The two charts displayed vertically allow for a convenient side-by-side comparison of the economic indicators. Analyzing the trends in these indicators can provide insights into the economic dynamics and relative performance of Turkey and the USA over the specified period.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 
@@ -205,21 +197,111 @@ gdp_plot <- ggplot(gdp_inflation_data, aes(x = Year, y = GdpPerCapita_Change, co
   theme_minimal()
 
 #grid.arrange(inflation_plot, gdp_plot, nrow = 2)
+print(inflation_plot)
+print(gdp_plot)
+
 ```
 
-### **5. Unemployment Rate Comparison:**
+### **Unemployment Rate Comparison:**
 
-The USA generally maintained lower unemployment rates compared to Turkey.
+The Unemployment Rate Comparison analysis reveals that, over the specified years (2018-2023), the USA consistently maintained lower unemployment rates compared to Turkey. The line chart visually depicts the annual fluctuations in the unemployment rates for both countries, with the USA consistently positioned below Turkey. This suggests a relatively more stable employment environment in the USA during the analyzed period, emphasizing the difference in labor market conditions between the two countries.
 
-### **6. Female Labor Force Participation Rate Comparison:**
+```{r, echo=FALSE, fig.cap="", out.width="100%"}
+
+ggplot(world_bank_data_summary, aes(x = Year, y = UnemploymentRate, color = Country)) +
+  geom_line() +
+  labs(
+    title = "Unemployment Rate Comparison",
+    x = "Year",
+    y = "Unemployment Rate",
+    color = "Country"
+  ) +
+  theme_minimal()
+```
+
+### **Female Labor Force Participation Rate Comparison:**
 
 The labor force participation rate for females showed variations but tended to be higher in the USA compared to Turkey.
 
-### **7. Male Labor Force Participation Rate Comparison:**
+```{r, echo=FALSE, fig.cap="", out.width="100%"}
+ggplot(world_bank_data_summary, aes(x = Year, y = FemaleLaborRate, color = Country)) +
+  geom_line() +
+  labs(
+    title = "Female Labor Force Participation Rate Comparison",
+    x = "Year",
+    y = "Female Labor Force Participation Rate",
+    color = "Country"
+  ) +
+  theme_minimal()
+
+```
+
+### **Male Labor Force Participation Rate Comparison:**
 
 The labor force participation rate for males exhibited fluctuations, with both countries experiencing changes over the years.
 
-### **8. Unemployment Rate and Female&Male Force Participation Rate Change Over Years**
+```{r, echo=FALSE, fig.cap="", out.width="100%"}
+ggplot(world_bank_data_summary, aes(x = Year, y = MaleLaborRate, color = Country)) +
+  geom_line() +
+  labs(
+    title = "Male Labor Force Participation Rate Comparison",
+    x = "Year",
+    y = "Male Labor Force Participation Rate",
+    color = "Country"
+  ) +
+  theme_minimal()
+```
+
+### **Unemployment Rate and Female&Male Force Participation Rate Change Over Years**
+
+The provided code conducts an analysis of the change in Unemployment Rate andFemale&Male Force Participation Rate over the years for two countries, Turkey (TUR) and the United States (USA). The data is first processed to calculate the percentage change in both Inflation and GDP per Capita compared to the previous year. Three line charts are then generated and displayed vertically.
+
+```{r, echo=FALSE, fig.cap="", out.width="100%"}
+
+labor_unemployment_data <- world_bank_data_summary %>%
+  arrange(Country, Year) %>%
+  group_by(Country) %>%
+  mutate(UnemploymentRate_Change = (UnemploymentRate - lag(UnemploymentRate)) / lag(UnemploymentRate) * 100,
+         FemaleLaborRate_Change = (FemaleLaborRate - lag(FemaleLaborRate)) / lag(FemaleLaborRate) * 100,
+          MaleLaborRate_Change = (MaleLaborRate - lag(MaleLaborRate)) / lag(MaleLaborRate) * 100) %>%
+  ungroup()
+
+# Unemployment grafiği oluştur
+unemployment_plot <- ggplot(labor_unemployment_data, aes(x = Year, y = UnemploymentRate_Change, color = Country)) +
+  geom_line() +
+  labs(
+    title = "Unemployment Change Over Years",
+    x = "Year",
+    y = "Unemployment Change (%)",
+    color = "Country"
+  ) +
+  theme_minimal()
+
+# Female Labor Participation grafiği oluştur
+female_labor_plot <- ggplot(labor_unemployment_data, aes(x = Year, y = FemaleLaborRate, color = Country)) +
+  geom_line() +
+  labs(
+    title = "Female Labor Participation Change Over Years",
+    x = "Year",
+    y = "Female Labor Participation Change (%)",
+    color = "Country"
+  ) +
+  theme_minimal()
+
+male_labor_plot <- ggplot(labor_unemployment_data, aes(x = Year, y = MaleLaborRate, color = Country)) +
+  geom_line() +
+  labs(
+    title = "Male Labor Participation Change Over Years",
+    x = "Year",
+    y = "Male Labor Participation Change (%)",
+    color = "Country"
+  ) +
+  theme_minimal()
+#grid.arrange(inflation_plot, gdp_plot, nrow = 2)
+print(unemployment_plot)
+print(female_labor_plot)
+print(male_labor_plot)
+```
 
 ## **Further Analysis:**
 
@@ -227,6 +309,6 @@ The labor force participation rate for males exhibited fluctuations, with both c
 
 -   Correlation Analysis: Investigate potential correlations between different indicators.
 
--   Regional Comparisons: Compare USA and Turkey indicators with other regions globally.
+-   Regional Comparisons: Compare USA and Turkey indicators with each other.
 
-This analysis provides an initial overview, and further investigations and statistical tests will be conducted for a more in-depth understanding.
+This Explatory Data Analysis provides an initial overview, and further investigations and statistical tests will be conducted for a more in-depth understanding.
