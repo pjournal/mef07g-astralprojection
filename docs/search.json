@@ -1,0 +1,93 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Astral Projection’s Progress Journal",
+    "section": "",
+    "text": "1 Introduction\n\nThis progress journal covers Astral Projection’s work during their term at BDA 503 Fall 2023.\nEach section is an assignment or an individual work.\n\n\nGroup Members\n\nGözde Uğur\nMelihcan Akgül\nDerya Şaşmaz\nBurcu Altıparmak"
+  },
+  {
+    "objectID": "assignment1.html",
+    "href": "assignment1.html",
+    "title": "2  Preprocessing",
+    "section": "",
+    "text": "3 Preprocessing"
+  },
+  {
+    "objectID": "assignment1.html#initial-setup",
+    "href": "assignment1.html#initial-setup",
+    "title": "2  Preprocessing",
+    "section": "3.1 Initial Setup",
+    "text": "3.1 Initial Setup\n\n#install.packages(\"WDI\",repos = \"http://cran.us.r-project.org\",dependencies=TRUE,eval=FALSE)\nlibrary(WDI)\n\n\n#install.packages(\"remotes\",repos = \"http://cran.us.r-project.org\",dependencies=TRUE,eval=FALSE)\nlibrary(remotes)\n\n#install_github('vincentarelbundock/WDI')"
+  },
+  {
+    "objectID": "assignment1.html#data-preparation",
+    "href": "assignment1.html#data-preparation",
+    "title": "2  Preprocessing",
+    "section": "3.2 Data Preparation",
+    "text": "3.2 Data Preparation\nThe specified block aims to extract WDI data containing certain indicators and create a summary data set for Turkey and the United States over a certain time period.\nIndicator codes to be used to pull data were defined.\nRelevant countries have been determined\nTime range defined\nSpecified indicators were received using the WDI function.\nA summary data set was created by selecting specific columns pulled from the data.\nColumn names have been made more understandable.\n\nindicator_codes &lt;- c(\"SP.POP.TOTL\",\"NY.GDP.PCAP.CD\",\"SP.POP.DPND\",\"FP.CPI.TOTL.ZG\",\"SL.UEM.TOTL.ZS\",\"SL.TLF.CACT.FE.ZS\",\"SL.TLF.CACT.MA.ZS\")\ncountries &lt;- c(\"TUR\", \"USA\")\nstart_date &lt;- 2018\nend_date &lt;- 2023\nworld_bank_data_2 &lt;- WDI( indicator = indicator_codes,\n                        country = countries,\n                        start = start_date, \n                        end = end_date, \n                        extra = TRUE)\n\nworld_bank_data_summary &lt;- world_bank_data_2[,c(\"country\",\"year\",\"SP.POP.TOTL\",\"NY.GDP.PCAP.CD\",\"SP.POP.DPND\",\"FP.CPI.TOTL.ZG\",\"SL.UEM.TOTL.ZS\",\"SL.TLF.CACT.FE.ZS\",\"SL.TLF.CACT.MA.ZS\")]\ncolnames(world_bank_data_summary) &lt;- c(\"Country\",\"Year\",\"Population\",\"GdpPerCapita\",\"AgeDependancyRatio\",\"Inflation\",\"UnemploymentRate\",\"FemaleLaborRate\",\"MaleLaborRate\")\nworld_bank_data_summary\n\n         Country Year Population GdpPerCapita AgeDependancyRatio Inflation\n1        Turkiye 2018   82809304     9400.836           46.30621 16.332464\n2        Turkiye 2019   83481684     9103.012           46.74186 15.176822\n3        Turkiye 2020   84135428     8561.064           46.82812 12.278957\n4        Turkiye 2021   84775404     9661.228           46.75508 19.596493\n5        Turkiye 2022   85341241    10616.061           46.77459 72.308836\n6  United States 2018  326838199    62823.309           52.22720  2.442583\n7  United States 2019  328329953    65120.395           52.73635  1.812210\n8  United States 2020  331511512    63528.634           53.22089  1.233584\n9  United States 2021  332031554    70219.472           53.66160  4.697859\n10 United States 2022  333287557    76398.592           54.05367  8.002800\n   UnemploymentRate FemaleLaborRate MaleLaborRate\n1            10.890          34.037        72.434\n2            13.670          34.215        71.761\n3            13.110          30.767        67.998\n4            11.980          32.762        70.135\n5            10.030          34.167        71.116\n6             3.900          56.497        68.449\n7             3.670          56.885        68.559\n8             8.050          55.700        67.116\n9             5.350          55.588        67.043\n10            3.611          56.459        67.511"
+  },
+  {
+    "objectID": "assignment1.html#save-as-.rds-file",
+    "href": "assignment1.html#save-as-.rds-file",
+    "title": "2  Preprocessing",
+    "section": "3.3 Save as .rds File",
+    "text": "3.3 Save as .rds File\n\nsaveRDS(world_bank_data_summary, file = \"world_bank_data.rds\")\nloaded_data &lt;- readRDS(\"world_bank_data.rds\")\nloaded_data\n\n         Country Year Population GdpPerCapita AgeDependancyRatio Inflation\n1        Turkiye 2018   82809304     9400.836           46.30621 16.332464\n2        Turkiye 2019   83481684     9103.012           46.74186 15.176822\n3        Turkiye 2020   84135428     8561.064           46.82812 12.278957\n4        Turkiye 2021   84775404     9661.228           46.75508 19.596493\n5        Turkiye 2022   85341241    10616.061           46.77459 72.308836\n6  United States 2018  326838199    62823.309           52.22720  2.442583\n7  United States 2019  328329953    65120.395           52.73635  1.812210\n8  United States 2020  331511512    63528.634           53.22089  1.233584\n9  United States 2021  332031554    70219.472           53.66160  4.697859\n10 United States 2022  333287557    76398.592           54.05367  8.002800\n   UnemploymentRate FemaleLaborRate MaleLaborRate\n1            10.890          34.037        72.434\n2            13.670          34.215        71.761\n3            13.110          30.767        67.998\n4            11.980          32.762        70.135\n5            10.030          34.167        71.116\n6             3.900          56.497        68.449\n7             3.670          56.885        68.559\n8             8.050          55.700        67.116\n9             5.350          55.588        67.043\n10            3.611          56.459        67.511"
+  },
+  {
+    "objectID": "assignment1.html#preprocessed-data-link",
+    "href": "assignment1.html#preprocessed-data-link",
+    "title": "2  Preprocessing",
+    "section": "3.4 Preprocessed Data Link",
+    "text": "3.4 Preprocessed Data Link"
+  },
+  {
+    "objectID": "assignment1.html#data-link",
+    "href": "assignment1.html#data-link",
+    "title": "2  Preprocessing",
+    "section": "3.5 Data Link",
+    "text": "3.5 Data Link"
+  },
+  {
+    "objectID": "eda.html",
+    "href": "eda.html",
+    "title": "3  Exploratory Data Analysis",
+    "section": "",
+    "text": "4 World Development Indicators - USA vs Turkey: Exploratory Data Analysis"
+  },
+  {
+    "objectID": "eda.html#introduction",
+    "href": "eda.html#introduction",
+    "title": "3  Exploratory Data Analysis",
+    "section": "4.1 Introduction:",
+    "text": "4.1 Introduction:\nIn this Exploratory Data Analysis (EDA), we compared key indicators for the USA and Turkey using the World Development Indicators (WDI) dataset. The analysis focused on the years between 2018 and 2023."
+  },
+  {
+    "objectID": "eda.html#description-of-selected-indicators",
+    "href": "eda.html#description-of-selected-indicators",
+    "title": "3  Exploratory Data Analysis",
+    "section": "4.2 Description of Selected Indicators:",
+    "text": "4.2 Description of Selected Indicators:\n\n4.2.1 1. Total Population:\n\nTotal population is the sum of all residents regardless of age.\n\n\n\n4.2.2 2. GDP per Capita:\n\nGross Domestic Product (GDP) per capita represents the average economic output per person.\n\n\n\n4.2.3 3. Age Dependency Ratio:\n\nThe age dependency ratio is the ratio of dependents (those aged 0-14 and 65+) to the working-age population (15-64).\n\n\n\n4.2.4 4. Inflation, Consumer Prices (CPI) Annual Growth Rate:\n\nThe Consumer Price Index (CPI) measures the average change over time in the prices paid by urban consumers for a market basket of consumer goods and services. This indicator represents the annual growth rate of CPI.\n\n\n\n4.2.5 5. Unemployment, Total (% of Labor Force):\n\nTotal unemployment is the percentage of the labor force that is unemployed but actively seeking employment.\n\n\n\n4.2.6 6. Labor Force Participation Rate, Female (% of Female Population Ages 15+):\n\nThe labor force participation rate for females represents the percentage of the female population ages 15 and older that is economically active.\n\n\n\n4.2.7 7. Labor Force Participation Rate, Male (% of Male Population Ages 15+):\n\nThe labor force participation rate for males represents the percentage of the male population ages 15 and older that is economically active."
+  },
+  {
+    "objectID": "eda.html#load-libraries-and-packages",
+    "href": "eda.html#load-libraries-and-packages",
+    "title": "3  Exploratory Data Analysis",
+    "section": "4.3 Load Libraries and Packages",
+    "text": "4.3 Load Libraries and Packages\nThe libraries used in our analysis are given below:\nThe data set used in our analysis is given below:\n\nindicator_codes &lt;- c(\"SP.POP.TOTL\",\"NY.GDP.PCAP.CD\",\"SP.POP.DPND\",\"FP.CPI.TOTL.ZG\",\"SL.UEM.TOTL.ZS\",\"SL.TLF.CACT.FE.ZS\",\"SL.TLF.CACT.MA.ZS\")\ncountries &lt;- c(\"TUR\", \"USA\")\nstart_date &lt;- 2018\nend_date &lt;- 2023\nworld_bank_data_2 &lt;- WDI( indicator = indicator_codes,\n                        country = countries,\n                        start = start_date, \n                        end = end_date, \n                        extra = TRUE)\n\nworld_bank_data_summary &lt;- world_bank_data_2[,c(\"country\",\"year\",\"SP.POP.TOTL\",\"NY.GDP.PCAP.CD\",\"SP.POP.DPND\",\"FP.CPI.TOTL.ZG\",\"SL.UEM.TOTL.ZS\",\"SL.TLF.CACT.FE.ZS\",\"SL.TLF.CACT.MA.ZS\")]\ncolnames(world_bank_data_summary) &lt;- c(\"Country\",\"Year\",\"Population\",\"GdpPerCapita\",\"AgeDependancyRatio\",\"Inflation\",\"UnemploymentRate\",\"FemaleLaborRate\",\"MaleLaborRate\")\nworld_bank_data_summary\n\n         Country Year Population GdpPerCapita AgeDependancyRatio Inflation\n1        Turkiye 2018   82809304     9400.836           46.30621 16.332464\n2        Turkiye 2019   83481684     9103.012           46.74186 15.176822\n3        Turkiye 2020   84135428     8561.064           46.82812 12.278957\n4        Turkiye 2021   84775404     9661.228           46.75508 19.596493\n5        Turkiye 2022   85341241    10616.061           46.77459 72.308836\n6  United States 2018  326838199    62823.309           52.22720  2.442583\n7  United States 2019  328329953    65120.395           52.73635  1.812210\n8  United States 2020  331511512    63528.634           53.22089  1.233584\n9  United States 2021  332031554    70219.472           53.66160  4.697859\n10 United States 2022  333287557    76398.592           54.05367  8.002800\n   UnemploymentRate FemaleLaborRate MaleLaborRate\n1            10.890          34.037        72.434\n2            13.670          34.215        71.761\n3            13.110          30.767        67.998\n4            11.980          32.762        70.135\n5            10.030          34.167        71.116\n6             3.900          56.497        68.449\n7             3.670          56.885        68.559\n8             8.050          55.700        67.116\n9             5.350          55.588        67.043\n10            3.611          56.459        67.511"
+  },
+  {
+    "objectID": "eda.html#key-findings",
+    "href": "eda.html#key-findings",
+    "title": "3  Exploratory Data Analysis",
+    "section": "4.4 Key Findings:",
+    "text": "4.4 Key Findings:\n\n4.4.1 1. Total Population Comparison:\nBoth the USA and Turkey experienced steady population growth between 2018 and 2023. The USA had a larger total population compared to Turkey throughout the period.\n\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\n\n\n\n\n\n4.4.2 2. GDP per Capita Comparison:\nThe USA consistently exhibited a higher GDP per capita compared to Turkey. Both countries showed variations in GDP per capita over the years.\n\n\n\n\n\n\n\n4.4.3 3. Age Dependency Ratio Comparison:\nThe age dependency ratio in Turkey was higher than in the USA, indicating a relatively larger proportion of dependents.\n\n\n\n\n\n\n\n4.4.4 4. Inflation Rate Comparison:\nInflation rates fluctuated in both countries, with specific years potentially warranting further investigation.\n\n\n\n\n\n\n\n4.4.5 4.1. Inflation and GdpPerCapita Change Over Years:\nThe provided code conducts an analysis of the change in Inflation and GDP per Capita over the years for two countries, Turkey (TUR) and the United States (USA). The data is first processed to calculate the percentage change in both Inflation and GDP per Capita compared to the previous year. Two line charts are then generated and displayed vertically.\nInflation Change Over Years: The line chart illustrates the percentage change in inflation rates for both Turkey and the USA over the specified years. Each line represents the annual variation in inflation, providing a visual comparison of the inflation dynamics between the two countries.\nGDP per Capita Change Over Years: Similarly, the second line chart visualizes the percentage change in GDP per Capita for Turkey and the USA across the given time frame. The lines depict the annual fluctuations in GDP per Capita, enabling a comparative analysis of economic performance between the two countries.\nThe two charts displayed vertically allow for a convenient side-by-side comparison of the economic indicators. Analyzing the trends in these indicators can provide insights into the economic dynamics and relative performance of Turkey and the USA over the specified period.\n\n\n4.4.6 5. Unemployment Rate Comparison:\nThe USA generally maintained lower unemployment rates compared to Turkey.\n\n\n4.4.7 6. Female Labor Force Participation Rate Comparison:\nThe labor force participation rate for females showed variations but tended to be higher in the USA compared to Turkey.\n\n\n4.4.8 7. Male Labor Force Participation Rate Comparison:\nThe labor force participation rate for males exhibited fluctuations, with both countries experiencing changes over the years.\n\n\n4.4.9 8. Unemployment Rate and Female&Male Force Participation Rate Change Over Years"
+  },
+  {
+    "objectID": "eda.html#further-analysis",
+    "href": "eda.html#further-analysis",
+    "title": "3  Exploratory Data Analysis",
+    "section": "4.5 Further Analysis:",
+    "text": "4.5 Further Analysis:\n\nTrend Analysis: Explore trends in each indicator over the specified period.\nCorrelation Analysis: Investigate potential correlations between different indicators.\nRegional Comparisons: Compare USA and Turkey indicators with other regions globally.\n\nThis analysis provides an initial overview, and further investigations and statistical tests will be conducted for a more in-depth understanding."
+  }
+]
