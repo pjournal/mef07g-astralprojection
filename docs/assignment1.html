@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-12-12">
+<meta name="dcterms.date" content="2023-12-24">
 
 <title>Astral Projection’s Progress Journal - 2&nbsp; Preprocessing</title>
 <style>
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./eda.html" rel="next">
+<link href="./EDA.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -96,6 +96,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 </head>
@@ -168,7 +171,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./eda.html" class="sidebar-item-text sidebar-link">
+  <a href="./EDA.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
   </div>
 </li>
@@ -209,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 12, 2023</p>
+      <p class="date">December 24, 2023</p>
     </div>
   </div>
   
@@ -227,11 +230,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("WDI",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WDI)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("remotes",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(remotes)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#install_github('vincentarelbundock/WDI')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("remotes",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(remotes)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#install_github('vincentarelbundock/WDI')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data-preparation" class="level2" data-number="3.2">
@@ -244,42 +246,212 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>A summary data set was created by selecting specific columns pulled from the data.</p>
 <p>Column names have been made more understandable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>indicator_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SP.POP.TOTL"</span>,<span class="st">"NY.GDP.PCAP.CD"</span>,<span class="st">"SP.POP.DPND"</span>,<span class="st">"FP.CPI.TOTL.ZG"</span>,<span class="st">"SL.UEM.TOTL.ZS"</span>,<span class="st">"SL.TLF.CACT.FE.ZS"</span>,<span class="st">"SL.TLF.CACT.MA.ZS"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TUR"</span>, <span class="st">"USA"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>start_date <span class="ot">&lt;-</span> <span class="dv">2018</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>end_date <span class="ot">&lt;-</span> <span class="dv">2023</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>world_bank_data_2 <span class="ot">&lt;-</span> <span class="fu">WDI</span>( <span class="at">indicator =</span> indicator_codes,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">country =</span> countries,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">start =</span> start_date, </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">end =</span> end_date, </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">extra =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>world_bank_data_summary <span class="ot">&lt;-</span> world_bank_data_2[,<span class="fu">c</span>(<span class="st">"country"</span>,<span class="st">"year"</span>,<span class="st">"SP.POP.TOTL"</span>,<span class="st">"NY.GDP.PCAP.CD"</span>,<span class="st">"SP.POP.DPND"</span>,<span class="st">"FP.CPI.TOTL.ZG"</span>,<span class="st">"SL.UEM.TOTL.ZS"</span>,<span class="st">"SL.TLF.CACT.FE.ZS"</span>,<span class="st">"SL.TLF.CACT.MA.ZS"</span>)]</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(world_bank_data_summary) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Country"</span>,<span class="st">"Year"</span>,<span class="st">"Population"</span>,<span class="st">"GdpPerCapita"</span>,<span class="st">"AgeDependancyRatio"</span>,<span class="st">"Inflation"</span>,<span class="st">"UnemploymentRate"</span>,<span class="st">"FemaleLaborRate"</span>,<span class="st">"MaleLaborRate"</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>world_bank_data_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         Country Year Population GdpPerCapita AgeDependancyRatio Inflation
-1        Turkiye 2018   82809304     9400.836           46.30621 16.332464
-2        Turkiye 2019   83481684     9103.012           46.74186 15.176822
-3        Turkiye 2020   84135428     8561.064           46.82812 12.278957
-4        Turkiye 2021   84775404     9661.228           46.75508 19.596493
-5        Turkiye 2022   85341241    10616.061           46.77459 72.308836
-6  United States 2018  326838199    62823.309           52.22720  2.442583
-7  United States 2019  328329953    65120.395           52.73635  1.812210
-8  United States 2020  331511512    63528.634           53.22089  1.233584
-9  United States 2021  332031554    70219.472           53.66160  4.697859
-10 United States 2022  333287557    76398.592           54.05367  8.002800
-   UnemploymentRate FemaleLaborRate MaleLaborRate
-1            10.890          34.037        72.434
-2            13.670          34.215        71.761
-3            13.110          30.767        67.998
-4            11.980          32.762        70.135
-5            10.030          34.167        71.116
-6             3.900          56.497        68.449
-7             3.670          56.885        68.559
-8             8.050          55.700        67.116
-9             5.350          55.588        67.043
-10            3.611          56.459        67.511</code></pre>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>indicator_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SP.POP.TOTL"</span>,<span class="st">"NY.GDP.PCAP.CD"</span>,<span class="st">"SP.POP.DPND"</span>,<span class="st">"FP.CPI.TOTL.ZG"</span>,<span class="st">"SL.UEM.TOTL.ZS"</span>,<span class="st">"SL.TLF.CACT.FE.ZS"</span>,<span class="st">"SL.TLF.CACT.MA.ZS"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="st">"TUR"</span>,<span class="st">"UKR"</span>,<span class="st">"EUU"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>start_date <span class="ot">&lt;-</span> <span class="dv">2018</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>end_date <span class="ot">&lt;-</span> <span class="dv">2023</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>world_bank_data_2 <span class="ot">&lt;-</span> <span class="fu">WDI</span>( <span class="at">indicator =</span> indicator_codes,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">country =</span> countries,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">start =</span> start_date, </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">end =</span> end_date, </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">extra =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>world_bank_data_summary <span class="ot">&lt;-</span> world_bank_data_2[,<span class="fu">c</span>(<span class="st">"country"</span>,<span class="st">"year"</span>,<span class="st">"SP.POP.TOTL"</span>,<span class="st">"NY.GDP.PCAP.CD"</span>,<span class="st">"SP.POP.DPND"</span>,<span class="st">"FP.CPI.TOTL.ZG"</span>,<span class="st">"SL.UEM.TOTL.ZS"</span>,<span class="st">"SL.TLF.CACT.FE.ZS"</span>,<span class="st">"SL.TLF.CACT.MA.ZS"</span>)]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(world_bank_data_summary) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Country"</span>,<span class="st">"Year"</span>,<span class="st">"Population"</span>,<span class="st">"GdpPerCapita"</span>,<span class="st">"AgeDependancyRatio"</span>,<span class="st">"Inflation"</span>,<span class="st">"UnemploymentRate"</span>,<span class="st">"FemaleLaborRate"</span>,<span class="st">"MaleLaborRate"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">max.print =</span> <span class="dv">15</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(world_bank_data_summary, <span class="st">"html"</span>) <span class="sc">%&gt;%</span> <span class="fu">kable_styling</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Country</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Year</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Population</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">GdpPerCapita</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AgeDependancyRatio</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Inflation</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">UnemploymentRate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">FemaleLaborRate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">MaleLaborRate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">European Union</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">447001100</td>
+<td style="text-align: right;">35751.573</td>
+<td style="text-align: right;">54.66621</td>
+<td style="text-align: right;">1.7386086</td>
+<td style="text-align: right;">7.253803</td>
+<td style="text-align: right;">51.06276</td>
+<td style="text-align: right;">63.84818</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">European Union</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">447367191</td>
+<td style="text-align: right;">35079.534</td>
+<td style="text-align: right;">55.29177</td>
+<td style="text-align: right;">1.6305226</td>
+<td style="text-align: right;">6.679810</td>
+<td style="text-align: right;">51.26601</td>
+<td style="text-align: right;">63.91365</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">European Union</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">447692315</td>
+<td style="text-align: right;">34356.575</td>
+<td style="text-align: right;">55.86259</td>
+<td style="text-align: right;">0.4764989</td>
+<td style="text-align: right;">7.054819</td>
+<td style="text-align: right;">50.50284</td>
+<td style="text-align: right;">63.01832</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">European Union</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">447178112</td>
+<td style="text-align: right;">38721.763</td>
+<td style="text-align: right;">56.34923</td>
+<td style="text-align: right;">2.5545070</td>
+<td style="text-align: right;">7.000430</td>
+<td style="text-align: right;">51.13162</td>
+<td style="text-align: right;">63.14634</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">European Union</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">447370510</td>
+<td style="text-align: right;">37432.560</td>
+<td style="text-align: right;">56.57327</td>
+<td style="text-align: right;">8.8336989</td>
+<td style="text-align: right;">6.098751</td>
+<td style="text-align: right;">51.88009</td>
+<td style="text-align: right;">63.83574</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Turkiye</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">81407204</td>
+<td style="text-align: right;">9568.836</td>
+<td style="text-align: right;">46.30621</td>
+<td style="text-align: right;">16.3324639</td>
+<td style="text-align: right;">10.890000</td>
+<td style="text-align: right;">34.03700</td>
+<td style="text-align: right;">72.43400</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Turkiye</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">82579440</td>
+<td style="text-align: right;">9215.441</td>
+<td style="text-align: right;">46.74186</td>
+<td style="text-align: right;">15.1768216</td>
+<td style="text-align: right;">13.670000</td>
+<td style="text-align: right;">34.21500</td>
+<td style="text-align: right;">71.76100</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Turkiye</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">83384680</td>
+<td style="text-align: right;">8638.739</td>
+<td style="text-align: right;">46.82812</td>
+<td style="text-align: right;">12.2789574</td>
+<td style="text-align: right;">13.110000</td>
+<td style="text-align: right;">30.76700</td>
+<td style="text-align: right;">67.99800</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Turkiye</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">84147318</td>
+<td style="text-align: right;">9743.213</td>
+<td style="text-align: right;">46.75508</td>
+<td style="text-align: right;">19.5964927</td>
+<td style="text-align: right;">11.980000</td>
+<td style="text-align: right;">32.76200</td>
+<td style="text-align: right;">70.13500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Turkiye</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">84979913</td>
+<td style="text-align: right;">10674.504</td>
+<td style="text-align: right;">46.77459</td>
+<td style="text-align: right;">72.3088360</td>
+<td style="text-align: right;">10.030000</td>
+<td style="text-align: right;">34.16700</td>
+<td style="text-align: right;">71.11600</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ukraine</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">44622518</td>
+<td style="text-align: right;">3096.562</td>
+<td style="text-align: right;">47.21927</td>
+<td style="text-align: right;">10.9518559</td>
+<td style="text-align: right;">8.800000</td>
+<td style="text-align: right;">49.54200</td>
+<td style="text-align: right;">64.46000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ukraine</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">44386203</td>
+<td style="text-align: right;">3661.458</td>
+<td style="text-align: right;">47.75787</td>
+<td style="text-align: right;">7.8867175</td>
+<td style="text-align: right;">8.190000</td>
+<td style="text-align: right;">49.26000</td>
+<td style="text-align: right;">64.81700</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ukraine</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">44132049</td>
+<td style="text-align: right;">3751.737</td>
+<td style="text-align: right;">48.18610</td>
+<td style="text-align: right;">2.7324921</td>
+<td style="text-align: right;">9.480000</td>
+<td style="text-align: right;">48.15100</td>
+<td style="text-align: right;">63.44800</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ukraine</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">43822901</td>
+<td style="text-align: right;">4827.846</td>
+<td style="text-align: right;">48.41627</td>
+<td style="text-align: right;">9.3631392</td>
+<td style="text-align: right;">9.830000</td>
+<td style="text-align: right;">47.79100</td>
+<td style="text-align: right;">62.89700</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ukraine</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">38000000</td>
+<td style="text-align: right;">4533.976</td>
+<td style="text-align: right;">52.05497</td>
+<td style="text-align: right;">20.1836367</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+
+
 </div>
 </div>
 </section>
@@ -287,32 +459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3.3" class="anchored" data-anchor-id="save-as-.rds-file"><span class="header-section-number">3.3</span> Save as .rds File</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(world_bank_data_summary, <span class="at">file =</span> <span class="st">"world_bank_data.rds"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>loaded_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"world_bank_data.rds"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>loaded_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         Country Year Population GdpPerCapita AgeDependancyRatio Inflation
-1        Turkiye 2018   82809304     9400.836           46.30621 16.332464
-2        Turkiye 2019   83481684     9103.012           46.74186 15.176822
-3        Turkiye 2020   84135428     8561.064           46.82812 12.278957
-4        Turkiye 2021   84775404     9661.228           46.75508 19.596493
-5        Turkiye 2022   85341241    10616.061           46.77459 72.308836
-6  United States 2018  326838199    62823.309           52.22720  2.442583
-7  United States 2019  328329953    65120.395           52.73635  1.812210
-8  United States 2020  331511512    63528.634           53.22089  1.233584
-9  United States 2021  332031554    70219.472           53.66160  4.697859
-10 United States 2022  333287557    76398.592           54.05367  8.002800
-   UnemploymentRate FemaleLaborRate MaleLaborRate
-1            10.890          34.037        72.434
-2            13.670          34.215        71.761
-3            13.110          30.767        67.998
-4            11.980          32.762        70.135
-5            10.030          34.167        71.116
-6             3.900          56.497        68.449
-7             3.670          56.885        68.559
-8             8.050          55.700        67.116
-9             5.350          55.588        67.043
-10            3.611          56.459        67.511</code></pre>
-</div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>world_bank_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"world_bank_data.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="preprocessed-data-link" class="level2" data-number="3.4">
@@ -566,7 +713,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./eda.html" class="pagination-link">
+      <a href="./EDA.html" class="pagination-link">
         <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

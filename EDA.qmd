@@ -23,7 +23,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 ### Introduction:
 
-In this Exploratory Data Analysis (EDA), we compared key indicators for the USA and Turkey using the World Development Indicators (WDI) dataset. The analysis focused on the years between 2018 and 2023.
+In this Exploratory Data Analysis (EDA), we focused on the years 2018 to 2023, we conducted a comparative analysis between two countries, Ukraine and Turkey, both aspiring to become candidates for the European Union. Utilizing key indicators such as total population, GDP per capita, age dependency ratio, inflation, unemployment rate, and gender-specific labor force participation rates, we aimed to evaluate and contrast the socio-economic landscapes of these nations. The data collected from the World Bank allows us to gain insights into the demographic structure, economic performance, and labor dynamics, providing a comprehensive overview of the key factors influencing their candidacy for EU membership. This analysis will contribute to a deeper understanding of the current state and potential trajectories of Ukraine and Turkey in their pursuit of EU accession.
 
 ### Description of Selected Indicators:
 
@@ -67,19 +67,11 @@ library(remotes)
 The data set used in our analysis is given below:
 
 ```{r}
-indicator_codes <- c("SP.POP.TOTL","NY.GDP.PCAP.CD","SP.POP.DPND","FP.CPI.TOTL.ZG","SL.UEM.TOTL.ZS","SL.TLF.CACT.FE.ZS","SL.TLF.CACT.MA.ZS")
-countries <- c("TUR", "USA")
-start_date <- 2018
-end_date <- 2023
-world_bank_data_2 <- WDI( indicator = indicator_codes,
-                        country = countries,
-                        start = start_date, 
-                        end = end_date, 
-                        extra = TRUE)
+world_bank_data <- readRDS("world_bank_data.rds")
 
-world_bank_data_summary <- world_bank_data_2[,c("country","year","SP.POP.TOTL","NY.GDP.PCAP.CD","SP.POP.DPND","FP.CPI.TOTL.ZG","SL.UEM.TOTL.ZS","SL.TLF.CACT.FE.ZS","SL.TLF.CACT.MA.ZS")]
-colnames(world_bank_data_summary) <- c("Country","Year","Population","GdpPerCapita","AgeDependancyRatio","Inflation","UnemploymentRate","FemaleLaborRate","MaleLaborRate")
-kable(world_bank_data_summary)
+options(max.print = 15)
+
+kable(world_bank_data, "html") %>% kable_styling()
 ```
 
 ### Key Findings:
@@ -93,7 +85,7 @@ library(ggplot2)
 library(scales)
 library(dplyr)
 
-ggplot(world_bank_data_summary, aes(x = factor(Year), y = Population / 1e6, fill = Country)) +
+ggplot(world_bank_data, aes(x = factor(Year), y = Population / 1e6, fill = Country)) +
   geom_bar(stat = "identity", position = "dodge") +
   geom_text(aes(label = scales::comma(Population, big.mark = ",")), 
             position = position_dodge(width = 0.9), 
@@ -114,7 +106,7 @@ ggplot(world_bank_data_summary, aes(x = factor(Year), y = Population / 1e6, fill
 The USA consistently exhibited a higher GDP per capita compared to Turkey. Both countries showed variations in GDP per capita over the years.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
-ggplot(world_bank_data_summary, aes(x = Year, y = GdpPerCapita, fill = Country)) +
+ggplot(world_bank_data, aes(x = Year, y = GdpPerCapita, fill = Country)) +
   geom_bar(stat = "identity", position = "dodge") +
   geom_text(aes(label = scales::comma(GdpPerCapita, big.mark = ",")), 
             position = position_dodge(width = 0.9), 
@@ -134,7 +126,7 @@ ggplot(world_bank_data_summary, aes(x = Year, y = GdpPerCapita, fill = Country))
 The age dependency ratio in Turkey was higher than in the USA, indicating a relatively larger proportion of dependents.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
-ggplot(world_bank_data_summary, aes(x = Year, y = AgeDependancyRatio, color = Country, group = Country)) +
+ggplot(world_bank_data, aes(x = Year, y = AgeDependancyRatio, color = Country, group = Country)) +
   geom_line() +
   geom_text(aes(label = scales::comma(AgeDependancyRatio, big.mark = ",")), 
             position = position_dodge(width = 0.9), 
@@ -156,7 +148,7 @@ ggplot(world_bank_data_summary, aes(x = Year, y = AgeDependancyRatio, color = Co
 Inflation rates fluctuated in both countries, with specific years potentially warranting further investigation.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
-ggplot(world_bank_data_summary, aes(x = Year, y = Inflation, color = Country, group = Country)) +
+ggplot(world_bank_data, aes(x = Year, y = Inflation, color = Country, group = Country)) +
   geom_line() +
    geom_text(aes(label = scales::comma(Inflation, big.mark = ",")), 
             position = position_dodge(width = 0.9), 
@@ -177,7 +169,7 @@ The provided code conducts an analysis of the change in Inflation and GDP per Ca
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 
-gdp_inflation_data <- world_bank_data_summary %>%
+gdp_inflation_data <- world_bank_data %>%
   arrange(Country, Year) %>%
   group_by(Country) %>%
   mutate(GdpPerCapita_Change = (GdpPerCapita - lag(GdpPerCapita)) / lag(GdpPerCapita) * 100,
@@ -218,7 +210,7 @@ The Unemployment Rate Comparison analysis reveals that, over the specified years
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 
-ggplot(world_bank_data_summary, aes(x = Year, y = UnemploymentRate, color = Country)) +
+ggplot(world_bank_data, aes(x = Year, y = UnemploymentRate, color = Country)) +
   geom_line() +
   labs(
     title = "Unemployment Rate Comparison",
@@ -234,7 +226,7 @@ ggplot(world_bank_data_summary, aes(x = Year, y = UnemploymentRate, color = Coun
 The labor force participation rate for females showed variations but tended to be higher in the USA compared to Turkey.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
-ggplot(world_bank_data_summary, aes(x = Year, y = FemaleLaborRate, color = Country)) +
+ggplot(world_bank_data, aes(x = Year, y = FemaleLaborRate, color = Country)) +
   geom_line() +
   labs(
     title = "Female Labor Force Participation Rate Comparison",
@@ -251,7 +243,7 @@ ggplot(world_bank_data_summary, aes(x = Year, y = FemaleLaborRate, color = Count
 The labor force participation rate for males exhibited fluctuations, with both countries experiencing changes over the years.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
-ggplot(world_bank_data_summary, aes(x = Year, y = MaleLaborRate, color = Country)) +
+ggplot(world_bank_data, aes(x = Year, y = MaleLaborRate, color = Country)) +
   geom_line() +
   labs(
     title = "Male Labor Force Participation Rate Comparison",
@@ -268,7 +260,7 @@ The provided code conducts an analysis of the change in Unemployment Rate andFem
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 
-labor_unemployment_data <- world_bank_data_summary %>%
+labor_unemployment_data <- world_bank_data %>%
   arrange(Country, Year) %>%
   group_by(Country) %>%
   mutate(UnemploymentRate_Change = (UnemploymentRate - lag(UnemploymentRate)) / lag(UnemploymentRate) * 100,
@@ -311,6 +303,21 @@ male_labor_plot <- ggplot(labor_unemployment_data, aes(x = Year, y = MaleLaborRa
 print(unemployment_plot)
 print(female_labor_plot)
 print(male_labor_plot)
+```
+
+```{r}
+ggplot(world_bank_data, aes(x = factor(Year), y =Inflation , size = GdpPerCapita)) +
+  geom_point(aes(color = Country), alpha = 0.7) +
+  labs(
+    title = "Inflation vs GdpPerCapita by Year and Country",
+    x = "Year",
+    y = "Inflation",
+    size = "GdpPerCapita",
+    color = "Country"
+  ) +
+  scale_size_continuous(range = c(3, 15)) +
+  theme_minimal()
+
 ```
 
 ### Further Analysis:

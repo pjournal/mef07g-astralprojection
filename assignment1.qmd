@@ -18,7 +18,6 @@ editor: visual
 #install.packages("WDI",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)
 library(WDI)
 
-
 #install.packages("remotes",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)
 library(remotes)
 
@@ -43,28 +42,35 @@ A summary data set was created by selecting specific columns pulled from the dat
 Column names have been made more understandable.
 
 ```{r}
+library(gt)
+library(knitr)
+library(kableExtra)
+```
+
+```{r}
 indicator_codes <- c("SP.POP.TOTL","NY.GDP.PCAP.CD","SP.POP.DPND","FP.CPI.TOTL.ZG","SL.UEM.TOTL.ZS","SL.TLF.CACT.FE.ZS","SL.TLF.CACT.MA.ZS")
-countries <- c("TUR", "USA")
+countries <-  c("TUR","UKR","EUU")
 start_date <- 2018
 end_date <- 2023
 world_bank_data_2 <- WDI( indicator = indicator_codes,
                         country = countries,
                         start = start_date, 
                         end = end_date, 
-                        extra = TRUE)
+                        extra = FALSE)
 
 world_bank_data_summary <- world_bank_data_2[,c("country","year","SP.POP.TOTL","NY.GDP.PCAP.CD","SP.POP.DPND","FP.CPI.TOTL.ZG","SL.UEM.TOTL.ZS","SL.TLF.CACT.FE.ZS","SL.TLF.CACT.MA.ZS")]
 colnames(world_bank_data_summary) <- c("Country","Year","Population","GdpPerCapita","AgeDependancyRatio","Inflation","UnemploymentRate","FemaleLaborRate","MaleLaborRate")
-world_bank_data_summary
+
+options(max.print = 15)
+
+kable(world_bank_data_summary, "html") %>% kable_styling()
 ```
 
 ## Save as .rds File
 
 ```{r}
 saveRDS(world_bank_data_summary, file = "world_bank_data.rds")
-loaded_data <- readRDS("world_bank_data.rds")
-loaded_data
-
+world_bank_data <- readRDS("world_bank_data.rds")
 ```
 
 ## Preprocessed Data Link
