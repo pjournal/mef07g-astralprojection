@@ -88,7 +88,7 @@ library(scales)
 library(dplyr)
 ```
 
-```{r, echo=FALSE, fig.cap="", out.width="100%"}
+```{r, echo=FALSE}
 
 ggplot(world_bank_data, aes(x = factor(Year), y = Population / 1e6, fill = Country)) +
   geom_bar(stat = "identity", position = "dodge", alpha = 0.7) +
