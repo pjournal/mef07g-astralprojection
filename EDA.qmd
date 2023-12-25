@@ -19,7 +19,7 @@ library(kableExtra)
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
 
-## World Development Indicators 
+## World Development Indicators
 
 ## Comparing Two EU Candidates: Ukraine and Turkey
 
