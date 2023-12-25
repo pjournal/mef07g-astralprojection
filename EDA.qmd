@@ -245,7 +245,15 @@ ggplot(world_bank_data, aes(x = Year, group = Country)) +
 
 #### Unemployment Rate Comparison:
 
-Unemployment rates varied across the years for the European Union, Turkey, and Ukraine. The European Union maintained relatively lower unemployment rates, ranging from 6.10% in 2022 to 7.25% in 2018. Turkey saw a decline from 10.89% in 2018 to 10.03% in 2022. Ukraine experienced fluctuations, notably increasing from 8.19% in 2019 to 20.18% in 2021. Overall, the European Union consistently had lower unemployment rates compared to Turkey and Ukraine during the specified years.
+Unemployment rates varied across the years for the European Union, Turkey, and Ukraine.
+
+-   The European Union maintained relatively lower unemployment rates, ranging from 6.10% in 2022 to 7.25% in 2018.
+
+-   Turkey saw a decline from 10.89% in 2018 to 10.03% in 2022.
+
+-   Ukraine experienced fluctuations, notably increasing from 8.19% in 2019 to 20.18% in 2021.
+
+-   Overall, the European Union consistently had lower unemployment rates compared to Turkey and Ukraine during the specified years.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 
