@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-12-24">
+<meta name="dcterms.date" content="2023-12-25">
 
 <title>Astral Projection’s Progress Journal - Exploratory Data Analysis</title>
 <style>
@@ -184,13 +184,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#world-development-indicators---usa-vs-turkey-exploratory-data-analysis" id="toc-world-development-indicators---usa-vs-turkey-exploratory-data-analysis" class="nav-link active" data-scroll-target="#world-development-indicators---usa-vs-turkey-exploratory-data-analysis">World Development Indicators - USA vs Turkey: Exploratory Data Analysis</a>
+  <li><a href="#world-development-indicators" id="toc-world-development-indicators" class="nav-link active" data-scroll-target="#world-development-indicators">World Development Indicators</a></li>
+  <li><a href="#comparing-two-eu-candidates-ukraine-and-turkey" id="toc-comparing-two-eu-candidates-ukraine-and-turkey" class="nav-link" data-scroll-target="#comparing-two-eu-candidates-ukraine-and-turkey">Comparing Two EU Candidates: Ukraine and Turkey</a>
   <ul class="collapse">
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction:</a></li>
   <li><a href="#description-of-selected-indicators" id="toc-description-of-selected-indicators" class="nav-link" data-scroll-target="#description-of-selected-indicators">Description of Selected Indicators:</a></li>
   <li><a href="#load-libraries-and-packages" id="toc-load-libraries-and-packages" class="nav-link" data-scroll-target="#load-libraries-and-packages">Load Libraries and Packages</a></li>
   <li><a href="#key-findings" id="toc-key-findings" class="nav-link" data-scroll-target="#key-findings">Key Findings:</a></li>
-  <li><a href="#further-analysis" id="toc-further-analysis" class="nav-link" data-scroll-target="#further-analysis">Further Analysis:</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -211,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 24, 2023</p>
+      <p class="date">December 25, 2023</p>
     </div>
   </div>
   
@@ -229,8 +229,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="world-development-indicators---usa-vs-turkey-exploratory-data-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="world-development-indicators---usa-vs-turkey-exploratory-data-analysis">World Development Indicators - USA vs Turkey: Exploratory Data Analysis</h2>
+<section id="world-development-indicators" class="level2">
+<h2 class="anchored" data-anchor-id="world-development-indicators">World Development Indicators</h2>
+</section>
+<section id="comparing-two-eu-candidates-ukraine-and-turkey" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-two-eu-candidates-ukraine-and-turkey">Comparing Two EU Candidates: Ukraine and Turkey</h2>
 <section id="introduction" class="level3">
 <h3 class="anchored" data-anchor-id="introduction">Introduction:</h3>
 <p>In this Exploratory Data Analysis (EDA), we focused on the years 2018 to 2023, we conducted a comparative analysis between two countries, Ukraine and Turkey, both aspiring to become candidates for the European Union. Utilizing key indicators such as total population, GDP per capita, age dependency ratio, inflation, unemployment rate, and gender-specific labor force participation rates, we aimed to evaluate and contrast the socio-economic landscapes of these nations. The data collected from the World Bank allows us to gain insights into the demographic structure, economic performance, and labor dynamics, providing a comprehensive overview of the key factors influencing their candidacy for EU membership. This analysis will contribute to a deeper understanding of the current state and potential trajectories of Ukraine and Turkey in their pursuit of EU accession.</p>
@@ -485,82 +488,92 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="key-findings">Key Findings:</h3>
 <section id="total-population-comparison" class="level4">
 <h4 class="anchored" data-anchor-id="total-population-comparison">Total Population Comparison:</h4>
-<p>Both the USA and Turkey experienced steady population growth between 2018 and 2023. The USA had a larger total population compared to Turkey throughout the period.</p>
+<p>While the European Union’s population remains stable, Turkey demonstrates a steady increase, and Ukraine experiences fluctuations with a notable decline in 2022.</p>
 <div class="cell">
-<div class="cell-output-display">
-<p><img src="EDA_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" style="width:100.0%"></p>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-</div>
-</section>
-<section id="gdp-per-capita-comparison" class="level4">
-<h4 class="anchored" data-anchor-id="gdp-per-capita-comparison">GDP per Capita Comparison:</h4>
-<p>The USA consistently exhibited a higher GDP per capita compared to Turkey. Both countries showed variations in GDP per capita over the years.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="EDA_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </section>
-<section id="age-dependency-ratio-comparison" class="level4">
-<h4 class="anchored" data-anchor-id="age-dependency-ratio-comparison">Age Dependency Ratio Comparison:</h4>
-<p>The age dependency ratio in Turkey was higher than in the USA, indicating a relatively larger proportion of dependents.</p>
+<section id="gdp-per-capita-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="gdp-per-capita-comparison">GDP per Capita Comparison:</h4>
+<p>The GDP per Capita Comparison graph highlights distinct economic trends for each country/region. The European Union faced a modest decline, Turkey experienced fluctuations with an increase in 2022, and Ukraine showed growth until 2021, with decreasing trend in 2022.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="EDA_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </section>
-<section id="inflation-rate-comparison" class="level4">
-<h4 class="anchored" data-anchor-id="inflation-rate-comparison">Inflation Rate Comparison:</h4>
-<p>Inflation rates fluctuated in both countries, with specific years potentially warranting further investigation.</p>
+<section id="age-dependency-ratio-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="age-dependency-ratio-comparison">Age Dependency Ratio Comparison:</h4>
+<p>The Age Dependency Ratio in the European Union increased slightly, Turkey’s ratio remains quite stable. Ukraine experienced a dramatic increase in 2022, suggesting changes in the demographic structure.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="EDA_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </section>
-<section id="inflation-and-gdppercapita-change-over-years" class="level4">
-<h4 class="anchored" data-anchor-id="inflation-and-gdppercapita-change-over-years">Inflation and GdpPerCapita Change Over Years:</h4>
-<p>The provided code conducts an analysis of the change in Inflation and GDP per Capita over the years for two countries, Turkey (TUR) and the United States (USA). The data is first processed to calculate the percentage change in both Inflation and GDP per Capita compared to the previous year. Two line charts are then generated and displayed vertically.</p>
+<section id="inflation-rate-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="inflation-rate-comparison">Inflation Rate Comparison:</h4>
+<p>The graph depicts the inflation rates for three different countries/regions over the years 2018 to 2022: European Union, Turkey, and Ukraine.</p>
+<ul>
+<li><p>The European Union generally had lower inflation rates compared to Turkey and Ukraine, with some fluctuations.</p></li>
+<li><p>Turkey experienced relatively higher and more volatile inflation rates, reaching a peak in 2022.</p></li>
+<li><p>Ukraine, in contrast, had a decreasing trend in inflation.</p></li>
+<li><p>All of them has increasing trend after 2020 and reaching the highest rate in 2022.</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="EDA_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
-<div class="cell-output-display">
-<p><img src="EDA_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" style="width:100.0%"></p>
-</div>
 </div>
 </section>
-<section id="unemployment-rate-comparison" class="level4">
-<h4 class="anchored" data-anchor-id="unemployment-rate-comparison">Unemployment Rate Comparison:</h4>
-<p>The Unemployment Rate Comparison analysis reveals that, over the specified years (2018-2023), the USA consistently maintained lower unemployment rates compared to Turkey. The line chart visually depicts the annual fluctuations in the unemployment rates for both countries, with the USA consistently positioned below Turkey. This suggests a relatively more stable employment environment in the USA during the analyzed period, emphasizing the difference in labor market conditions between the two countries.</p>
+<section id="inflation-and-unemployment-rate-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="inflation-and-unemployment-rate-comparison">Inflation and Unemployment Rate Comparison:</h4>
+<ul>
+<li><p>The European Union generally experienced moderate inflation and unemployment rates.</p></li>
+<li><p>Turkey faced higher inflation rates and initially high but decreasing unemployment rates.</p></li>
+<li><p>Ukraine showed more significant fluctuations in both inflation and unemployment rates, with a notable increase in inflation in 2021. It’s important to note that the provided data has missing values (NA), especially in the case of Ukraine’s unemployment rate for 2022.</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="EDA_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </section>
-<section id="female-labor-force-participation-rate-comparison" class="level4">
-<h4 class="anchored" data-anchor-id="female-labor-force-participation-rate-comparison">Female Labor Force Participation Rate Comparison:</h4>
-<p>The labor force participation rate for females showed variations but tended to be higher in the USA compared to Turkey.</p>
+<section id="inflation-and-gdp-per-capita-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="inflation-and-gdp-per-capita-comparison">Inflation and GDP Per Capita Comparison:</h4>
+<ul>
+<li><p>The European Union maintained relatively low inflation (0.48% to 2.55%) but saw a modest decline in GDP per capita.</p></li>
+<li><p>Turkey experienced higher inflation, peaking at 19.60% in 2021, and a fluctuating GDP per capita.</p></li>
+<li><p>Ukraine had varying inflation rates, notably increasing in 2022 (20.18%), with GDP per capita showing fluctuations. These trends highlight economic variations and challenges across the regions during the specified period.</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="EDA_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </section>
-<section id="male-labor-force-participation-rate-comparison" class="level4">
-<h4 class="anchored" data-anchor-id="male-labor-force-participation-rate-comparison">Male Labor Force Participation Rate Comparison:</h4>
-<p>The labor force participation rate for males exhibited fluctuations, with both countries experiencing changes over the years.</p>
+<section id="unemployment-rate-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="unemployment-rate-comparison">Unemployment Rate Comparison:</h4>
+<p>Unemployment rates varied across the years for the European Union, Turkey, and Ukraine. The European Union maintained relatively lower unemployment rates, ranging from 6.10% in 2022 to 7.25% in 2018. Turkey saw a decline from 10.89% in 2018 to 10.03% in 2022. Ukraine experienced fluctuations, notably increasing from 8.19% in 2019 to 20.18% in 2021. Overall, the European Union consistently had lower unemployment rates compared to Turkey and Ukraine during the specified years.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="EDA_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 </section>
-<section id="unemployment-rate-and-femalemale-force-participation-rate-change-over-years" class="level4">
-<h4 class="anchored" data-anchor-id="unemployment-rate-and-femalemale-force-participation-rate-change-over-years">Unemployment Rate and Female&amp;Male Force Participation Rate Change Over Years</h4>
-<p>The provided code conducts an analysis of the change in Unemployment Rate andFemale&amp;Male Force Participation Rate over the years for two countries, Turkey (TUR) and the United States (USA). The data is first processed to calculate the percentage change in both Inflation and GDP per Capita compared to the previous year. Three line charts are then generated and displayed vertically.</p>
+<section id="male-and-female-labor-force-participation-rate-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="male-and-female-labor-force-participation-rate-comparison">Male and Female Labor Force Participation Rate Comparison:</h4>
+<p>The European Union consistently leads in both male and female labor force participation rates, while Turkey sees a notable gender gap with higher male participation. Ukraine shows a more balanced but lower overall participation compared to the EU.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="EDA_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" style="width:100.0%"></p>
@@ -568,41 +581,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <p><img src="EDA_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid" style="width:100.0%"></p>
 </div>
-<div class="cell-output-display">
-<p><img src="EDA_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid" style="width:100.0%"></p>
 </div>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(world_bank_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Year), <span class="at">y =</span>Inflation , <span class="at">size =</span> GdpPerCapita)) <span class="sc">+</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> Country), <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Inflation vs GdpPerCapita by Year and Country"</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Inflation"</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="st">"GdpPerCapita"</span>,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Country"</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">15</span>)) <span class="sc">+</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<p><img src="EDA_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-</section>
-<section id="further-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="further-analysis">Further Analysis:</h3>
-<ul>
-<li><p>Trend Analysis: Explore trends in each indicator over the specified period.</p></li>
-<li><p>Correlation Analysis: Investigate potential correlations between different indicators.</p></li>
-<li><p>Regional Comparisons: Compare USA and Turkey indicators with each other.</p></li>
-</ul>
-<p>This Explatory Data Analysis provides an initial overview, and further investigations and statistical tests will be conducted for a more in-depth understanding.</p>
 
 
+</section>
 </section>
 </section>
 

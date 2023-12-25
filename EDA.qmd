@@ -19,7 +19,9 @@ library(kableExtra)
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
 
-## World Development Indicators - USA vs Turkey: Exploratory Data Analysis
+## World Development Indicators 
+
+## Comparing Two EU Candidates: Ukraine and Turkey
 
 ### Introduction:
 
@@ -78,74 +80,93 @@ kable(world_bank_data, "html") %>% kable_styling()
 
 #### Total Population Comparison:
 
-Both the USA and Turkey experienced steady population growth between 2018 and 2023. The USA had a larger total population compared to Turkey throughout the period.
+While the European Union's population remains stable, Turkey demonstrates a steady increase, and Ukraine experiences fluctuations with a notable decline in 2022.
 
-```{r, echo=FALSE, fig.cap="", out.width="100%"}
+```{r}
 library(ggplot2)
 library(scales)
 library(dplyr)
+```
+
+```{r, echo=FALSE, fig.cap="", out.width="100%"}
+# scales paketini yükleyin (eğer yüklü değilse)
+if (!requireNamespace("scales", quietly = TRUE)) {
+  install.packages("scales")
+}
+
+# scales paketini yükleyin
+library(scales)
 
 ggplot(world_bank_data, aes(x = factor(Year), y = Population / 1e6, fill = Country)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  geom_text(aes(label = scales::comma(Population, big.mark = ",")), 
+  geom_bar(stat = "identity", position = "dodge", alpha = 0.7) +
+  geom_text(aes(label = scales::label_number_si(accuracy = 1)(Population)), 
             position = position_dodge(width = 0.9), 
             vjust = -0.5, 
-            size = 3) +  # Barların üstüne değerleri yazmak için
-  labs(title = "Total Population Comparison by Year and Country",
+            size = 3) +
+  labs(title = "Total Population Comparison",
        x = "Year",
        y = "Population (Million)",
        fill = "Country") +
-  scale_y_continuous(labels = scales::comma) +
+  scale_y_continuous(labels = scales::label_number_si(accuracy = 1)) +  # y ekseninde de SI öneklerini kullan
   theme_minimal()
-
 
 ```
 
 #### GDP per Capita Comparison:
 
-The USA consistently exhibited a higher GDP per capita compared to Turkey. Both countries showed variations in GDP per capita over the years.
+The GDP per Capita Comparison graph highlights distinct economic trends for each country/region. The European Union faced a modest decline, Turkey experienced fluctuations with an increase in 2022, and Ukraine showed growth until 2021, with decreasing trend in 2022.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 ggplot(world_bank_data, aes(x = Year, y = GdpPerCapita, fill = Country)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  geom_text(aes(label = scales::comma(GdpPerCapita, big.mark = ",")), 
+  geom_bar(stat = "identity", position = "dodge",alpha = 0.7) +
+  geom_text(aes(label = scales::label_number_si(accuracy = 1)(GdpPerCapita)), 
             position = position_dodge(width = 0.9), 
             vjust = -0.5, 
-            size = 3) +  # Barların üstüne değerleri yazmak için
+            size = 3) +
   labs(
     title = "GDP per Capita Comparison (USD)",
     x = "Year",
     y = "GDP per Capita (USD)",
     fill = "Country"
   ) +
+  scale_y_continuous(labels = scales::label_number_si(accuracy = 1)) +  # y ekseninde de SI öneklerini kullan
   theme_minimal()
+
 ```
 
 #### Age Dependency Ratio Comparison:
 
-The age dependency ratio in Turkey was higher than in the USA, indicating a relatively larger proportion of dependents.
+The Age Dependency Ratio in the European Union increased slightly, Turkey's ratio remains quite stable. Ukraine experienced a dramatic increase in 2022, suggesting changes in the demographic structure.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 ggplot(world_bank_data, aes(x = Year, y = AgeDependancyRatio, color = Country, group = Country)) +
   geom_line() +
-  geom_text(aes(label = scales::comma(AgeDependancyRatio, big.mark = ",")), 
+  geom_text(aes(label = paste0(scales::comma(round(AgeDependancyRatio), big.mark = ","), "%")), 
             position = position_dodge(width = 0.9), 
             vjust = -0.5, 
-            size = 3) +  # Barların üstüne değerleri yazmak için
+            size = 3) +
   labs(
     title = "Age Dependency Ratio Comparison",
     x = "Year",
-    y = "Age Dependency Ratio",
+    y = "Age Dependency Ratio (%)",
     color = "Country"
   ) + 
   theme_minimal() +
-    scale_y_continuous(limits = c(40, 60), breaks = seq(40, 60, by = 10))
+  scale_y_continuous(labels = scales::percent_format(scale = 1), limits = c(40, 60), breaks = seq(40, 60, by = 10))
 
 ```
 
 #### Inflation Rate Comparison:
 
-Inflation rates fluctuated in both countries, with specific years potentially warranting further investigation.
+The graph depicts the inflation rates for three different countries/regions over the years 2018 to 2022: European Union, Turkey, and Ukraine.
+
+-   The European Union generally had lower inflation rates compared to Turkey and Ukraine, with some fluctuations.
+
+-   Turkey experienced relatively higher and more volatile inflation rates, reaching a peak in 2022.
+
+-   Ukraine, in contrast, had a decreasing trend in inflation.
+
+-   All of them has increasing trend after 2020 and reaching the highest rate in 2022.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 ggplot(world_bank_data, aes(x = Year, y = Inflation, color = Country, group = Country)) +
@@ -163,55 +184,80 @@ ggplot(world_bank_data, aes(x = Year, y = Inflation, color = Country, group = Co
   theme_minimal()
 ```
 
-#### Inflation and GdpPerCapita Change Over Years:
+#### Inflation and Unemployment Rate Comparison:
 
-The provided code conducts an analysis of the change in Inflation and GDP per Capita over the years for two countries, Turkey (TUR) and the United States (USA). The data is first processed to calculate the percentage change in both Inflation and GDP per Capita compared to the previous year. Two line charts are then generated and displayed vertically.
+-   The European Union generally experienced moderate inflation and unemployment rates.
+
+-   Turkey faced higher inflation rates and initially high but decreasing unemployment rates.
+
+-   Ukraine showed more significant fluctuations in both inflation and unemployment rates, with a notable increase in inflation in 2021. It's important to note that the provided data has missing values (NA), especially in the case of Ukraine's unemployment rate for 2022.
+
+```{r, echo=FALSE, fig.cap="", out.width="100%"}
+ggplot(world_bank_data, aes(x = Year, y = UnemploymentRate, color = Country, size=Inflation)) +
+  geom_point() +
+  labs(title = " Inflation Rate and Unemployment Rate Comparison",
+       x = "Year",
+       y = "UnemploymentRate",
+       color = "Country") +
+  theme_minimal()
+```
+
+#### Inflation and GDP Per Capita Comparison:
+
+-   The European Union maintained relatively low inflation (0.48% to 2.55%) but saw a modest decline in GDP per capita.
+
+-   Turkey experienced higher inflation, peaking at 19.60% in 2021, and a fluctuating GDP per capita.
+
+-   Ukraine had varying inflation rates, notably increasing in 2022 (20.18%), with GDP per capita showing fluctuations. These trends highlight economic variations and challenges across the regions during the specified period.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 
-gdp_inflation_data <- world_bank_data %>%
-  arrange(Country, Year) %>%
-  group_by(Country) %>%
-  mutate(GdpPerCapita_Change = (GdpPerCapita - lag(GdpPerCapita)) / lag(GdpPerCapita) * 100,
-         Inflation_Change = (Inflation - lag(Inflation)) / lag(Inflation) * 100) %>%
-  ungroup()
+# Veriyi düzenle
+world_bank_data <- world_bank_data %>%
+  filter(!is.na(Inflation))  # NA değerleri filtrele
 
-# Inflation grafiği oluştur
-inflation_plot <- ggplot(gdp_inflation_data, aes(x = Year, y = Inflation_Change, color = Country)) +
-  geom_line() +
-  labs(
-    title = "Inflation Change Over Years",
-    x = "Year",
-    y = "Inflation Change (%)",
-    color = "Country"
-  ) +
-  theme_minimal()
+# Çift y eksenli çizgi grafiği oluştur
+ggplot(world_bank_data, aes(x = Year, group = Country)) +
+  geom_line(aes(y = GdpPerCapita, color = Country, linetype = "GdpPerCapita"), size = 1.2) +
+  geom_line(aes(y = Inflation * 100, color = Country, linetype = "Inflation"), size = 1.2) +
+  
+  # Renk ve şekil özelleştirmeleri
 
-# GDP per Capita grafiği oluştur
-gdp_plot <- ggplot(gdp_inflation_data, aes(x = Year, y = GdpPerCapita_Change, color = Country)) +
-  geom_line() +
-  labs(
-    title = "GDP per Capita Change Over Years",
-    x = "Year",
-    y = "GDP per Capita Change (%)",
-    color = "Country"
-  ) +
-  theme_minimal()
-
-#grid.arrange(inflation_plot, gdp_plot, nrow = 2)
-print(inflation_plot)
-print(gdp_plot)
-
+  scale_linetype_manual(values = c("GdpPerCapita" = "solid", "Inflation" = "dotted")) +
+  
+  # Sol y eksen etiketleri ve başlık
+  labs(title = "Inflation and Gdp Per Capita (USD) Comparison",
+       x = "Year", 
+       y = "GdpPerCapita",
+       color = "Country",
+       linetype = "Indicator") +
+  
+  # Sağ y eksen etiketleri
+  scale_y_continuous(sec.axis = sec_axis(~./100, name = "Inflation")) +
+  
+  # Legend'ı daha iyi konumlandır ve büyüt
+  theme_minimal() +
+  theme(legend.position = "bottom",   # Legend'ı alt kısma taşı
+        legend.title = element_blank(),
+        legend.box = "horizontal",    # Legend'ı yatay düzende göster
+        legend.margin = margin(t = 0, r = 0, b = 0, l = 0),  # Legend'ın kenarlara olan uzaklığını sıfırla
+        plot.title = element_text(size = 12),  # Başlık font boyutunu ayarla
+        axis.text = element_text(size = 10),   # Eksen etiketleri font boyutunu ayarla
+        legend.text = element_text(size = 10))  # Legend metni font boyutunu ayarla
 ```
 
 #### Unemployment Rate Comparison:
 
-The Unemployment Rate Comparison analysis reveals that, over the specified years (2018-2023), the USA consistently maintained lower unemployment rates compared to Turkey. The line chart visually depicts the annual fluctuations in the unemployment rates for both countries, with the USA consistently positioned below Turkey. This suggests a relatively more stable employment environment in the USA during the analyzed period, emphasizing the difference in labor market conditions between the two countries.
+Unemployment rates varied across the years for the European Union, Turkey, and Ukraine. The European Union maintained relatively lower unemployment rates, ranging from 6.10% in 2022 to 7.25% in 2018. Turkey saw a decline from 10.89% in 2018 to 10.03% in 2022. Ukraine experienced fluctuations, notably increasing from 8.19% in 2019 to 20.18% in 2021. Overall, the European Union consistently had lower unemployment rates compared to Turkey and Ukraine during the specified years.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
 
 ggplot(world_bank_data, aes(x = Year, y = UnemploymentRate, color = Country)) +
   geom_line() +
+  geom_text(aes(label = paste0(scales::comma(round(UnemploymentRate,2), big.mark = ","), "%")), 
+            position = position_dodge(width = 0.9), 
+            vjust = -0.5, 
+            size = 3) +
   labs(
     title = "Unemployment Rate Comparison",
     x = "Year",
@@ -221,111 +267,34 @@ ggplot(world_bank_data, aes(x = Year, y = UnemploymentRate, color = Country)) +
   theme_minimal()
 ```
 
-#### Female Labor Force Participation Rate Comparison:
+#### Male and Female Labor Force Participation Rate Comparison:
 
-The labor force participation rate for females showed variations but tended to be higher in the USA compared to Turkey.
-
-```{r, echo=FALSE, fig.cap="", out.width="100%"}
-ggplot(world_bank_data, aes(x = Year, y = FemaleLaborRate, color = Country)) +
-  geom_line() +
-  labs(
-    title = "Female Labor Force Participation Rate Comparison",
-    x = "Year",
-    y = "Female Labor Force Participation Rate",
-    color = "Country"
-  ) +
-  theme_minimal()
-
-```
-
-#### Male Labor Force Participation Rate Comparison:
-
-The labor force participation rate for males exhibited fluctuations, with both countries experiencing changes over the years.
+The European Union consistently leads in both male and female labor force participation rates, while Turkey sees a notable gender gap with higher male participation. Ukraine shows a more balanced but lower overall participation compared to the EU.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
-ggplot(world_bank_data, aes(x = Year, y = MaleLaborRate, color = Country)) +
-  geom_line() +
-  labs(
-    title = "Male Labor Force Participation Rate Comparison",
-    x = "Year",
-    y = "Male Labor Force Participation Rate",
-    color = "Country"
-  ) +
-  theme_minimal()
-```
+# ggplot2 ile grafik çizimi
+  ggplot(world_bank_data, aes(x = Year)) +
+  geom_line(aes(y = MaleLaborRate, color = Country), na.rm = TRUE) +
+ 
+  labs(title = "Male Labor Rate",
+       x = "Year",
+       y = "Male Labor Rate") +
+  theme_minimal() +
+  facet_grid(. ~ Country) +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  theme(legend.position="bottom",
+        panel.spacing.x = unit(1, "lines"))  
 
-#### Unemployment Rate and Female&Male Force Participation Rate Change Over Years
-
-The provided code conducts an analysis of the change in Unemployment Rate andFemale&Male Force Participation Rate over the years for two countries, Turkey (TUR) and the United States (USA). The data is first processed to calculate the percentage change in both Inflation and GDP per Capita compared to the previous year. Three line charts are then generated and displayed vertically.
-
-```{r, echo=FALSE, fig.cap="", out.width="100%"}
-
-labor_unemployment_data <- world_bank_data %>%
-  arrange(Country, Year) %>%
-  group_by(Country) %>%
-  mutate(UnemploymentRate_Change = (UnemploymentRate - lag(UnemploymentRate)) / lag(UnemploymentRate) * 100,
-         FemaleLaborRate_Change = (FemaleLaborRate - lag(FemaleLaborRate)) / lag(FemaleLaborRate) * 100,
-          MaleLaborRate_Change = (MaleLaborRate - lag(MaleLaborRate)) / lag(MaleLaborRate) * 100) %>%
-  ungroup()
-
-# Unemployment grafiği oluştur
-unemployment_plot <- ggplot(labor_unemployment_data, aes(x = Year, y = UnemploymentRate_Change, color = Country)) +
-  geom_line() +
-  labs(
-    title = "Unemployment Change Over Years",
-    x = "Year",
-    y = "Unemployment Change (%)",
-    color = "Country"
-  ) +
-  theme_minimal()
-
-# Female Labor Participation grafiği oluştur
-female_labor_plot <- ggplot(labor_unemployment_data, aes(x = Year, y = FemaleLaborRate, color = Country)) +
-  geom_line() +
-  labs(
-    title = "Female Labor Participation Change Over Years",
-    x = "Year",
-    y = "Female Labor Participation Change (%)",
-    color = "Country"
-  ) +
-  theme_minimal()
-
-male_labor_plot <- ggplot(labor_unemployment_data, aes(x = Year, y = MaleLaborRate, color = Country)) +
-  geom_line() +
-  labs(
-    title = "Male Labor Participation Change Over Years",
-    x = "Year",
-    y = "Male Labor Participation Change (%)",
-    color = "Country"
-  ) +
-  theme_minimal()
-#grid.arrange(inflation_plot, gdp_plot, nrow = 2)
-print(unemployment_plot)
-print(female_labor_plot)
-print(male_labor_plot)
-```
-
-```{r}
-ggplot(world_bank_data, aes(x = factor(Year), y =Inflation , size = GdpPerCapita)) +
-  geom_point(aes(color = Country), alpha = 0.7) +
-  labs(
-    title = "Inflation vs GdpPerCapita by Year and Country",
-    x = "Year",
-    y = "Inflation",
-    size = "GdpPerCapita",
-    color = "Country"
-  ) +
-  scale_size_continuous(range = c(3, 15)) +
-  theme_minimal()
+# ggplot2 ile diğer grafik çizimi
+ggplot(world_bank_data, aes(x = Year)) +
+  geom_line(aes(y = FemaleLaborRate, color = Country), na.rm = TRUE) +
+  labs(title = "Female Labor Rate",
+       x = "Year",
+       y = "Female Labor Rate") +
+  theme_minimal() +
+  facet_grid(. ~ Country) +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  theme(legend.position="bottom",
+        panel.spacing.x = unit(1, "lines"))  
 
 ```
-
-### Further Analysis:
-
--   Trend Analysis: Explore trends in each indicator over the specified period.
-
--   Correlation Analysis: Investigate potential correlations between different indicators.
-
--   Regional Comparisons: Compare USA and Turkey indicators with each other.
-
-This Explatory Data Analysis provides an initial overview, and further investigations and statistical tests will be conducted for a more in-depth understanding.
