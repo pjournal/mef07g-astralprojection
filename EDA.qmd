@@ -89,13 +89,6 @@ library(dplyr)
 ```
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
-# scales paketini yükleyin (eğer yüklü değilse)
-if (!requireNamespace("scales", quietly = TRUE)) {
-  install.packages("scales")
-}
-
-# scales paketini yükleyin
-library(scales)
 
 ggplot(world_bank_data, aes(x = factor(Year), y = Population / 1e6, fill = Country)) +
   geom_bar(stat = "identity", position = "dodge", alpha = 0.7) +
@@ -117,6 +110,7 @@ ggplot(world_bank_data, aes(x = factor(Year), y = Population / 1e6, fill = Count
 The GDP per Capita Comparison graph highlights distinct economic trends for each country/region. The European Union faced a modest decline, Turkey experienced fluctuations with an increase in 2022, and Ukraine showed growth until 2021, with decreasing trend in 2022.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
+
 ggplot(world_bank_data, aes(x = Year, y = GdpPerCapita, fill = Country)) +
   geom_bar(stat = "identity", position = "dodge",alpha = 0.7) +
   geom_text(aes(label = scales::label_number_si(accuracy = 1)(GdpPerCapita)), 
@@ -139,6 +133,7 @@ ggplot(world_bank_data, aes(x = Year, y = GdpPerCapita, fill = Country)) +
 The Age Dependency Ratio in the European Union increased slightly, Turkey's ratio remains quite stable. Ukraine experienced a dramatic increase in 2022, suggesting changes in the demographic structure.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
+
 ggplot(world_bank_data, aes(x = Year, y = AgeDependancyRatio, color = Country, group = Country)) +
   geom_line() +
   geom_text(aes(label = paste0(scales::comma(round(AgeDependancyRatio), big.mark = ","), "%")), 
@@ -169,6 +164,7 @@ The graph depicts the inflation rates for three different countries/regions over
 -   All of them has increasing trend after 2020 and reaching the highest rate in 2022.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
+
 ggplot(world_bank_data, aes(x = Year, y = Inflation, color = Country, group = Country)) +
   geom_line() +
    geom_text(aes(label = scales::comma(Inflation, big.mark = ",")), 
@@ -193,6 +189,7 @@ ggplot(world_bank_data, aes(x = Year, y = Inflation, color = Country, group = Co
 -   Ukraine showed more significant fluctuations in both inflation and unemployment rates, with a notable increase in inflation in 2021. It's important to note that the provided data has missing values (NA), especially in the case of Ukraine's unemployment rate for 2022.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
+
 ggplot(world_bank_data, aes(x = Year, y = UnemploymentRate, color = Country, size=Inflation)) +
   geom_point() +
   labs(title = " Inflation Rate and Unemployment Rate Comparison",
@@ -272,6 +269,7 @@ ggplot(world_bank_data, aes(x = Year, y = UnemploymentRate, color = Country)) +
 The European Union consistently leads in both male and female labor force participation rates, while Turkey sees a notable gender gap with higher male participation. Ukraine shows a more balanced but lower overall participation compared to the EU.
 
 ```{r, echo=FALSE, fig.cap="", out.width="100%"}
+
 # ggplot2 ile grafik çizimi
   ggplot(world_bank_data, aes(x = Year)) +
   geom_line(aes(y = MaleLaborRate, color = Country), na.rm = TRUE) +
