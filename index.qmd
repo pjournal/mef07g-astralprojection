@@ -1,19 +1,18 @@
-
-# Introduction 
-
+# Introduction
 
 <!-- DO NOT TOUCH THIS PART EXCEPT FILLING YOUR OR YOUR GROUP's NAME -->
 
 This progress journal covers Astral Projection's work during their term at [BDA 503 Fall 2023](https://mef-bda503.github.io/fall23/).
 
+Please find our [Medium Blog Post](https://medium.com/eda-journal/european-union-candidates-turkiye-and-ukraine-a-comparative-analysis-aad0648b8b27) for detail.
+
 Each section is an assignment or an individual work.
 
 <!-- IF THIS IS A GROUP UNCOMMENT BELOW -->
 
-### Group Members {-}
+### Group Members {.unnumbered}
 
-+   [Gözde Uğur](https://pjournal.github.io/mef07-GozdeUgurK/)
-+   [Melihcan Akgül](https://pjournal.github.io/mef07-meakgul/)
-+   [Derya Şaşmaz](https://pjournal.github.io/mef07-sasmazd/)
-+   [Burcu Altıparmak](https://pjournal.github.io/mef07-BurcuAltiparmak/)
-
+-   [Gözde Uğur](https://pjournal.github.io/mef07-GozdeUgurK/)
+-   [Melihcan Akgül](https://pjournal.github.io/mef07-meakgul/)
+-   [Derya Şaşmaz](https://pjournal.github.io/mef07-sasmazd/)
+-   [Burcu Altıparmak](https://pjournal.github.io/mef07-BurcuAltiparmak/)
