@@ -212,34 +212,29 @@ ggplot(world_bank_data, aes(x = Year, y = UnemploymentRate, color = Country, siz
 world_bank_data <- world_bank_data %>%
   filter(!is.na(Inflation))  # NA değerleri filtrele
 
-# Çift y eksenli çizgi grafiği oluştur
 ggplot(world_bank_data, aes(x = Year, group = Country)) +
   geom_line(aes(y = GdpPerCapita, color = Country, linetype = "GdpPerCapita"), size = 1.2) +
   geom_line(aes(y = Inflation * 100, color = Country, linetype = "Inflation"), size = 1.2) +
   
-  # Renk ve şekil özelleştirmeleri
 
   scale_linetype_manual(values = c("GdpPerCapita" = "solid", "Inflation" = "dotted")) +
   
-  # Sol y eksen etiketleri ve başlık
   labs(title = "Inflation and Gdp Per Capita (USD) Comparison",
        x = "Year", 
        y = "GdpPerCapita",
        color = "Country",
        linetype = "Indicator") +
   
-  # Sağ y eksen etiketleri
   scale_y_continuous(sec.axis = sec_axis(~./100, name = "Inflation")) +
   
-  # Legend'ı daha iyi konumlandır ve büyüt
   theme_minimal() +
-  theme(legend.position = "bottom",   # Legend'ı alt kısma taşı
+  theme(legend.position = "bottom",   
         legend.title = element_blank(),
-        legend.box = "horizontal",    # Legend'ı yatay düzende göster
-        legend.margin = margin(t = 0, r = 0, b = 0, l = 0),  # Legend'ın kenarlara olan uzaklığını sıfırla
-        plot.title = element_text(size = 12),  # Başlık font boyutunu ayarla
-        axis.text = element_text(size = 10),   # Eksen etiketleri font boyutunu ayarla
-        legend.text = element_text(size = 10))  # Legend metni font boyutunu ayarla
+        legend.box = "horizontal",  
+        legend.margin = margin(t = 0, r = 0, b = 0, l = 0),  
+        plot.title = element_text(size = 12), 
+        axis.text = element_text(size = 10),  
+        legend.text = element_text(size = 10))  
 ```
 
 #### Unemployment Rate Comparison:

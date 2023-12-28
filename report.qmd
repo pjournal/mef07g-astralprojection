@@ -1,0 +1,265 @@
+---
+title: "Final Report"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+format: 
+  html:
+    code-fold: true
+    number-sections: false
+    toc: true
+---
+
+```{r, echo=FALSE}
+library(gt)
+library(knitr)
+library(kableExtra)
+```
+
+```{r include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+## World Development Indicators
+
+## Comparing Two EU Candidates: Ukraine and Turkey
+
+### Introduction:
+
+::: {style="text-align: center;"}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7guNbHgJzgI?si=Nc9yKOeOozXgEHVR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+
+</iframe>
+
+</iframe>
+:::
+
+In this Analysis, we focused on the years 2018 to 2022, we conducted a comparative analysis between two countries, Ukraine and Turkey, both aspiring to become candidates for the European Union. Utilizing key indicators such as total population, GDP per capita, age dependency ratio, inflation, unemployment rate, and gender-specific labor force participation rates, we aimed to evaluate and contrast the socio-economic landscapes of these nations. The data collected from the World Bank allows us to gain insights into the demographic structure, economic performance, and labor dynamics, providing a comprehensive overview of the key factors influencing their candidacy for EU membership. This analysis will contribute to a deeper understanding of the current state and potential trajectories of Ukraine and Turkey in their pursuit of EU accession.
+
+### Key Takeaways:
+
+### Outcomes:
+
+```{r, echo=FALSE}
+library(ggplot2)
+library(scales)
+library(dplyr)
+```
+
+```{r, echo=FALSE}
+world_bank_data <- readRDS("world_bank_data.rds")
+
+```
+
+#### GDP per Capita:
+
+The GDP per Capita Comparison graph highlights distinct economic trends for each country/region. Ukraine's GDP is approximately 5 million, while Turkiye's is around 10 million, signifying that Turkiye's GDP is twice the size of Ukraine's. It's important to note that these figures are not only influenced by economic trends but also by demographic factors. With Turkiye's population being 1.5 times larger than Ukraine's, it further accentuates that Turkiye has a larger economic volume compared to Ukraine.
+
+```{r, fig.cap="", out.width="100%"}
+
+ggplot(world_bank_data, aes(x = Year, y = GdpPerCapita, fill = Country)) +
+  geom_bar(stat = "identity", position = "dodge",alpha = 0.7) +
+  geom_text(aes(label = scales::label_number_si(accuracy = 1)(GdpPerCapita)), 
+            position = position_dodge(width = 0.9), 
+            vjust = -0.5, 
+            size = 3) +
+  labs(
+    title = "GDP per Capita Comparison (USD)",
+    x = "Year",
+    y = "GDP per Capita (USD)",
+    fill = "Country"
+  ) +
+  scale_y_continuous(labels = scales::label_number_si(accuracy = 1)) +  
+  theme_minimal()
+```
+
+#### Population and Age Dependency:
+
+Upon examining the data, a clear correlation between population and age dependency ratio can be observed. In both the European Union and in Turkiye and Ukraine, the population and age dependency ratio generally increase together ( except Ukraine for 2022).
+
+In the European Union, while the population shows a slight increase from the year 2018 to 2022 (from 447.1M to 447.3M), the age dependency ratio also rises during this period, from 54.66 to 56.57. This indicates that as the population ages, older individuals' dependency on the younger population increases.
+
+In Turkiye, the population is increasing every year as well (from 81.4M to 84.9M) and the age dependency ratio also rises in a similar way, from 46.30 to 46.77. This points out that Turkiye is also gradually aging.
+
+In Ukraine, both population and the age dependency ratio follow a general upward trend. Despite the population decreased from 2018 to 2021 (from 44.6M to 43.8M), the age dependency ratio has risen in this interval, from 47.21 to 48.41. However, in 2022 the population experienced a significant drop and dwindled to 38 million, while the age dependency ratio has risen to 52.05. This situation denotes a decrease in the country's young population and an increase in the elderly population, and hence a significant increase in age dependency. This could be linked to the younger and working-age population leaving the country due to war, and potentially losing their lives in the war.
+
+Based on these results, the increase in the age dependency ratio as the population ages in all three examples would increase the demand for social and health services. Moreover, this trend implies a decrease in the working population and an increase in the retirement burden.
+
+```{r, fig.cap="", out.width="100%"}
+
+ggplot(world_bank_data, aes(x = factor(Year), y = Population / 1e6, fill = Country)) +
+  geom_bar(stat = "identity", position = "dodge", alpha = 0.7) +
+  geom_text(aes(label = scales::label_number_si(accuracy = 1)(Population)), 
+            position = position_dodge(width = 0.9), 
+            vjust = -0.5, 
+            size = 3) +
+  labs(title = "Total Population Comparison",
+       x = "Year",
+       y = "Population (Million)",
+       fill = "Country") +
+  scale_y_continuous(labels = scales::label_number_si(accuracy = 1)) + 
+  theme_minimal()
+
+ggplot(world_bank_data, aes(x = Year, y = AgeDependancyRatio, color = Country, group = Country)) +
+  geom_line() +
+  geom_text(aes(label = paste0(scales::comma(round(AgeDependancyRatio), big.mark = ","), "%")), 
+            position = position_dodge(width = 0.9), 
+            vjust = -0.5, 
+            size = 3) +
+  labs(
+    title = "Age Dependency Ratio Comparison",
+    x = "Year",
+    y = "Age Dependency Ratio (%)",
+    color = "Country"
+  ) + 
+  theme_minimal() +
+  scale_y_continuous(labels = scales::percent_format(scale = 1), limits = c(40, 60), breaks = seq(40, 60, by = 10))
+
+
+```
+
+#### Inflation:
+
+**Why is inflation decreasing during COVID-19 pandemic?**
+
+During COVID-19 pandemic, the economic landscape underwent a series of fluctuations. Lockdowns and heightened uncertainty led to reduced consumer spending, prompting businesses to lower prices in a bid to stimulate activity. Global supply chains encountered disruptions, resulting in shortages in certain sectors. Nevertheless, overall prices were restrained due to a decrease in economic activity. A positive outcome for consumers emerged as oil prices took a nosedive, acting as a buffer against inflationary pressures. On the flip side, job losses exerted downward pressure on wages. Interestingly, this wage constraint facilitated cost-cutting for businesses, contributing to the overall moderation of inflation. To navigate these challenges, central banks intervened by lowering interest rates to invigorate the economy. While primarily aimed at encouraging spending, these measures also played a pivotal role in maintaining relatively subdued inflation levels amidst the prevailing uncertainties.
+
+**Why is inflation dramatically increasing after COVID-19 pandemic?**
+
+After the challenging times of the COVID-19 pandemic, things took an interesting turn for inflation. As the world reopened, people started buying a lot more stuff, creating high demand. However, there were problems in getting products out smoothly because of supply chain issues and higher costs for businesses. They had to charge more for their products to cover these increased expenses. On top of that, the job market was a bit tricky, with difficulties in finding workers and wages going up. The global economy also picked up, leading to higher demand for goods, and the measures taken by governments and central banks to boost the economy played a role in driving up prices. When you compare these prices to the low points during the worst of the pandemic, it looks like a significant increase, adding another layer to the story of post-2020 inflation.
+
+```{r, fig.cap="", out.width="100%"}
+
+ggplot(world_bank_data, aes(x = Year, y = UnemploymentRate, color = Country, size=Inflation)) +
+  geom_point() +
+  labs(title = " Inflation Rate and Unemployment Rate Comparison",
+       x = "Year",
+       y = "UnemploymentRate",
+       color = "Country") +
+  theme_minimal()
+```
+
+**Special Cases of Turkiye and Ukraine**
+
+One of the main causes of the economic crisis in Turkiye is the rapid and unstable increase in foreign exchange rates in conjunction with high inflation. This situation has particularly caused inflation to rise to 72.3% in 2022. Moreover, the negative effects of high inflation rates on unemployment rates and the overall economic situation have been observed. This situation indicates that the Turkish economy is in a crisis.
+
+On the other hand, the situation in Ukraine is slightly different. The inflation rate in 2020 is relatively low at 2.73%. However, the rate increased to 9.36% in 2021. This increase is largely due to ongoing war and political instability in the country. The war has hindered production and consequently caused prices to increase.
+
+Inflation rates in both Turkiye and Ukraine have significantly increased due to different reasons. Both countries may need to make policy changes to address this situation. It will be important to focus on economic stability and exchange rate policies in Turkiye, and peace and security issues in Ukraine.
+
+```{r, fig.cap="", out.width="100%"}
+
+ggplot(world_bank_data, aes(x = Year, y = Inflation, color = Country, group = Country)) +
+  geom_line() +
+   geom_text(aes(label = scales::comma(Inflation, big.mark = ",")), 
+            position = position_dodge(width = 0.9), 
+            vjust = -0.5, 
+            size = 3) +  # Barların üstüne değerleri yazmak için
+  labs(
+    title = "Inflation Rate Comparison",
+    x = "Year",
+    y = "Inflation Rate",
+    color = "Country"
+  ) +
+  theme_minimal()
+```
+
+#### Unemployment and Male&Female Labor Rates:
+
+Looking at the graph below, it can be seen that the unemployment rate in Turkiye exhibited fluctuations from 2018 to 2022. The highest unemployment rate was in 2019 with 13.67%, and this rate has decreased in 2020 and 2021. It can be observed that in 2022, the unemployment rate is still below the levels of 2018.
+
+```{r, fig.cap="", out.width="100%"}
+#Unemployment Rate
+ggplot(world_bank_data, aes(x = Year, y = UnemploymentRate, color = Country)) +
+  geom_line() +
+  geom_text(aes(label = paste0(scales::comma(round(UnemploymentRate,2), big.mark = ","), "%")), 
+            position = position_dodge(width = 0.9), 
+            vjust = -0.5, 
+            size = 3) +
+  labs(
+    title = "Unemployment Rate Comparison",
+    x = "Year",
+    y = "Unemployment Rate",
+    color = "Country"
+  ) +
+  theme_minimal()
+
+```
+
+According to graph below, for both male and female labor force participation rates, there is a continuous decline from 2018 to 2020, however, it's observed that this rate began to increase in 2021 and 2022. Despite this increase, it should be noted that as of 2022, both the male and female labor force participation rate is still below the levels of 2018.
+
+```{r, fig.cap="", out.width="100%"}
+#Male Labor Rate
+
+  ggplot(world_bank_data, aes(x = Year)) +
+  geom_line(aes(y = MaleLaborRate, color = Country), na.rm = TRUE) +
+ 
+  labs(title = "Male Labor Rate",
+       x = "Year",
+       y = "Male Labor Rate") +
+  theme_minimal() +
+  facet_grid(. ~ Country) +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  theme(legend.position="bottom",
+        panel.spacing.x = unit(1, "lines"))  
+  
+#Female Labor Rate
+
+ggplot(world_bank_data, aes(x = Year)) +
+  geom_line(aes(y = FemaleLaborRate, color = Country), na.rm = TRUE) +
+  labs(title = "Female Labor Rate",
+       x = "Year",
+       y = "Female Labor Rate") +
+  theme_minimal() +
+  facet_grid(. ~ Country) +
+  scale_y_continuous(labels = scales::percent_format(scale = 1)) +
+  theme(legend.position="bottom",
+        panel.spacing.x = unit(1, "lines"))  
+```
+
+Mahfi Eğilmez explains this contradictory picture between unemployment rate and labor force participation rate as: "If the number of unemployed ([1](https://data.tuik.gov.tr/Bulten/Index?p=Isgucu-Istatistikleri-2022-49390#:~:text=Tablo%2D3-,Metodolojik,-a%C3%A7%C4%B1klama%20dok%C3%BCman%C4%B1)) is decreasing while the number of employed is also decreasing, then there is something odd happening. Because normally, if the number of employed is decreasing, the number of unemployed should increase. The answer to this intriguing situation is largely hidden in the broad unemployment rate. It seems people are giving up on finding a job and therefore are not applying."([2](https://www.mahfiegilmez.com/2022/09/issizlik-oran-gercekten-dusuyor-mu.html))
+
+### Conclusion:
+
+```{r, fig.cap="", out.width="100%"}
+
+# Veriyi düzenle
+world_bank_data <- world_bank_data %>%
+  filter(!is.na(Inflation))  # NA değerleri filtrele
+
+ggplot(world_bank_data, aes(x = Year, group = Country)) +
+  geom_line(aes(y = GdpPerCapita, color = Country, linetype = "GdpPerCapita"), size = 1.2) +
+  geom_line(aes(y = Inflation * 100, color = Country, linetype = "Inflation"), size = 1.2) +
+  
+
+  scale_linetype_manual(values = c("GdpPerCapita" = "solid", "Inflation" = "dotted")) +
+  
+  labs(title = "Inflation and Gdp Per Capita (USD) Comparison",
+       x = "Year", 
+       y = "GdpPerCapita",
+       color = "Country",
+       linetype = "Indicator") +
+  
+  scale_y_continuous(sec.axis = sec_axis(~./100, name = "Inflation")) +
+  
+  theme_minimal() +
+  theme(legend.position = "bottom",   
+        legend.title = element_blank(),
+        legend.box = "horizontal",  
+        legend.margin = margin(t = 0, r = 0, b = 0, l = 0),  
+        plot.title = element_text(size = 12), 
+        axis.text = element_text(size = 10),  
+        legend.text = element_text(size = 10))  
+```
+
+### Resources:
+
+1.  <https://data.tuik.gov.tr/Bulten/Index?p=Isgucu-Istatistikleri-2022-49390#:~:text=Tablo%2D3-,Metodolojik,-a%C3%A7%C4%B1klama%20dok%C3%BCman%C4%B1>
+
+2.  <https://www.mahfiegilmez.com/2022/09/issizlik-oran-gercekten-dusuyor-mu.html>
+
+### References:
+
+-   [World Development Indicators (World Bank)](https://datatopics.worldbank.org/world-development-indicators/)
+
+-   <https://dergipark.org.tr/en/download/article-file/2058207>
+
+-   <https://dergipark.org.tr/en/download/article-file/2692768>
