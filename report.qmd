@@ -20,7 +20,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 ## World Development Indicators
 
-## Comparing Two EU Candidates: Ukraine and Turkey
+## Comparing Two EU Candidates: Ukraine and Turkiye
 
 ### Introduction:
 
@@ -32,9 +32,17 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 </iframe>
 :::
 
-In this Analysis, we focused on the years 2018 to 2022, we conducted a comparative analysis between two countries, Ukraine and Turkey, both aspiring to become candidates for the European Union. Utilizing key indicators such as total population, GDP per capita, age dependency ratio, inflation, unemployment rate, and gender-specific labor force participation rates, we aimed to evaluate and contrast the socio-economic landscapes of these nations. The data collected from the World Bank allows us to gain insights into the demographic structure, economic performance, and labor dynamics, providing a comprehensive overview of the key factors influencing their candidacy for EU membership. This analysis will contribute to a deeper understanding of the current state and potential trajectories of Ukraine and Turkey in their pursuit of EU accession.
+In this analysis, we focused on the years 2018 to 2022, we conducted a comparative analysis between two countries, Ukraine and Turkiye, both aspiring to become candidates for the European Union. Utilizing key indicators such as total population, GDP per capita, age dependency ratio, inflation, unemployment rate, and gender-specific labor force participation rates, we aimed to evaluate and contrast the socio-economic landscapes of these nations. The data collected from the World Bank allows us to gain insights into the demographic structure, economic performance, and labor dynamics, providing a comprehensive overview of the key factors influencing their candidacy for EU membership. This analysis will contribute to a deeper understanding of the current state and potential trajectories of Ukraine and Turkiye in their pursuit of EU accession.
 
 ### Key Takeaways:
+
+1.  Turkey's larger GDP and population compared to Ukraine indicate that Turkey has a greater economic volume.
+
+2.  In Ukraine, despite the decrease in population from 2018 to 2022, the age dependency ratio generally follows an upward trend. This could be linked to the younger and working-age population leaving the country due to the war that started in 2022, and potentially losing their lives.
+
+3.  The inflation rates in Turkey and Ukraine have significantly increased due to economic and political factors. While high inflation has triggered an economic crisis in Turkey, the ongoing war and political instability in Ukraine have caused inflation to rise.
+
+4.  In Turkey, although the unemployment rate showed fluctuations, it remained below the levels of 2018. In Ukraine, there has been a decrease in both male and female labor force participation rates below 2018 levels. This suggests serious issues in the labor markets of both Turkey and Ukraine.
 
 ### Outcomes:
 
@@ -79,10 +87,6 @@ In the European Union, while the population shows a slight increase from the yea
 
 In Turkiye, the population is increasing every year as well (from 81.4M to 84.9M) and the age dependency ratio also rises in a similar way, from 46.30 to 46.77. This points out that Turkiye is also gradually aging.
 
-In Ukraine, both population and the age dependency ratio follow a general upward trend. Despite the population decreased from 2018 to 2021 (from 44.6M to 43.8M), the age dependency ratio has risen in this interval, from 47.21 to 48.41. However, in 2022 the population experienced a significant drop and dwindled to 38 million, while the age dependency ratio has risen to 52.05. This situation denotes a decrease in the country's young population and an increase in the elderly population, and hence a significant increase in age dependency. This could be linked to the younger and working-age population leaving the country due to war, and potentially losing their lives in the war.
-
-Based on these results, the increase in the age dependency ratio as the population ages in all three examples would increase the demand for social and health services. Moreover, this trend implies a decrease in the working population and an increase in the retirement burden.
-
 ```{r, fig.cap="", out.width="100%"}
 
 ggplot(world_bank_data, aes(x = factor(Year), y = Population / 1e6, fill = Country)) +
@@ -97,6 +101,13 @@ ggplot(world_bank_data, aes(x = factor(Year), y = Population / 1e6, fill = Count
        fill = "Country") +
   scale_y_continuous(labels = scales::label_number_si(accuracy = 1)) + 
   theme_minimal()
+```
+
+In Ukraine, despite the population decreased from 2018 to 2022 (from 44.6M to 38M), the age dependency ratio has risen in this interval, from 47.21 to 48.41. However, in 2022 the population experienced a significant drop and dwindled to 38 million, while the age dependency ratio has risen to 52.05. This situation denotes a decrease in the country's young population and an increase in the elderly population, and hence a significant increase in age dependency. This could be linked to the younger and working-age population leaving the country due to war, and potentially losing their lives in the war.
+
+Based on these results, the increase in the age dependency ratio as the population ages in all three examples would increase the demand for social and health services. Moreover, this trend implies a decrease in the working population and an increase in the retirement burden.
+
+```{r, fig.cap="", out.width="100%"}
 
 ggplot(world_bank_data, aes(x = Year, y = AgeDependancyRatio, color = Country, group = Country)) +
   geom_line() +
@@ -121,6 +132,23 @@ ggplot(world_bank_data, aes(x = Year, y = AgeDependancyRatio, color = Country, g
 **Why is inflation decreasing during COVID-19 pandemic?**
 
 During COVID-19 pandemic, the economic landscape underwent a series of fluctuations. Lockdowns and heightened uncertainty led to reduced consumer spending, prompting businesses to lower prices in a bid to stimulate activity. Global supply chains encountered disruptions, resulting in shortages in certain sectors. Nevertheless, overall prices were restrained due to a decrease in economic activity. A positive outcome for consumers emerged as oil prices took a nosedive, acting as a buffer against inflationary pressures. On the flip side, job losses exerted downward pressure on wages. Interestingly, this wage constraint facilitated cost-cutting for businesses, contributing to the overall moderation of inflation. To navigate these challenges, central banks intervened by lowering interest rates to invigorate the economy. While primarily aimed at encouraging spending, these measures also played a pivotal role in maintaining relatively subdued inflation levels amidst the prevailing uncertainties.
+
+```{r, fig.cap="", out.width="100%"}
+
+ggplot(world_bank_data, aes(x = Year, y = Inflation, color = Country, group = Country)) +
+  geom_line() +
+   geom_text(aes(label = scales::comma(Inflation, big.mark = ",")), 
+            position = position_dodge(width = 0.9), 
+            vjust = -0.5, 
+            size = 3) +  # Barların üstüne değerleri yazmak için
+  labs(
+    title = "Inflation Rate Comparison",
+    x = "Year",
+    y = "Inflation Rate",
+    color = "Country"
+  ) +
+  theme_minimal()
+```
 
 **Why is inflation dramatically increasing after COVID-19 pandemic?**
 
@@ -147,24 +175,41 @@ Inflation rates in both Turkiye and Ukraine have significantly increased due to 
 
 ```{r, fig.cap="", out.width="100%"}
 
-ggplot(world_bank_data, aes(x = Year, y = Inflation, color = Country, group = Country)) +
-  geom_line() +
-   geom_text(aes(label = scales::comma(Inflation, big.mark = ",")), 
-            position = position_dodge(width = 0.9), 
-            vjust = -0.5, 
-            size = 3) +  # Barların üstüne değerleri yazmak için
-  labs(
-    title = "Inflation Rate Comparison",
-    x = "Year",
-    y = "Inflation Rate",
-    color = "Country"
-  ) +
-  theme_minimal()
+# Veriyi düzenle
+world_bank_data <- world_bank_data %>%
+  filter(!is.na(Inflation))  # NA değerleri filtrele
+
+  ggplot(world_bank_data, aes(x = Year, group = Country)) +
+  geom_line(aes(y = GdpPerCapita, color = Country, linetype = "GdpPerCapita"), size = 1.2) +
+  geom_line(aes(y = Inflation * 100, color = Country, linetype = "Inflation"), size = 1.2) +
+  
+
+  scale_linetype_manual(values = c("GdpPerCapita" = "solid", "Inflation" = "dotted")) +
+  
+  labs(title = "Inflation and Gdp Per Capita (USD) Comparison",
+       x = "Year", 
+       y = "GdpPerCapita",
+       color = "Country",
+       linetype = "Indicator") +
+  
+  scale_y_continuous(sec.axis = sec_axis(~./100, name = "Inflation")) +
+  
+  theme_minimal() +
+  theme(legend.position = "bottom",   
+        legend.title = element_blank(),
+        legend.box = "horizontal",  
+        legend.margin = margin(t = 0, r = 0, b = 0, l = 0),  
+        plot.title = element_text(size = 12), 
+        axis.text = element_text(size = 10),  
+        legend.text = element_text(size = 10))  
+
 ```
 
 #### Unemployment and Male&Female Labor Rates:
 
 Looking at the graph below, it can be seen that the unemployment rate in Turkiye exhibited fluctuations from 2018 to 2022. The highest unemployment rate was in 2019 with 13.67%, and this rate has decreased in 2020 and 2021. It can be observed that in 2022, the unemployment rate is still below the levels of 2018.
+
+For Ukraine, on the other hand, we can see a general trend of increasing unemployment rates from the year 2018 onwards. However, due to the absence of data for the year 2022, it's not possible to definitively state the unemployment rate for that year. Generally, conditions of war negatively impact the economy, leading to a rise in unemployment rates; thus, it can be assumed that there would be a higher rate of unemployment.
 
 ```{r, fig.cap="", out.width="100%"}
 #Unemployment Rate
@@ -184,7 +229,9 @@ ggplot(world_bank_data, aes(x = Year, y = UnemploymentRate, color = Country)) +
 
 ```
 
-According to graph below, for both male and female labor force participation rates, there is a continuous decline from 2018 to 2020, however, it's observed that this rate began to increase in 2021 and 2022. Despite this increase, it should be noted that as of 2022, both the male and female labor force participation rate is still below the levels of 2018.
+According to graph below, for both male and female labor force participation rates, there is a continuous decline from 2018 to 2020 in Turkiye, however, it's observed that this rate began to increase in 2021 and 2022. Despite this increase, it should be noted that as of 2022, both the male and female labor force participation rate is still below the levels of 2018.
+
+Regarding female and male labor force participation rates in Ukraine, the graph shows a decline for both genders. In situations of war, participation rates typically drop as stable jobs diminish and individuals may opt to stay at home for safety or may be forced to participate in the combat. Therefore, it is likely that these rates would have dropped in 2022. Further, we see a significant decrease in the population of Ukraine from 2018 to 2022. This is typically associated with a high rate of migration - a common occurrence in situations of war or conflict. Since the people who migrate are often working-age adults, this decrease in population can also indirectly affect unemployment rates.
 
 ```{r, fig.cap="", out.width="100%"}
 #Male Labor Rate
@@ -215,40 +262,11 @@ ggplot(world_bank_data, aes(x = Year)) +
         panel.spacing.x = unit(1, "lines"))  
 ```
 
-Mahfi Eğilmez explains this contradictory picture between unemployment rate and labor force participation rate as: "If the number of unemployed ([1](https://data.tuik.gov.tr/Bulten/Index?p=Isgucu-Istatistikleri-2022-49390#:~:text=Tablo%2D3-,Metodolojik,-a%C3%A7%C4%B1klama%20dok%C3%BCman%C4%B1)) is decreasing while the number of employed is also decreasing, then there is something odd happening. Because normally, if the number of employed is decreasing, the number of unemployed should increase. The answer to this intriguing situation is largely hidden in the broad unemployment rate. It seems people are giving up on finding a job and therefore are not applying."([2](https://www.mahfiegilmez.com/2022/09/issizlik-oran-gercekten-dusuyor-mu.html))
+Furthermore, Mahfi Eğilmez explains Turkiye's contradictory picture between unemployment rate and labor force participation rate as: "If the number of unemployed ([1](https://data.tuik.gov.tr/Bulten/Index?p=Isgucu-Istatistikleri-2022-49390#:~:text=Tablo%2D3-,Metodolojik,-a%C3%A7%C4%B1klama%20dok%C3%BCman%C4%B1)) is decreasing while the number of employed is also decreasing, then there is something odd happening. Because normally, if the number of employed is decreasing, the number of unemployed should increase. The answer to this intriguing situation is largely hidden in the broad unemployment rate. It seems people are giving up on finding a job and therefore are not applying."([2](https://www.mahfiegilmez.com/2022/09/issizlik-oran-gercekten-dusuyor-mu.html))
 
 ### Conclusion:
 
-```{r, fig.cap="", out.width="100%"}
-
-# Veriyi düzenle
-world_bank_data <- world_bank_data %>%
-  filter(!is.na(Inflation))  # NA değerleri filtrele
-
-ggplot(world_bank_data, aes(x = Year, group = Country)) +
-  geom_line(aes(y = GdpPerCapita, color = Country, linetype = "GdpPerCapita"), size = 1.2) +
-  geom_line(aes(y = Inflation * 100, color = Country, linetype = "Inflation"), size = 1.2) +
-  
-
-  scale_linetype_manual(values = c("GdpPerCapita" = "solid", "Inflation" = "dotted")) +
-  
-  labs(title = "Inflation and Gdp Per Capita (USD) Comparison",
-       x = "Year", 
-       y = "GdpPerCapita",
-       color = "Country",
-       linetype = "Indicator") +
-  
-  scale_y_continuous(sec.axis = sec_axis(~./100, name = "Inflation")) +
-  
-  theme_minimal() +
-  theme(legend.position = "bottom",   
-        legend.title = element_blank(),
-        legend.box = "horizontal",  
-        legend.margin = margin(t = 0, r = 0, b = 0, l = 0),  
-        plot.title = element_text(size = 12), 
-        axis.text = element_text(size = 10),  
-        legend.text = element_text(size = 10))  
-```
+Turkiye has a larger economic volume compared to Ukraine. This situation is influenced by Turkiye's higher GDP (Gross Domestic Product) and larger population. With the COVID-19 pandemic, it is observed that the economic crisis in Turkiye has deepened due to extreme inflation. At the same time, fluctuations in Turkiye's unemployment rate and labor force participation rates indicate a worrisome situation in terms of economic conditions. In Ukraine, instead of macroeconomic crisis, the country's ongoing war and political instability have led to an increase in inflation rates and caused the young population to migrate out. This situation negatively affects the country's overall economic stability. While both countries have certain challenges for European Union membership, based on these evaluations and analysis with the current data, it can be concluded that Turkiye is a more suitable candidate compared to Ukraine in terms of economic stability and demographic trends in the population.
 
 ### Resources:
 
