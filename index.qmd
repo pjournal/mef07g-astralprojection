@@ -16,3 +16,45 @@ Each section is an assignment or an individual work.
 -   [Melihcan Akgül](https://pjournal.github.io/mef07-meakgul/)
 -   [Derya Şaşmaz](https://pjournal.github.io/mef07-sasmazd/)
 -   [Burcu Altıparmak](https://pjournal.github.io/mef07-BurcuAltiparmak/)
+
+### Group Project {.unnumbered}
+
+#### Comparing Two EU Candidates: Ukraine and Turkiye
+
+This project provides a comparative assessment of the credentials of Turkiye and Ukraine, two candidates for European Union (EU) membership, using World Bank - World Development Indicators data from 2018 to 2022 by using selected indicators.
+
+::: {style="text-align: center;"}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7guNbHgJzgI?si=Nc9yKOeOozXgEHVR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+
+</iframe>
+
+</iframe>
+:::
+
+-   [Data Preprocessing](https://pjournal.github.io/mef07g-astralprojection/assignment1.html)
+
+    -   [.Rdata File](https://github.com/pjournal/mef07g-astralprojection/blob/main/world_bank_data.rds)
+    -   [WDI Raw Data](https://github.com/vincentarelbundock/WDI)
+
+-   [Exploratory Data Analysis](https://pjournal.github.io/mef07g-astralprojection/eda.html)
+
+-   Final Report
+
+    -   [HTML Format](https://pjournal.github.io/mef07g-astralprojection/report.html)
+    -   PDF Format
+
+-   Final Presentation
+
+    -   [Teaser](https://www.youtube.com/watch?v=7guNbHgJzgI)
+    -   HTML Format
+    -   PDF Format
+
+-   [Medium Blog Post](https://medium.com/eda-journal/european-union-candidates-turkiye-and-ukraine-a-comparative-analysis-aad0648b8b27)
+
+-   [Shiny Codes](https://github.com/pjournal/mef07g-astralprojection/blob/main/AstralProjectionShinyApp/app.R)
+
+-   [Shiny App](https://gozdeugurkayar.shinyapps.io/AstralProjection/)
+
+-   You can also reach the Shiny App by running the code below in R Console:
+
+**`shiny::runGitHub(repo = "pjournal/mef07g-astralprojection",subdir="AstralProjectionShinyApp/app.R")`**

@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Astral Projection’s Progress Journal",
     "section": "",
-    "text": "1 Introduction\n\nThis progress journal covers Astral Projection’s work during their term at BDA 503 Fall 2023.\nPlease find our Medium Blog Post for detail.\nEach section is an assignment or an individual work.\n\n\nGroup Members\n\nGözde Uğur\nMelihcan Akgül\nDerya Şaşmaz\nBurcu Altıparmak"
+    "text": "1 Introduction\n\nThis progress journal covers Astral Projection’s work during their term at BDA 503 Fall 2023.\nPlease find our Medium Blog Post for detail.\nEach section is an assignment or an individual work.\n\n\nGroup Members\n\nGözde Uğur\nMelihcan Akgül\nDerya Şaşmaz\nBurcu Altıparmak\n\n\n\nGroup Project\n\n1.0.0.1 Comparing Two EU Candidates: Ukraine and Turkiye\nThis project provides a comparative assessment of the credentials of Turkiye and Ukraine, two candidates for European Union (EU) membership, using World Bank - World Development Indicators data from 2018 to 2022 by using selected indicators.\n\n\n\n\n\n\nData Preprocessing\n\n.Rdata File\nWDI Raw Data\n\nExploratory Data Analysis\nFinal Report\n\nHTML Format\nPDF Format\n\nFinal Presentation\n\nTeaser\nHTML Format\nPDF Format\n\nMedium Blog Post\nShiny Codes\nShiny App\nYou can also reach the Shiny App by running the code below in R Console:\n\nshiny::runGitHub(repo = \"pjournal/mef07g-astralprojection\",subdir=\"AstralProjectionShinyApp/app.R\")"
   },
   {
     "objectID": "assignment1.html",
