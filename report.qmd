@@ -18,11 +18,11 @@ library(kableExtra)
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
 
-## World Development Indicators
+# World Development Indicators
 
-## Comparing Two EU Candidates: Ukraine and Turkiye
+# Comparing Two EU Candidates: Ukraine and Turkiye
 
-### Introduction:
+## Introduction:
 
 ::: {style="text-align: center;"}
 <iframe width="560" height="315" src="https://www.youtube.com/embed/7guNbHgJzgI?si=Nc9yKOeOozXgEHVR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
@@ -34,7 +34,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 In this analysis, we focused on the years 2018 to 2022, we conducted a comparative analysis between two countries, Ukraine and Turkiye, both aspiring to become candidates for the European Union. Utilizing key indicators such as total population, GDP per capita, age dependency ratio, inflation, unemployment rate, and gender-specific labor force participation rates, we aimed to evaluate and contrast the socio-economic landscapes of these nations. The data collected from the World Bank allows us to gain insights into the demographic structure, economic performance, and labor dynamics, providing a comprehensive overview of the key factors influencing their candidacy for EU membership. This analysis will contribute to a deeper understanding of the current state and potential trajectories of Ukraine and Turkiye in their pursuit of EU accession.
 
-### Key Takeaways:
+## Key Takeaways:
 
 1.  This report provides a comparative assessment of the credentials of Turkiye and Ukraine, two candidates for European Union (EU) membership, using World Bank - World Development Indicators data from 2018 to 2022 by using key indicators such as population totals, GDP per capita, age dependency ratios, inflation, unemployment rates, and gender-specific labor force participation rates were essential in this evaluation of their socio-economic landscapes. (LINK row+used)
 
@@ -46,7 +46,7 @@ In this analysis, we focused on the years 2018 to 2022, we conducted a comparati
 
 5.  With its overall economic state and younger population, Turkiye might be slightly in a more favorable position for EU candidacy. However, although both countries possess compelling economic and demographic capacities, they need to address crucial changes in areas such as political stability and economic harmonization to advance their pursuit of EU accession.
 
-### Outcomes:
+## Outcomes:
 
 ```{r, echo=FALSE}
 library(ggplot2)
@@ -59,7 +59,7 @@ world_bank_data <- readRDS("world_bank_data.rds")
 
 ```
 
-#### GDP per Capita:
+### GDP per Capita:
 
 The GDP per Capita Comparison graph reveals unique economic trajectories for each country or region. The data shows that the European Union, comprising 27 member countries, consistently maintains the highest GDP per capita among the three regions.
 
@@ -87,7 +87,7 @@ ggplot(world_bank_data, aes(x = Year, y = GdpPerCapita, fill = Country)) +
   theme_minimal()
 ```
 
-#### Population and Age Dependency:
+### Population and Age Dependency:
 
 In the context of population, both the European Union and Turkiye exhibit a gradual increase over the years examined. The population of the European Union saw a slight increase from 447.1 million in 2018 to 447.3 million in 2022. Turkiye's growth was more pronounced, rising annually from 81.4 million to 84.9 million. Meanwhile, Ukraine experienced a population significant decline, falling from 44.6 million in 2018 to 38 million in 2022. This could be linked to Ukrainians leaving the country due to war, and potentially losing their lives in the war.
 
@@ -135,7 +135,7 @@ From the age dependency perspective, it's notable to highlight that the ratios r
 
 On the contrary, the European Union records the highest age dependency ratio. This trend suggests a mounting pressure on the active population to provide for the social and healthcare needs of the elderly in the European Union and has important socioeconomic implications, requiring proactive planning and social policy adaptations, particularly in dealing with healthcare demands, retirement schemes, and possibly stimulating birth rates or immigration to ensure future generation replacement.
 
-#### Inflation:
+### Inflation:
 
 According to 2018-2022 data, the European Union inflation rate is the lowest while Turkiye's is the highest. Until 2020, all three entities are showing decreasing inflation rates. However, after Covid-19 pandemic relaxed in 2021, all started showing higher inflation rates, especially Turkiye with a dramatic rise in 2022 almost 4 times higher than previous year.
 
@@ -215,7 +215,7 @@ ggplot(world_bank_data, aes(x = Year, group = Country)) +
 
 ```
 
-#### Unemployment and Male&Female Labor Rates:
+### Unemployment and Male&Female Labor Rates:
 
 Looking at the graph below, it can be seen that the unemployment rate in Turkiye exhibited fluctuations from 2018 to 2022. The highest unemployment rate was in 2019 with 13.67%, and this rate has decreased in 2020 and 2021. It can be observed that in 2022, the unemployment rate is still below the levels of 2018.
 
@@ -276,7 +276,7 @@ Furthermore, Mahfi Eğilmez explains Turkiye's contradictory picture between une
 
 Across the parameters of unemployment and labor force participation, the European Union displays the strongest performance with the lowest unemployment rate and highest labor force participation. Turkiye, despite having higher male labor force participation, struggles with the highest unemployment and low female labor force participation. Ukraine shows lower labor force participation overall. Thus, while the European Union exhibits robust employment health, Turkiye and Ukraine follow, facing challenges in unemployment and labor participation respectively.
 
-### Conclusion:
+## Conclusion:
 
 When comparing Ukraine and Turkiye, both candidates for European Union (EU) membership, both countries present vastly different economic and social landscapes. It has been noted that Turkiye has a larger economic scale, boasting a larger population and GDP in comparison to Ukraine.
 
@@ -284,13 +284,13 @@ Additionally, as Turkiye has a younger demographic compared to both Ukraine and 
 
 However, while both Turkiye and Ukraine possess considerable economic and demographic capacities to attain EU standards, both need to make further advancements in areas such as political stability and economic harmonization. With its overall economic state and younger population, Turkiye might be slightly in a more favorable position for EU candidacy.
 
-### Resources:
+## Resources:
 
 1.  <https://data.tuik.gov.tr/Bulten/Index?p=Isgucu-Istatistikleri-2022-49390#:~:text=Tablo%2D3-,Metodolojik,-a%C3%A7%C4%B1klama%20dok%C3%BCman%C4%B1>
 
 2.  <https://www.mahfiegilmez.com/2022/09/issizlik-oran-gercekten-dusuyor-mu.html>
 
-### References:
+## References:
 
 -   [World Development Indicators (World Bank)](https://datatopics.worldbank.org/world-development-indicators/)
 
