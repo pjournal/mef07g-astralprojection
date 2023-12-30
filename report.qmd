@@ -36,7 +36,7 @@ In this analysis, we focused on the years 2018 to 2022, we conducted a comparati
 
 ## Key Takeaways:
 
-1.  This report provides a comparative assessment of the credentials of Turkiye and Ukraine, two candidates for European Union (EU) membership, using World Bank - World Development Indicators data from 2018 to 2022 by using key indicators such as population totals, GDP per capita, age dependency ratios, inflation, unemployment rates, and gender-specific labor force participation rates were essential in this evaluation of their socio-economic landscapes. (LINK row+used)
+1.  This report provides a comparative assessment of the credentials of Turkiye and Ukraine, two candidates for European Union (EU) membership, using World Bank - World Development Indicators data ([WDI Raw Data](https://github.com/vincentarelbundock/WDI)) from 2018 to 2022 by using key indicators such as population totals, GDP per capita, age dependency ratios, inflation, unemployment rates, and gender-specific labor force participation rates were essential in this evaluation of their socio-economic landscapes. ([Analysis Data](https://github.com/pjournal/mef07g-astralprojection/blob/main/world_bank_data.rds))
 
 2.  The post- COVID-19 global economic landscape significantly affected these nations. Turkiye, battling the highest inflation among the three entities, showed a dramatically heightened inflation rate in 2022, which was about four times the rate of the previous year.
 
