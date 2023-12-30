@@ -4,49 +4,49 @@
     "href": "index.html",
     "title": "Astral Projection’s Progress Journal",
     "section": "",
-    "text": "1 Introduction\n\nThis progress journal covers Astral Projection’s work during their term at BDA 503 Fall 2023.\nPlease find our Medium Blog Post for detail.\nEach section is an assignment or an individual work.\n\n\nGroup Members\n\nGözde Uğur\nMelihcan Akgül\nDerya Şaşmaz\nBurcu Altıparmak\n\n\n\nGroup Project\n\n1.0.0.1 Comparing Two EU Candidates: Ukraine and Turkiye\nThis project provides a comparative assessment of the credentials of Turkiye and Ukraine, two candidates for European Union (EU) membership, using World Bank - World Development Indicators data from 2018 to 2022 by using selected indicators.\n\n\n\n\n\n\nData Preprocessing\n\n.Rdata File\nWDI Raw Data\n\nExploratory Data Analysis\nFinal Report\n\nHTML Format\nPDF Format\n\nFinal Presentation\n\nTeaser\nHTML Format\nPDF Format\n\nMedium Blog Post\nShiny Codes\nShiny App\nYou can also reach the Shiny App by running the code below in R Console:\n\nshiny::runGitHub(repo = \"pjournal/mef07g-astralprojection\",subdir=\"AstralProjectionShinyApp/app.R\")"
+    "text": "1 Introduction\nThis progress journal covers Astral Projection’s work during their term at BDA 503 Fall 2023."
   },
   {
-    "objectID": "assignment1.html",
-    "href": "assignment1.html",
-    "title": "2  Preprocessing",
-    "section": "",
-    "text": "3 Preprocessing"
+    "objectID": "index.html#group-members",
+    "href": "index.html#group-members",
+    "title": "Astral Projection’s Progress Journal",
+    "section": "Group Members",
+    "text": "Group Members\n\nGözde Uğur\nMelihcan Akgül\nDerya Şaşmaz\nBurcu Altıparmak"
+  },
+  {
+    "objectID": "index.html#group-project",
+    "href": "index.html#group-project",
+    "title": "Astral Projection’s Progress Journal",
+    "section": "Group Project",
+    "text": "Group Project\n\nComparing Two EU Candidates: Ukraine and Turkiye\nThis project provides a comparative assessment of the credentials of Turkiye and Ukraine, two candidates for European Union (EU) membership, using World Bank - World Development Indicators data from 2018 to 2022 by using selected indicators.\n\n\n\n\n\n\nData Preprocessing\n\n.Rdata File\nWDI Raw Data\n\nExploratory Data Analysis\nFinal Report\n\nPDF Format\n\nFinal Presentation\n\nTeaser\nHTML Format\nPDF Format\n\nMedium Blog Post\nShiny Codes\nShiny App\nYou can also reach the Shiny App by running the code below in R Console:\n\nshiny::runGitHub(repo = \"pjournal/mef07g-astralprojection\",subdir=\"AstralProjectionShinyApp/app.R\")"
   },
   {
     "objectID": "assignment1.html#initial-setup",
     "href": "assignment1.html#initial-setup",
     "title": "2  Preprocessing",
-    "section": "3.1 Initial Setup",
-    "text": "3.1 Initial Setup\n\n#install.packages(\"WDI\",repos = \"http://cran.us.r-project.org\",dependencies=TRUE,eval=FALSE)\nlibrary(WDI)\n\n#install.packages(\"remotes\",repos = \"http://cran.us.r-project.org\",dependencies=TRUE,eval=FALSE)\nlibrary(remotes)\n\n#install_github('vincentarelbundock/WDI')"
+    "section": "Initial Setup",
+    "text": "Initial Setup\nThe provided R code installs and loads the “WDI” package, a tool for accessing World Bank data indicators. Additionally, it installs and loads the “remotes” package, a dependency required for installation.\n\n#install.packages(\"WDI\",repos = \"http://cran.us.r-project.org\",dependencies=TRUE,eval=FALSE)\nlibrary(WDI)\n\n#install.packages(\"remotes\",repos = \"http://cran.us.r-project.org\",dependencies=TRUE,eval=FALSE)\nlibrary(remotes)"
   },
   {
     "objectID": "assignment1.html#data-preparation",
     "href": "assignment1.html#data-preparation",
     "title": "2  Preprocessing",
-    "section": "3.2 Data Preparation",
-    "text": "3.2 Data Preparation\nThe specified block aims to extract WDI data containing certain indicators and create a summary data set for Turkey and the United States over a certain time period.\nIndicator codes to be used to pull data were defined.\nRelevant countries have been determined\nTime range defined\nSpecified indicators were received using the WDI function.\nA summary data set was created by selecting specific columns pulled from the data.\nColumn names have been made more understandable.\n\nlibrary(gt)\nlibrary(knitr)\nlibrary(kableExtra)\n\n\nindicator_codes &lt;- c(\"SP.POP.TOTL\",\"NY.GDP.PCAP.CD\",\"SP.POP.DPND\",\"FP.CPI.TOTL.ZG\",\"SL.UEM.TOTL.ZS\",\"SL.TLF.CACT.FE.ZS\",\"SL.TLF.CACT.MA.ZS\")\ncountries &lt;-  c(\"TUR\",\"UKR\",\"EUU\")\nstart_date &lt;- 2018\nend_date &lt;- 2023\nworld_bank_data_2 &lt;- WDI( indicator = indicator_codes,\n                        country = countries,\n                        start = start_date, \n                        end = end_date, \n                        extra = FALSE)\n\nworld_bank_data_summary &lt;- world_bank_data_2[,c(\"country\",\"year\",\"SP.POP.TOTL\",\"NY.GDP.PCAP.CD\",\"SP.POP.DPND\",\"FP.CPI.TOTL.ZG\",\"SL.UEM.TOTL.ZS\",\"SL.TLF.CACT.FE.ZS\",\"SL.TLF.CACT.MA.ZS\")]\ncolnames(world_bank_data_summary) &lt;- c(\"Country\",\"Year\",\"Population\",\"GdpPerCapita\",\"AgeDependancyRatio\",\"Inflation\",\"UnemploymentRate\",\"FemaleLaborRate\",\"MaleLaborRate\")\n\noptions(max.print = 15)\n\nkable(world_bank_data_summary, \"html\") %&gt;% kable_styling()\n\n\n\n\nCountry\nYear\nPopulation\nGdpPerCapita\nAgeDependancyRatio\nInflation\nUnemploymentRate\nFemaleLaborRate\nMaleLaborRate\n\n\n\n\nEuropean Union\n2018\n447001100\n35751.573\n54.66621\n1.7386086\n7.253803\n51.06276\n63.84818\n\n\nEuropean Union\n2019\n447367191\n35079.534\n55.29177\n1.6305226\n6.679810\n51.26601\n63.91365\n\n\nEuropean Union\n2020\n447692315\n34356.575\n55.86259\n0.4764989\n7.054819\n50.50284\n63.01832\n\n\nEuropean Union\n2021\n447178112\n38721.763\n56.34923\n2.5545070\n7.000430\n51.13162\n63.14634\n\n\nEuropean Union\n2022\n447370510\n37432.560\n56.57327\n8.8336989\n6.098751\n51.88009\n63.83574\n\n\nTurkiye\n2018\n81407204\n9568.836\n46.30621\n16.3324639\n10.890000\n34.03700\n72.43400\n\n\nTurkiye\n2019\n82579440\n9215.441\n46.74186\n15.1768216\n13.670000\n34.21500\n71.76100\n\n\nTurkiye\n2020\n83384680\n8638.739\n46.82812\n12.2789574\n13.110000\n30.76700\n67.99800\n\n\nTurkiye\n2021\n84147318\n9743.213\n46.75508\n19.5964927\n11.980000\n32.76200\n70.13500\n\n\nTurkiye\n2022\n84979913\n10674.504\n46.77459\n72.3088360\n10.030000\n34.16700\n71.11600\n\n\nUkraine\n2018\n44622518\n3096.562\n47.21927\n10.9518559\n8.800000\n49.54200\n64.46000\n\n\nUkraine\n2019\n44386203\n3661.458\n47.75787\n7.8867175\n8.190000\n49.26000\n64.81700\n\n\nUkraine\n2020\n44132049\n3751.737\n48.18610\n2.7324921\n9.480000\n48.15100\n63.44800\n\n\nUkraine\n2021\n43822901\n4827.846\n48.41627\n9.3631392\n9.830000\n47.79100\n62.89700\n\n\nUkraine\n2022\n38000000\n4533.976\n52.05497\n20.1836367\nNA\nNA\nNA"
+    "section": "Data Preparation",
+    "text": "Data Preparation\nThe objective is to obtain specific World Development Indicators (WDI) data for the indicators listed in the “indicator_codes” vector, focusing on countries specified in the “countries” vector. The time range for data extraction is set between the years 2018 and 2023.\nThe WDI function is utilized with parameters such as indicator codes, countries, and the specified time range. The resulting dataset, denoted as “world_bank_data_2,” is then refined by selecting relevant columns and renaming them for clarity. The summary dataset, named “world_bank_data_summary,” includes columns such as country, year, population, GDP per capita, age dependency ratio, inflation, unemployment rate, female labor force participation rate, and male labor force participation rate.\nFinally, the kable function is employed to render the summary dataset in HTML format, and the kable_styling function is applied to enhance the visual presentation of the table.\n\nlibrary(gt)\nlibrary(knitr)\nlibrary(kableExtra)\n\n\nindicator_codes &lt;- c(\"SP.POP.TOTL\",\"NY.GDP.PCAP.CD\",\"SP.POP.DPND\",\"FP.CPI.TOTL.ZG\",\"SL.UEM.TOTL.ZS\",\"SL.TLF.CACT.FE.ZS\",\"SL.TLF.CACT.MA.ZS\")\ncountries &lt;-  c(\"TUR\",\"UKR\",\"EUU\")\nstart_date &lt;- 2018\nend_date &lt;- 2023\nworld_bank_data_2 &lt;- WDI( indicator = indicator_codes,\n                        country = countries,\n                        start = start_date, \n                        end = end_date, \n                        extra = FALSE)\n\nworld_bank_data_summary &lt;- world_bank_data_2[,c(\"country\",\"year\",\"SP.POP.TOTL\",\"NY.GDP.PCAP.CD\",\"SP.POP.DPND\",\"FP.CPI.TOTL.ZG\",\"SL.UEM.TOTL.ZS\",\"SL.TLF.CACT.FE.ZS\",\"SL.TLF.CACT.MA.ZS\")]\ncolnames(world_bank_data_summary) &lt;- c(\"Country\",\"Year\",\"Population\",\"GdpPerCapita\",\"AgeDependancyRatio\",\"Inflation\",\"UnemploymentRate\",\"FemaleLaborRate\",\"MaleLaborRate\")\n\noptions(max.print = 15)\n\nkable(world_bank_data_summary, \"html\") %&gt;% kable_styling()\n\n\n\n\nCountry\nYear\nPopulation\nGdpPerCapita\nAgeDependancyRatio\nInflation\nUnemploymentRate\nFemaleLaborRate\nMaleLaborRate\n\n\n\n\nEuropean Union\n2018\n447001100\n35751.573\n54.66621\n1.7386086\n7.253803\n51.06276\n63.84818\n\n\nEuropean Union\n2019\n447367191\n35079.534\n55.29177\n1.6305226\n6.679810\n51.26601\n63.91365\n\n\nEuropean Union\n2020\n447692315\n34356.575\n55.86259\n0.4764989\n7.054819\n50.50284\n63.01832\n\n\nEuropean Union\n2021\n447178112\n38721.763\n56.34923\n2.5545070\n7.000430\n51.13162\n63.14634\n\n\nEuropean Union\n2022\n447370510\n37432.560\n56.57327\n8.8336989\n6.098751\n51.88009\n63.83574\n\n\nTurkiye\n2018\n81407204\n9568.836\n46.30621\n16.3324639\n10.890000\n34.03700\n72.43400\n\n\nTurkiye\n2019\n82579440\n9215.441\n46.74186\n15.1768216\n13.670000\n34.21500\n71.76100\n\n\nTurkiye\n2020\n83384680\n8638.739\n46.82812\n12.2789574\n13.110000\n30.76700\n67.99800\n\n\nTurkiye\n2021\n84147318\n9743.213\n46.75508\n19.5964927\n11.980000\n32.76200\n70.13500\n\n\nTurkiye\n2022\n84979913\n10674.504\n46.77459\n72.3088360\n10.030000\n34.16700\n71.11600\n\n\nUkraine\n2018\n44622518\n3096.562\n47.21927\n10.9518559\n8.800000\n49.54200\n64.46000\n\n\nUkraine\n2019\n44386203\n3661.458\n47.75787\n7.8867175\n8.190000\n49.26000\n64.81700\n\n\nUkraine\n2020\n44132049\n3751.737\n48.18610\n2.7324921\n9.480000\n48.15100\n63.44800\n\n\nUkraine\n2021\n43822901\n4827.846\n48.41627\n9.3631392\n9.830000\n47.79100\n62.89700\n\n\nUkraine\n2022\n38000000\n4533.976\n52.05497\n20.1836367\nNA\nNA\nNA"
   },
   {
     "objectID": "assignment1.html#save-as-.rds-file",
     "href": "assignment1.html#save-as-.rds-file",
     "title": "2  Preprocessing",
-    "section": "3.3 Save as .rds File",
-    "text": "3.3 Save as .rds File\n\nsaveRDS(world_bank_data_summary, file = \"world_bank_data.rds\")\nworld_bank_data &lt;- readRDS(\"world_bank_data.rds\")"
+    "section": "Save as .rds File",
+    "text": "Save as .rds File\nIn this R code snippet, the saveRDS function is used to save the dataset named “world_bank_data_summary” as an RDS (R Data Serialization) file named “world_bank_data.rds.” Subsequently, the readRDS function is employed to read the saved RDS file back into R and store it in a variable named “world_bank_data.” This process enables the preservation and retrieval of the dataset in a serialized format.\n\nsaveRDS(world_bank_data_summary, file = \"world_bank_data.rds\")\nworld_bank_data &lt;- readRDS(\"world_bank_data.rds\")"
   },
   {
     "objectID": "assignment1.html#preprocessed-data-link",
     "href": "assignment1.html#preprocessed-data-link",
     "title": "2  Preprocessing",
-    "section": "3.4 Preprocessed Data Link",
-    "text": "3.4 Preprocessed Data Link"
-  },
-  {
-    "objectID": "assignment1.html#data-link",
-    "href": "assignment1.html#data-link",
-    "title": "2  Preprocessing",
-    "section": "3.5 Data Link",
-    "text": "3.5 Data Link"
+    "section": "Preprocessed Data Link",
+    "text": "Preprocessed Data Link\nPlease find preprocessed Data Link."
   },
   {
     "objectID": "eda.html#world-development-indicators",

@@ -9,37 +9,26 @@ output:
 editor: visual
 ---
 
-# Preprocessing
+## Initial Setup {.unnumbered}
 
-## Initial Setup
+The provided R code installs and loads the "WDI" package, a tool for accessing World Bank data indicators. Additionally, it installs and loads the "remotes" package, a dependency required for installation.
 
 ```{r}
-
 #install.packages("WDI",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)
 library(WDI)
 
 #install.packages("remotes",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)
 library(remotes)
 
-#install_github('vincentarelbundock/WDI')
-
 ```
 
-## Data Preparation
+## Data Preparation {.unnumbered}
 
-The specified block aims to extract WDI data containing certain indicators and create a summary data set for Turkey and the United States over a certain time period.
+The objective is to obtain specific World Development Indicators (WDI) data for the indicators listed in the "indicator_codes" vector, focusing on countries specified in the "countries" vector. The time range for data extraction is set between the years 2018 and 2023.
 
-Indicator codes to be used to pull data were defined.
+The WDI function is utilized with parameters such as indicator codes, countries, and the specified time range. The resulting dataset, denoted as "world_bank_data_2," is then refined by selecting relevant columns and renaming them for clarity. The summary dataset, named "world_bank_data_summary," includes columns such as country, year, population, GDP per capita, age dependency ratio, inflation, unemployment rate, female labor force participation rate, and male labor force participation rate.
 
-Relevant countries have been determined
-
-Time range defined
-
-Specified indicators were received using the WDI function.
-
-A summary data set was created by selecting specific columns pulled from the data.
-
-Column names have been made more understandable.
+Finally, the kable function is employed to render the summary dataset in HTML format, and the kable_styling function is applied to enhance the visual presentation of the table.
 
 ```{r}
 library(gt)
@@ -66,13 +55,15 @@ options(max.print = 15)
 kable(world_bank_data_summary, "html") %>% kable_styling()
 ```
 
-## Save as .rds File
+## Save as .rds File {.unnumbered}
+
+In this R code snippet, the saveRDS function is used to save the dataset named "world_bank_data_summary" as an RDS (R Data Serialization) file named "world_bank_data.rds." Subsequently, the readRDS function is employed to read the saved RDS file back into R and store it in a variable named "world_bank_data." This process enables the preservation and retrieval of the dataset in a serialized format.
 
 ```{r}
 saveRDS(world_bank_data_summary, file = "world_bank_data.rds")
 world_bank_data <- readRDS("world_bank_data.rds")
 ```
 
-## Preprocessed Data Link
+## Preprocessed Data Link {.unnumbered}
 
-## [Data Link](https://github.com/pjournal/mef07g-astralprojection/blob/main/world_bank_data.rds)
+Please find preprocessed [Data Link](https://github.com/pjournal/mef07g-astralprojection/blob/main/world_bank_data.rds).

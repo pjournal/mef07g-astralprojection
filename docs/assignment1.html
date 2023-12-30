@@ -191,14 +191,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preprocessing" id="toc-preprocessing" class="nav-link active" data-scroll-target="#preprocessing"><span class="header-section-number">3</span> Preprocessing</a>
-  <ul class="collapse">
-  <li><a href="#initial-setup" id="toc-initial-setup" class="nav-link" data-scroll-target="#initial-setup"><span class="header-section-number">3.1</span> Initial Setup</a></li>
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="header-section-number">3.2</span> Data Preparation</a></li>
-  <li><a href="#save-as-.rds-file" id="toc-save-as-.rds-file" class="nav-link" data-scroll-target="#save-as-.rds-file"><span class="header-section-number">3.3</span> Save as .rds File</a></li>
-  <li><a href="#preprocessed-data-link" id="toc-preprocessed-data-link" class="nav-link" data-scroll-target="#preprocessed-data-link"><span class="header-section-number">3.4</span> Preprocessed Data Link</a></li>
-  <li><a href="#data-link" id="toc-data-link" class="nav-link" data-scroll-target="#data-link"><span class="header-section-number">3.5</span> Data Link</a></li>
-  </ul></li>
+  <li><a href="#initial-setup" id="toc-initial-setup" class="nav-link active" data-scroll-target="#initial-setup">Initial Setup</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data Preparation</a></li>
+  <li><a href="#save-as-.rds-file" id="toc-save-as-.rds-file" class="nav-link" data-scroll-target="#save-as-.rds-file">Save as .rds File</a></li>
+  <li><a href="#preprocessed-data-link" id="toc-preprocessed-data-link" class="nav-link" data-scroll-target="#preprocessed-data-link">Preprocessed Data Link</a></li>
   </ul>
 </nav>
     </div>
@@ -228,29 +224,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="preprocessing" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Preprocessing</h1>
-<section id="initial-setup" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="initial-setup"><span class="header-section-number">3.1</span> Initial Setup</h2>
+<section id="initial-setup" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="initial-setup">Initial Setup</h2>
+<p>The provided R code installs and loads the “WDI” package, a tool for accessing World Bank data indicators. Additionally, it installs and loads the “remotes” package, a dependency required for installation.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("WDI",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(WDI)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("remotes",repos = "http://cran.us.r-project.org",dependencies=TRUE,eval=FALSE)</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(remotes)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#install_github('vincentarelbundock/WDI')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(remotes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="data-preparation" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">3.2</span> Data Preparation</h2>
-<p>The specified block aims to extract WDI data containing certain indicators and create a summary data set for Turkey and the United States over a certain time period.</p>
-<p>Indicator codes to be used to pull data were defined.</p>
-<p>Relevant countries have been determined</p>
-<p>Time range defined</p>
-<p>Specified indicators were received using the WDI function.</p>
-<p>A summary data set was created by selecting specific columns pulled from the data.</p>
-<p>Column names have been made more understandable.</p>
+<section id="data-preparation" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="data-preparation">Data Preparation</h2>
+<p>The objective is to obtain specific World Development Indicators (WDI) data for the indicators listed in the “indicator_codes” vector, focusing on countries specified in the “countries” vector. The time range for data extraction is set between the years 2018 and 2023.</p>
+<p>The WDI function is utilized with parameters such as indicator codes, countries, and the specified time range. The resulting dataset, denoted as “world_bank_data_2,” is then refined by selecting relevant columns and renaming them for clarity. The summary dataset, named “world_bank_data_summary,” includes columns such as country, year, population, GDP per capita, age dependency ratio, inflation, unemployment rate, female labor force participation rate, and male labor force participation rate.</p>
+<p>Finally, the kable function is employed to render the summary dataset in HTML format, and the kable_styling function is applied to enhance the visual presentation of the table.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
@@ -461,21 +450,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="save-as-.rds-file" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="save-as-.rds-file"><span class="header-section-number">3.3</span> Save as .rds File</h2>
+<section id="save-as-.rds-file" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="save-as-.rds-file">Save as .rds File</h2>
+<p>In this R code snippet, the saveRDS function is used to save the dataset named “world_bank_data_summary” as an RDS (R Data Serialization) file named “world_bank_data.rds.” Subsequently, the readRDS function is employed to read the saved RDS file back into R and store it in a variable named “world_bank_data.” This process enables the preservation and retrieval of the dataset in a serialized format.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(world_bank_data_summary, <span class="at">file =</span> <span class="st">"world_bank_data.rds"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>world_bank_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"world_bank_data.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="preprocessed-data-link" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="preprocessed-data-link"><span class="header-section-number">3.4</span> Preprocessed Data Link</h2>
-</section>
-<section id="data-link" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="data-link"><span class="header-section-number">3.5</span> <a href="https://github.com/pjournal/mef07g-astralprojection/blob/main/world_bank_data.rds">Data Link</a></h2>
+<section id="preprocessed-data-link" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="preprocessed-data-link">Preprocessed Data Link</h2>
+<p>Please find preprocessed <a href="https://github.com/pjournal/mef07g-astralprojection/blob/main/world_bank_data.rds">Data Link</a>.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
