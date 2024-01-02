@@ -1,0 +1,24 @@
+---
+title: "Shiny App"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 1
+    number_sections: true
+editor: visual
+---
+
+Development Indicators Comparison [Shiny App](https://gozdeugurkayar.shinyapps.io/AstralProjection/) is designed to visualize and compare World Bank data through a user interface.
+
+The functionality of Shiny App is divided into three tabs:
+
+1.  **Single Indicator Comparison:** The first tab is used to compare data for a specific country across selected years based on a single indicator (such as inflation rate, unemployment rate, age dependency ratio, GDP, population, etc.). Users can filter by country, year, and indicator.
+
+2.  **Double Indicator Comparison:** The second tab allows users to compare data for a specific country across selected years based on two indicators (e.g., inflation rate and unemployment rate). Users can filter by country, year, and select from predefined indicator pairs.
+
+3.  **Labor Force Participation Rates:** The third tab focuses on comparing male and female labor force participation rates for selected countries and years. Users can filter by country and year.
+
+Please find the code details [here](https://github.com/pjournal/mef07g-astralprojection/blob/main/AstralProjectionShinyApp/app.R). You can also reach the Shiny App by running the code below in R Console:
+
+**`shiny::runGitHub(repo = "pjournal/mef07g-astralprojection",subdir="AstralProjectionShinyApp/app.R")`**

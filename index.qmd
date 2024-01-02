@@ -37,15 +37,13 @@ This project provides a comparative assessment of the credentials of Turkiye and
 -   Final Presentation
 
     -   [Teaser](https://www.youtube.com/watch?v=7guNbHgJzgI)
-    -   HTML Format
-    -   PDF Format
 
 -   [Medium Blog Post](https://medium.com/eda-journal/european-union-candidates-turkiye-and-ukraine-a-comparative-analysis-aad0648b8b27)
 
--   [Shiny Codes](https://github.com/pjournal/mef07g-astralprojection/blob/main/AstralProjectionShinyApp/app.R)
-
 -   [Shiny App](https://gozdeugurkayar.shinyapps.io/AstralProjection/)
 
--   You can also reach the Shiny App by running the code below in R Console:
+    -   [Shiny Codes](https://github.com/pjournal/mef07g-astralprojection/blob/main/AstralProjectionShinyApp/app.R)
+
+    -   You can also reach the Shiny App by running the code below in R Console:
 
 **`shiny::runGitHub(repo = "pjournal/mef07g-astralprojection",subdir="AstralProjectionShinyApp/app.R")`**

@@ -110,7 +110,7 @@ The GDP per Capita Comparison graph reveals unique economic trajectories for eac
 
 In 2018, the European Union's GDP per capita stood at approximately \$35,700. It experienced a slight downturn in 2019 and 2020, but rebounded robustly in 2021 to nearly \$38,700, and continues to perform strongly in 2022 at about \$37,400.
 
-In contrast, Ukraine's GDP per capita hovers around \$5 million, while Turkiye's stands near \$10 million, indicating that Turkiye's GDP per capita is double that of Ukraine's. Moreover, Turkiye's population is 1.5 times larger than Ukraine's, affirming its larger economic scale.
+In contrast, Ukraine's GDP per capita hovers around \$5K, while Turkiye's stands near \$10K, indicating that Turkiye's GDP per capita is double that of Ukraine's. Moreover, Turkiye's population is 1.5 times larger than Ukraine's, affirming its larger economic scale.
 
 Notably, the European Union's GDP per capita is over four times that of Turkiye and approximately twelve times that of Ukraine, highlighting the economic strength of the European Union. However, it is crucial to consider the Union's significantly larger population and diverse economies, which contribute to this superior statistical performance.
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Astral Projection’s Progress Journal</title>
+<title>Astral Projection’s Progress Journal - 4&nbsp; Shiny App</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./assignment1.html" rel="next">
+<link href="./report.html" rel="next">
+<link href="./eda.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -73,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./shinyapp.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Shiny App</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -120,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -138,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./shinyapp.html" class="sidebar-item-text sidebar-link">
+  <a href="./shinyapp.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Shiny App</span></span></a>
   </div>
 </li>
@@ -160,27 +161,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
-  <ul class="collapse">
-  <li><a href="#group-members" id="toc-group-members" class="nav-link" data-scroll-target="#group-members">Group Members</a></li>
-  <li><a href="#group-project" id="toc-group-project" class="nav-link" data-scroll-target="#group-project">Group Project</a>
-  <ul class="collapse">
-  <li><a href="#comparing-two-eu-candidates-ukraine-and-turkiye" id="toc-comparing-two-eu-candidates-ukraine-and-turkiye" class="nav-link" data-scroll-target="#comparing-two-eu-candidates-ukraine-and-turkiye">Comparing Two EU Candidates: Ukraine and Turkiye</a></li>
-  </ul></li>
-  </ul></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Astral Projection’s Progress Journal</h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Shiny App</span></h1>
 </div>
 
 
@@ -188,6 +176,12 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Invalid Date</p>
+    </div>
+  </div>
   
     
   </div>
@@ -195,56 +189,17 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>This progress journal covers Astral Projection’s work during their term at <a href="https://mef-bda503.github.io/fall23/">BDA 503 Fall 2023</a>.</p>
-<section id="group-members" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="group-members">Group Members</h2>
-<ul>
-<li><a href="https://pjournal.github.io/mef07-GozdeUgurK/">Gözde Uğur</a></li>
-<li><a href="https://pjournal.github.io/mef07-meakgul/">Melihcan Akgül</a></li>
-<li><a href="https://pjournal.github.io/mef07-sasmazd/">Derya Şaşmaz</a></li>
-<li><a href="https://pjournal.github.io/mef07-BurcuAltiparmak/">Burcu Altıparmak</a></li>
-</ul>
-</section>
-<section id="group-project" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="group-project">Group Project</h2>
-<section id="comparing-two-eu-candidates-ukraine-and-turkiye" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="comparing-two-eu-candidates-ukraine-and-turkiye">Comparing Two EU Candidates: Ukraine and Turkiye</h3>
-<p>This project provides a comparative assessment of the credentials of Turkiye and Ukraine, two candidates for European Union (EU) membership, using World Bank - World Development Indicators data from 2018 to 2022 by using selected indicators.</p>
-<div style="text-align: center;">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/7guNbHgJzgI?si=Nc9yKOeOozXgEHVR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
-</iframe>
-
-</div>
-<ul>
-<li><p><a href="https://pjournal.github.io/mef07g-astralprojection/assignment1.html">Data Preprocessing</a></p>
-<ul>
-<li><a href="https://github.com/pjournal/mef07g-astralprojection/blob/main/world_bank_data.rds">.Rdata File</a></li>
-<li><a href="https://github.com/vincentarelbundock/WDI">WDI Raw Data</a></li>
-</ul></li>
-<li><p><a href="https://pjournal.github.io/mef07g-astralprojection/eda.html">Exploratory Data Analysis</a></p></li>
-<li><p><a href="https://pjournal.github.io/mef07g-astralprojection/report.html">Final Report</a></p>
-<ul>
-<li><a href="https://github.com/pjournal/mef07g-astralprojection/blob/main/FinalReport.pdf">PDF Format</a></li>
-</ul></li>
-<li><p>Final Presentation</p>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=7guNbHgJzgI">Teaser</a></li>
-</ul></li>
-<li><p><a href="https://medium.com/eda-journal/european-union-candidates-turkiye-and-ukraine-a-comparative-analysis-aad0648b8b27">Medium Blog Post</a></p></li>
-<li><p><a href="https://gozdeugurkayar.shinyapps.io/AstralProjection/">Shiny App</a></p>
-<ul>
-<li><p><a href="https://github.com/pjournal/mef07g-astralprojection/blob/main/AstralProjectionShinyApp/app.R">Shiny Codes</a></p></li>
-<li><p>You can also reach the Shiny App by running the code below in R Console:</p></li>
-</ul></li>
-</ul>
+<p>Development Indicators Comparison <a href="https://gozdeugurkayar.shinyapps.io/AstralProjection/">Shiny App</a> is designed to visualize and compare World Bank data through a user interface.</p>
+<p>The functionality of Shiny App is divided into three tabs:</p>
+<ol type="1">
+<li><p><strong>Single Indicator Comparison:</strong> The first tab is used to compare data for a specific country across selected years based on a single indicator (such as inflation rate, unemployment rate, age dependency ratio, GDP, population, etc.). Users can filter by country, year, and indicator.</p></li>
+<li><p><strong>Double Indicator Comparison:</strong> The second tab allows users to compare data for a specific country across selected years based on two indicators (e.g., inflation rate and unemployment rate). Users can filter by country, year, and select from predefined indicator pairs.</p></li>
+<li><p><strong>Labor Force Participation Rates:</strong> The third tab focuses on comparing male and female labor force participation rates for selected countries and years. Users can filter by country and year.</p></li>
+</ol>
+<p>Please find the code details <a href="https://github.com/pjournal/mef07g-astralprojection/blob/main/AstralProjectionShinyApp/app.R">here</a>. You can also reach the Shiny App by running the code below in R Console:</p>
 <p><strong><code>shiny::runGitHub(repo = "pjournal/mef07g-astralprojection",subdir="AstralProjectionShinyApp/app.R")</code></strong></p>
 
 
-</section>
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -482,10 +437,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./eda.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./assignment1.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocessing</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./report.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Final Report</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
