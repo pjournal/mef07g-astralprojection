@@ -9,4 +9,4 @@ output:
 editor: visual
 ---
 
-Please access our presentation via the following link: Link
+Please access our presentation via the following link: [Link](https://github.com/pjournal/mef07g-astralprojection/blob/main/WDI%20Final%20Presentation_Final.pptx)

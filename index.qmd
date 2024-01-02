@@ -34,7 +34,7 @@ This project provides a comparative assessment of the credentials of Turkiye and
 
     -   [PDF Format](https://github.com/pjournal/mef07g-astralprojection/blob/main/FinalReport.pdf)
 
--   Final Presentation
+-   [Final Presentation](https://github.com/pjournal/mef07g-astralprojection/blob/main/WDI%20Final%20Presentation_Final.pptx)
 
     -   [Teaser](https://www.youtube.com/watch?v=7guNbHgJzgI)
 
